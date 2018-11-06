@@ -1,0 +1,2 @@
+http://siggigue.github.io/pyfilterbank/splweighting.html
+https://gist.github.com/endolith/148112
