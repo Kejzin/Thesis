@@ -8,3 +8,5 @@ AudioEventDetector/\.idea/modules\.xml
 AudioEventDetector/\.idea/vcs\.xml
 
 AudioEventDetector/\.idea/workspace\.xml
+
+*.pyc
