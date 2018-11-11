@@ -3,21 +3,21 @@ import logging
 
 
 class WaveReader:
-    def wave_sample_width_channels_sample_rate_reader(self, file_path):
-        """Read basic wave parameters and return it as a tuple """
-        audio_file = wave.open(file_path, 'rb')
-        sample_width = audio_file.getsampwidth()
-        print(sample_width)
-        channels = audio_file.getnchannels()
-        rate = audio_file.getframerate()
-        audio_data = (file_path, sample_width, channels, rate)
-        logging.info(audio_data)
-        return audio_data
+    def __init__(self, file_path):
+        self.audio_file = wave.open(file_path, 'rb')
+        self.sample_width = self.audio_file.getsampwidth()
+        self.channels = self.audio_file.getnchannels()
+        self.frame_rate = self.audio_file.getframerate()
 
-    def audio_data_chunk_reader(self, wave_object, chunk_size=512):
+    def audio_data_chunk_reader(self, seconds_to_read = 10):
         """ Read audio data in chunks"""
+        chunk_size = seconds_to_read * self.frame_rate
         while True:
-            data = wave_object.readnframes(chunk_size)
-            if not data:
+            try:
+                data = self.audio_file.readnframes(chunk_size)
+            except Exception as e:
+                # TODO make more concrete exception
+                logging.info('full file read', e)
+                self. audio_file.close()
                 break
             yield data
