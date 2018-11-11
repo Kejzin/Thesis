@@ -1,6 +1,7 @@
 import wave
 import logging
 
+
 class WaveReader:
     def wave_sample_width_channels_sample_rate_reader(self, file_path):
         """Read basic wave parameters and return it as a tuple """
