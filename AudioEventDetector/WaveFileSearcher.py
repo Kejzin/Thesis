@@ -1,18 +1,24 @@
 import os
-
+import sys
+import logging
 
 class WaveFileSearcher:
-    @property
-    def find_wave_file(self,):
-        path = self.get_path_from_cmd()
+    def find_wave_files(self, ):
+        path = self._get_path_from_cmd()
+        wave_files_paths = []
         if os.path.isfile(path):
-            wave_files_paths = path
+            wave_files_paths.append(path)
         elif os.path.isdir(path):
             path_content = os.listdir(path)
             wave_files_paths = [path for path in path_content if '.wav' in path]
         else:
-            logging.info('there is no valid path')
+            logging.error('there is no valid path')
         return wave_files_paths
 
-    def get_path_from_cmd(self,):
-        pass
+    def _get_path_from_cmd(self, ):
+        try:
+            path = sys.argv[1]
+        except IndexError:
+            logging.error('please enter path to wave files')
+            raise
+        return path
