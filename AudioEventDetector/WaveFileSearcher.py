@@ -2,6 +2,7 @@ import os
 import sys
 import logging
 
+
 class WaveFileSearcher:
     def find_wave_files(self, ):
         path = self._get_path_from_cmd()

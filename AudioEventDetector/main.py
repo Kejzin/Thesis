@@ -1,7 +1,7 @@
 from WaveReader import WaveReader
 from WaveFileSearcher import WaveFileSearcher
 from Sample_dB_converter import SamplesConverter
-import logging
+from PlotsMaker import Plotter
 
 if __name__ == '__main__':
     wave_file_searcher = WaveFileSearcher()
@@ -12,6 +12,9 @@ if __name__ == '__main__':
         print(file)
         print('jestem w for w main')
         # wave_reader = WaveReader(file)
-        samples_converter = SamplesConverter(file)
-        samples_converter.convert_all_audio_file()
+        plotter = Plotter(file)
+        plotter.simple_plot()
+        print('tadam')
+
+
 

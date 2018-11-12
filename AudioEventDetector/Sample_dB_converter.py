@@ -13,7 +13,8 @@ class SamplesConverter:
         self._filtered_samples = []
 
     def convert_samples_to_db_fs(self,):
-        max_value = 2**16 # (self.wave_reader_object.sample_width - 1)
+        max_value = 2**15  # (self.wave_reader_object.sample_width - 1)
+        print('sample width is: {}'.format(self.wave_reader_object.sample_width))
         converted_values = [20*np.log10(np.abs(sample)/max_value) for sample in self._filtered_samples if sample]
         return converted_values
 
@@ -23,6 +24,15 @@ class SamplesConverter:
             self._filtered_samples = splweighting.weight_signal(self._samples, self.wave_reader_object.frame_rate, 'A')
         except StopIteration as e:
             raise
+
+    def make_db_fs_a_samples(self,):
+        try:
+            self.filter_samples_with_weighting_filter()
+            converted_samples = self.convert_samples_to_db_fs()
+            print('original sample: {}, filtered sample: {}'.format(self._samples[0], self._filtered_samples[0]))
+        except StopIteration:
+            print('wszystko gra, sialala!')
+        return converted_samples
 
     def _get_weighting_from_cmd(self,):
         try:
@@ -34,12 +44,3 @@ class SamplesConverter:
     def _get_audio_chunk(self, ):
         self._samples = next(self.audio_samples_generator)
 
-    def convert_all_audio_file(self,):
-        while True:
-            try:
-                self.filter_samples_with_weighting_filter()
-                self.convert_samples_to_db_fs()
-                # print('original sample: {}, filtered sample: {}'.format(self._samples[0], self._filtered_samples[0]))
-            except StopIteration:
-                print('wszystko gra, sialala!')
-                break
