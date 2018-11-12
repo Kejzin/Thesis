@@ -13,19 +13,15 @@ class WaveReader:
     def read_audio_data_chunk(self, seconds_to_read=1):
         """ Read audio data in chunks"""
         chunk_size = seconds_to_read * self.frame_rate
+        samples = (1)
         print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))
-        while True:
-            try:
-                print('czytamy od probki')
-                print(self.audio_file.tell())
-                samples = self.audio_file.readframes(chunk_size)
-                # print('samples: {}'.format(samples[0:10]))
-                samples = self._decode_audio_chunk(samples)
-            except Exception as e:
-                # TODO make more concrete exception
-                logging.error('full file read {}'.format(e))
-                self. audio_file.close()
-                break
+        while samples:
+            # print('czytamy od probki')
+            # print(self.audio_file.tell())
+            samples = self.audio_file.readframes(chunk_size)
+            # print('samples: {}'.format(samples[0:10]))
+            samples = self._decode_audio_chunk(samples)
+            # print(samples[0])
             yield samples
 
     def _decode_audio_chunk(self, samples):

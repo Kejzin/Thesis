@@ -13,5 +13,5 @@ if __name__ == '__main__':
         print('jestem w for w main')
         # wave_reader = WaveReader(file)
         samples_converter = SamplesConverter(file)
-        print('koncze')
+        samples_converter.convert_all_audio_file()
 
