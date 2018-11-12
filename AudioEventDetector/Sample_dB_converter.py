@@ -12,9 +12,18 @@ class SamplesConverter:
         self._samples = []
         self._filtered_samples = []
 
-    def convert_samples_to_db_fs(self,):
-        max_value = 2**16 # (self.wave_reader_object.sample_width - 1)
-        converted_values = [20*np.log10(np.abs(sample)/max_value) for sample in self._filtered_samples if sample]
+  def convert_samples_to_db_fs(self, ):
+        
+        max_value = 2**(self.wave_reader_object.sample_width - 1)
+        
+        converted_values = []
+        for sample in self._filtered_samples:
+            new_converted_value = 0
+            if(sample > 0):
+                new_converted_value = 20*math.log10(abs(sample)/max_value)
+            
+            converted_values.append(new_converted_value);
+
         return converted_values
 
     def filter_samples_with_weighting_filter(self, ):
