@@ -5,7 +5,7 @@ from PlotsMaker import Plotter
 
 if __name__ == '__main__':
     wave_file_searcher = WaveFileSearcher()
-    wave_files = wave_file_searcher.find_wave_files()
+    wave_files = wave_file_searcher.find_wave_files_paths()
     print('elo')
     print('wave files: {}'.format(wave_files))
     for file in wave_files:

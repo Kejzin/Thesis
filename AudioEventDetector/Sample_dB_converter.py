@@ -1,5 +1,5 @@
-from pyfilterbank import splweighting
 import sys
+from pyfilterbank import splweighting
 import numpy as np
 from WaveReader import WaveReader
 
@@ -14,25 +14,31 @@ class SamplesConverter:
 
     def convert_samples_to_db_fs(self,):
         max_value = 2**15  # (self.wave_reader_object.sample_width - 1)
-        print('sample width is: {}'.format(self.wave_reader_object.sample_width))
+        print('[convert_samples_to_db_fs] sample width is: {}'.format(self.wave_reader_object.sample_width))
         converted_values = [20*np.log10(np.abs(sample)/max_value) for sample in self._filtered_samples if sample]
         return converted_values
 
-    def filter_samples_with_weighting_filter(self, ):
+    def filter_samples_with_weighting_filter(self,):
         try:
             self._samples = next(self.audio_samples_generator)
-            self._filtered_samples = splweighting.weight_signal(self._samples, self.wave_reader_object.frame_rate, 'A')
-        except StopIteration as e:
+        except StopIteration :
             raise
+        self._filtered_samples = splweighting.weight_signal(self._samples,
+                                                            self.wave_reader_object.frame_rate,
+                                                            self.weighting)
 
-    def make_db_fs_a_samples(self,):
+    def convert_filtered_samples_to_db_fs(self,):
         try:
             self.filter_samples_with_weighting_filter()
-            converted_samples = self.convert_samples_to_db_fs()
-            print('original sample: {}, filtered sample: {}'.format(self._samples[0], self._filtered_samples[0]))
         except StopIteration:
-            print('wszystko gra, sialala!')
+            print('plik przeczytany w calosci!')
+            raise
+        converted_samples = self.convert_samples_to_db_fs()
+        # print('original sample: {}, filtered sample: {}'.format(self._samples[0], self._filtered_samples[0]))
         return converted_samples
+
+    def apply_time_constant_to_db_samples(self, ):
+        pass
 
     def _get_weighting_from_cmd(self,):
         try:
@@ -41,6 +47,6 @@ class SamplesConverter:
             weighting = 'A'
         return weighting
 
-    def _get_audio_chunk(self, ):
+    def _get_audio_chunk(self,):
         self._samples = next(self.audio_samples_generator)
 
