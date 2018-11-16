@@ -34,7 +34,6 @@ class SamplesConverter:
             print('plik przeczytany w calosci!')
             raise
         converted_samples = self.convert_samples_to_db_fs()
-        # print('original sample: {}, filtered sample: {}'.format(self._samples[0], self._filtered_samples[0]))
         return converted_samples
 
     def apply_time_constant_to_db_samples(self, ):
