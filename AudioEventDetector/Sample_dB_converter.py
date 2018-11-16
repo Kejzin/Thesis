@@ -13,7 +13,7 @@ class SamplesConverter:
         self._filtered_samples = []
 
     def convert_samples_to_db_fs(self,):
-        max_value = 2**15  # (self.wave_reader_object.sample_width - 1)
+        max_value = 2**(self.wave_reader_object.sample_width*8 - 1)
         print('[convert_samples_to_db_fs] sample width is: {}'.format(self.wave_reader_object.sample_width))
         converted_values = [20*np.log10(np.abs(sample)/max_value) for sample in self._filtered_samples if sample]
         return converted_values
