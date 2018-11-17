@@ -2,50 +2,69 @@ import sys
 from pyfilterbank import splweighting
 import numpy as np
 from WaveReader import WaveReader
+from acoustics import standards
 
+class CmdInterface:
+    @staticmethod
+    def get_frequency_weighting_from_cmd():
+        try:
+            frequency_weighting = sys.argv[2]
+            if frequency_weighting not in ['A', 'B']:
+                raise ValueError('frequency weighting must be "A" or "B" not {}'.format(frequency_weighting))
+        except IndexError:
+            frequency_weighting = 'A'
+        return frequency_weighting
+
+    @staticmethod
+    def get_time_weighting_from_cmd():
+        try:
+            time_weighting = sys.argv[3]
+            if time_weighting not in ['slow', 'fast']
+                raise ValueError('time weighting must be "slow" or "fast", not {}'.format(time_weighting))
+        except IndexError:
+            time_weighting = 'slow'
+        return time_weighting
 
 class SamplesConverter:
+    """Convert samples to frequency and time weighted signal according to IEC 61672-1:2013"""
     def __init__(self, file_path):
         self.wave_reader_object = WaveReader(file_path)
         self.audio_samples_generator = self.wave_reader_object.read_audio_data_chunk()
-        self.weighting = self._get_weighting_from_cmd()
-        self._samples = []
-        self._filtered_samples = []
+        self.frequency_weighting = CmdInterface.get_frequency_weighting_from_cmd()
+        self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
 
-    def convert_samples_to_db_fs(self,):
+    def _log_10_dealing_with_0(self, value):
+        dummy_value = 10**-10
+        if value == 0:
+            result = dummy_value
+        else:
+            result = np.log10(value)
+        return result
+
+    def _convert_samples_to_db_fs(self, samples):
         max_value = 2**(self.wave_reader_object.sample_width*8 - 1)
+
         print('[convert_samples_to_db_fs] sample width is: {}'.format(self.wave_reader_object.sample_width))
-        converted_values = [20*np.log10(np.abs(sample)/max_value) for sample in self._filtered_samples if sample]
-        return converted_values
 
-    def filter_samples_with_weighting_filter(self,):
-        try:
-            self._samples = next(self.audio_samples_generator)
-        except StopIteration :
-            raise
-        self._filtered_samples = splweighting.weight_signal(self._samples,
-                                                            self.wave_reader_object.frame_rate,
-                                                            self.weighting)
+        samples_db_fs = [20*self._log_10_dealing_with_0(np.abs(sample)/max_value) for sample in samples]
+        return samples_db_fs
 
-    def convert_filtered_samples_to_db_fs(self,):
-        try:
-            self.filter_samples_with_weighting_filter()
-        except StopIteration:
-            print('plik przeczytany w calosci!')
-            raise
-        converted_samples = self.convert_samples_to_db_fs()
-        return converted_samples
+    def _filter_samples_with_weighting_filter(self, samples):
+        samples_weighted = splweighting.weight_signal(samples,
+                                                      self.wave_reader_object.frame_rate,
+                                                      self.weighting)
+        return samples_weighted
 
-    def apply_time_constant_to_db_samples(self, ):
+    def _filter_db_samples_samples_with_time_constant(self, db_samples):
+        standards.iec_61672_1_2013.slow_level(db_samples, self.wave_reader_object.frame_rate)
         pass
 
-    def _get_weighting_from_cmd(self,):
-        try:
-            weighting = sys.argv[2]
-        except IndexError as e:
-            weighting = 'A'
-        return weighting
 
     def _get_audio_chunk(self,):
-        self._samples = next(self.audio_samples_generator)
+        try:
+            samples = next(self.audio_samples_generator)
+        except StopIteration:
+            print('all samples read')
+            raise
+        return samples
 
