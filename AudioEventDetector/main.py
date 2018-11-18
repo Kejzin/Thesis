@@ -3,6 +3,7 @@ from WaveFileSearcher import WaveFileSearcher
 from Sample_dB_converter import SamplesConverter
 from PlotsMaker import Plotter
 import numpy as np
+import pydoc
 
 if __name__ == '__main__':
     wave_file_searcher = WaveFileSearcher()
