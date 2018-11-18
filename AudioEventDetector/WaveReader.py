@@ -9,7 +9,7 @@ class WaveReader:
         self.channels = self.audio_file.getnchannels()
         self.frame_rate = self.audio_file.getframerate()
 
-    def read_audio_data_chunk(self, seconds_to_read=60):
+    def read_audio_data_chunk(self, seconds_to_read=10):
         """ Read audio data in chunks"""
         chunk_size = seconds_to_read * self.frame_rate
         print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))

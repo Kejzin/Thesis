@@ -7,8 +7,8 @@ class WaveFileSearcher:
     def find_wave_files_paths(self, ):
         """
         Find wave files under path given in cmd.
-        :return: list of wave files path
-        :rtype: [str]
+        return:
+            wave_files_paths([str]) list of strings wave files path
         """
         path = self._get_path_from_cmd()
         wave_files_paths = []
@@ -26,12 +26,12 @@ class WaveFileSearcher:
     def _get_path_from_cmd(self, ):
         """
         get firs argument from cmd. In use case it should be wave files path
-        :return: string from cmd
-        :rtype: str
+        return:
+            path(str): first argument from cmd, should be path to wave files
         """
         try:
             path = sys.argv[1]
         except IndexError:
-            logging.error('please enter path to wave files')
-            raise
+            logging.error('Path not entered. Please enter path to wave files')
+            sys.exit()
         return path

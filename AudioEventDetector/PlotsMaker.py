@@ -8,7 +8,6 @@ class Plotter:
 
     def simple_plot(self, data):
         print('i want to plot something')
-        print(data)
         plt.plot(data)
         plt.show()
 
