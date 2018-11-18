@@ -60,8 +60,7 @@ class SamplesConverter:
         return samples
 
     def _filter_samples_with_weighting_filter(self, samples):
-        """
-        Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
+        """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
         class variable.
         Parameters
         ---------------
@@ -77,8 +76,7 @@ class SamplesConverter:
         return samples_weighted
 
     def _convert_samples_to_db_fs(self, energy_samples):
-        """
-        Convert samples in energy unit(preferably p^2) to dB FS.
+        """Convert samples in energy unit(preferably p^2) to dB FS.
         FS value is calculated from sample_width of read object.
         Args:
             energy_samples(list): list of samples in energy unit (e.x p^2).
@@ -101,13 +99,18 @@ class SamplesConverter:
         return result
 
     def _filter_db_samples_samples_with_time_constant(self, samples):
-        """
-        Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
+        """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
         Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
-        Args:
-            samples([float]): list of samples with dynamic pressure level.
-        return:
-            list(time_weighted_samples)([float]): list of samples weighted which defined time constant.
+
+        Parameters
+        ----------
+            samples: [float]
+                    list of samples with dynamic pressure level.
+
+        Returns
+        --------
+            list(time_weighted_samples): [float]
+                                        list of samples weighted which defined time constant.
 
         """
         if self.time_weighting == 'slow':
