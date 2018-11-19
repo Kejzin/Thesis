@@ -4,6 +4,7 @@ import numpy as np
 from WaveReader import WaveReader
 from acoustics import standards
 
+
 class CmdInterface:
     @staticmethod
     def get_frequency_weighting_from_cmd():
@@ -84,8 +85,10 @@ class SamplesConverter:
             list(samples_db_fs): list of samples in dB FS format.
         """
         # TODO: Verify if it is true dB FS, preferably in standard  AES17-1998,[13] IEC 61606
+        # TODO: Check what RMS is measured. Mean is already did by time integration!
         max_value = 2**(self.wave_reader_object.sample_width*8 - 1)
-        samples_db_fs = [20 * self._log_10_dealing_with_0(np.abs(sample)/max_value**2) for sample in energy_samples]
+        samples_db_fs = [20 * self._log_10_dealing_with_0(np.sqrt(sample/max_value**2)*np.sqrt(2))
+                         for sample in energy_samples]
         return list(samples_db_fs)
 
     def _log_10_dealing_with_0(self, value):
@@ -93,7 +96,6 @@ class SamplesConverter:
         dummy_value = 10**-10
         if value == 0:
             result = dummy_value
-            raise Exception
         else:
             result = np.log10(value)
         return result

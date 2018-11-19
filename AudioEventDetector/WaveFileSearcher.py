@@ -35,3 +35,5 @@ class WaveFileSearcher:
             logging.error('Path not entered. Please enter path to wave files')
             sys.exit()
         return path
+
+# TODO find reference wave and compute dB SPL.
