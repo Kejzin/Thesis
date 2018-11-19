@@ -36,12 +36,20 @@ class SamplesConverter:
         self.frequency_weighting = CmdInterface.get_frequency_weighting_from_cmd()
         self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
 
+    def convert_all_file_samples(self,):
+        all_converted_samples = []
+        while True:
+            try:
+                all_converted_samples += next(self.convert_samples())
+            except StopIteration as e:
+                break
+        return all_converted_samples
+
     def convert_samples(self,):
         """
         Make full conversion according to IEC-61672.
         :return:  db_fs_samples([float]): frequency and time weighted full scale level.
         """
-
         while True:
             try:
                 samples = next(self.audio_samples_generator)
