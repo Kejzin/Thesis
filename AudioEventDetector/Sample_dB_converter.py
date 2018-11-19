@@ -28,7 +28,7 @@ class CmdInterface:
 
 
 class SamplesConverter:
-    """Convert samples to frequency and time weighted signal according to IEC 61672-1:2013"""
+    """Convert samples from given wave file to frequency and time weighted signal according to IEC 61672-1:2013"""
 
     def __init__(self, file_path):
         self.wave_reader_object = WaveReader(file_path)
@@ -44,21 +44,13 @@ class SamplesConverter:
 
         while True:
             try:
-                samples = self._get_audio_chunk()
+                samples = next(self.audio_samples_generator)
             except StopIteration:
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
             time_weighted_samples = self._filter_db_samples_samples_with_time_constant(frequency_weighted_samples**2)
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             yield db_fs_samples
-
-    def _get_audio_chunk(self,):
-        try:
-            samples = next(self.audio_samples_generator)
-        except StopIteration:
-            print('all samples read')
-            raise
-        return samples
 
     def _filter_samples_with_weighting_filter(self, samples):
         """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
@@ -85,7 +77,7 @@ class SamplesConverter:
             list(samples_db_fs): list of samples in dB FS format.
         """
         # TODO: Verify if it is true dB FS, preferably in standard  AES17-1998,[13] IEC 61606
-        # TODO: Check what RMS is measured. Mean is already did by time integration!
+        # TODO: Check how RMS is measured. Mean is already did by time integration!
         max_value = 2**(self.wave_reader_object.sample_width*8 - 1)
         samples_db_fs = [20 * self._log_10_dealing_with_0(np.sqrt(sample/max_value**2)*np.sqrt(2))
                          for sample in energy_samples]
@@ -122,5 +114,6 @@ class SamplesConverter:
             time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
 
-        print('lenght changed from {} to {}'.format(len(samples),len(time_weighted_samples)))
-        return list(time_weighted_samples)
+        print('length changed from {} to {}'.format(len(samples),len(time_weighted_samples)))
+        time_weighted_samples = list(time_weighted_samples)
+        return time_weighted_samples
