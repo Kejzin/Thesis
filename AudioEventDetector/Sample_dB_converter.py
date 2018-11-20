@@ -152,10 +152,12 @@ class SamplesConverter:
         if self.time_weighting == 'slow':
             time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
-        else:
+        elif self.time_weighting == 'fast':
             time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
+        else:
+            raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
 
-        print('length changed from {} to {}'.format(len(samples),len(time_weighted_samples)))
+        print('length changed from {} to {}'.format(len(samples), len(time_weighted_samples)))
         time_weighted_samples = list(time_weighted_samples)
         return time_weighted_samples
