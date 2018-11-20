@@ -2,6 +2,28 @@ import wave
 import struct
 
 
+class WaveWriter:
+    def read_defined_frames(self, file_path, event):
+        start, end, length = event
+        audio_file = wave.open(file_path, 'rb')
+        audio_file.rewind()
+        frame_rate = audio_file.getframerate()
+        audio_file.setpos(audio_file.tell() + start*frame_rate)
+        frames = audio_file.readframes(length*frame_rate)
+        print("[read_defined_frames] {}".format(len(frames)))
+        # frames = WaveReader.decode_audio_chunk(frames)
+        return frames
+
+    def write_defined_frames(self, file_name, frames):
+        audio_file = wave.open(file_name, 'wb')
+        audio_file.setsampwidth(2)
+        audio_file. setnchannels(1)
+        audio_file.setframerate(48000)
+        audio_file.writeframes(frames)
+        print('new file is {} sampwidth'.format(audio_file.getsampwidth()))
+        # print("I just write {}". format(frames))
+        audio_file.close()
+
 class WaveReader:
     def __init__(self, file_path):
         self.file_path = file_path
@@ -25,11 +47,12 @@ class WaveReader:
             if not samples:
                 print('end reading {}. Read {} frames'.format(self.file_path, self.audio_file.tell()))
                 return
-            samples = self._decode_audio_chunk(samples)
+            samples = self.decode_audio_chunk(samples)
             yield samples
 
     # TODO: Check what exactly size must be here
-    def _decode_audio_chunk(self, samples):
+    @staticmethod
+    def decode_audio_chunk(samples):
         fmt = '<{}h'.format(len(samples)//2)
         print(struct.calcsize(fmt))
         print("FMT IS {}".format(fmt))

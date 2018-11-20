@@ -8,6 +8,11 @@ from acoustics import standards
 class CmdInterface:
     @staticmethod
     def get_frequency_weighting_from_cmd():
+        """Read second argument from cmd which should be frequency weighting. Can be "A", "B" or "C".
+        Returns:
+        -------
+            frequency_weighting: str
+        """
         try:
             frequency_weighting = sys.argv[2]
             if frequency_weighting not in ['A', 'B', 'C']:
@@ -18,6 +23,11 @@ class CmdInterface:
 
     @staticmethod
     def get_time_weighting_from_cmd():
+        """Read third argument from cmd which should be time weighting. Can be "slow" or "fast".
+        Returns:
+        -------
+            time_weighting: str
+        """
         try:
             time_weighting = sys.argv[3]
             if time_weighting not in ['slow', 'fast']:
@@ -37,6 +47,11 @@ class SamplesConverter:
         self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
 
     def convert_all_file_samples(self,):
+        """Use convert_samples method to all samples in file.
+        Returns
+        -------
+            all_converted_samples: [float]
+        """
         all_converted_samples = []
         while True:
             try:
@@ -47,8 +62,11 @@ class SamplesConverter:
 
     def convert_samples(self,):
         """
-        Make full conversion according to IEC-61672.
-        :return:  db_fs_samples([float]): frequency and time weighted full scale level.
+        Make full conversion from dynamic representation to frequency and time weighted samples according to IEC-61672.
+        Returns
+        -------
+            db_fs_samples: [float]
+                frequency and time weighted full scale level.
         """
         while True:
             try:
@@ -64,10 +82,13 @@ class SamplesConverter:
         """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
         class variable.
         Parameters
-        ---------------
-            samples([float]): list of samples representing dynamic pressure level.
-        :return:
-            samples_weighted([float]): list of samples representing weighted samples of dynamic pressure level.
+        ----------
+            samples: [float]
+                list of samples representing dynamic pressure level.
+        Returns
+        -------
+            samples_weighted: [float]
+                list of samples representing weighted samples of dynamic pressure level.
 
         """
 
@@ -79,10 +100,14 @@ class SamplesConverter:
     def _convert_samples_to_db_fs(self, energy_samples):
         """Convert samples in energy unit(preferably p^2) to dB FS.
         FS value is calculated from sample_width of read object.
-        Args:
-            energy_samples(list): list of samples in energy unit (e.x p^2).
-        returns:
-            list(samples_db_fs): list of samples in dB FS format.
+        Parameters
+        ----------
+            energy_samples: [float]
+                list of samples in energy unit (e.x p^2).
+        Returns
+        -------
+            list(samples_db_fs): [float]
+                list of samples in dB FS format.
         """
         # TODO: Verify if it is true dB FS, preferably in standard  AES17-1998,[13] IEC 61606
         # TODO: Check how RMS is measured. Mean is already did by time integration!
@@ -92,7 +117,16 @@ class SamplesConverter:
         return list(samples_db_fs)
 
     def _log_10_dealing_with_0(self, value):
-        """Normal np.log10 but if value is 0 return dummy small value."""
+        """Normal np.log10 but if value is 0 return dummy small value.
+        Parameters
+        ----------
+        value: float
+            value to convert.
+        Returns
+        -------
+        result: float
+            computed value.
+        """
         dummy_value = 10**-10
         if value == 0:
             result = dummy_value
@@ -107,12 +141,12 @@ class SamplesConverter:
         Parameters
         ----------
             samples: [float]
-                    list of samples with dynamic pressure level.
+                list of samples with dynamic pressure level.
 
         Returns
         --------
             list(time_weighted_samples): [float]
-                                        list of samples weighted which defined time constant.
+                list of samples weighted which defined time constant.
 
         """
         if self.time_weighting == 'slow':

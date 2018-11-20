@@ -1,9 +1,9 @@
-from WaveReader import WaveReader
+from WaveReader import WaveReader, WaveWriter
 from WaveFileSearcher import WaveFileSearcher
 from Sample_dB_converter import SamplesConverter
 from PlotsMaker import Plotter
 from Detectors import TresholdCrossDetector
-import pydoc
+from Detectors import EventsOrganiser
 
 if __name__ == '__main__':
     wave_file_searcher = WaveFileSearcher()
@@ -17,17 +17,24 @@ if __name__ == '__main__':
         # print('I have {} samples with are {}'.format(len(all_samples), type(all_samples)))
         plotter = Plotter()
         samples_gen = samples_converter.convert_samples()
-        occurrence_gen = TresholdCrossDetector.count_occurence(-25)
-        occurrence = []
+        events_generator = TresholdCrossDetector.count_occurence(-25)
+        events = []
         while True:
             try:
                 samples = next(samples_gen)
             except StopIteration:
                 break
-            next(occurrence_gen)
-            occurrence += occurrence_gen.send(samples)
-        print('i found {} occurrence'.format(len(occurrence)))
-        print(occurrence)
+            next(events_generator)
+            events += events_generator.send(samples)
+        print('event lenghts {}'.format(EventsOrganiser.organise_events(events)))
+        organised_events = EventsOrganiser.organise_events(events)
+        print('i found {} events'.format(len(events)))
+        wave_file_writer = WaveWriter()
+        count = 0
+        for event in organised_events:
+            count += 1
+            frames = wave_file_writer.read_defined_frames(file, event)
+            wave_file_writer.write_defined_frames('{}_{}.wav'.format(file.replace('.wav', ''), count), frames)
         print('tadam')
     print("JUUUUUUUUUUUHUUUUUUUUUUUU")
 
