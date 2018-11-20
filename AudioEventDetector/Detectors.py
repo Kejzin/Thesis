@@ -1,17 +1,21 @@
-Sample
+from Sample_dB_converter import SamplesConverter
 
 class TresholdCrossDetector:
-    def colect_data(self,):
-        data_generator =
-        all_samples = []
+    @staticmethod
+    def count_occurence(treshold, last_previous_index=0, found=0):
         while True:
-            try:
-                print(' [while]')
-                try:
-                    all_samples += next(converted_samples_generator)
-                except ValueError as e:
-                    print(e, 'but okay!')
-            except StopIteration:
-                print('[main:for:while]is there stop iteration?')
-                break
-        return all_samples
+            data = yield
+            print("I yield {}".format(data[0:5]))
+            first_index_of_chunk = last_previous_index
+            last_previous_index = len(data)+first_index_of_chunk
+            events = []
+            for value in data:
+                if found % 2 == 0 and value >= treshold:
+                    events += [(value, data.index(value)+first_index_of_chunk)]
+                    found += 1
+                    print('event started in {} s'.format(data.index(value)+first_index_of_chunk))
+                if found % 2 != 0 and value <= treshold:
+                    events += [(value, data.index(value)+first_index_of_chunk)]
+                    print('event end in {} s'.format(data.index(value)+first_index_of_chunk))
+                    found += 1
+            yield events

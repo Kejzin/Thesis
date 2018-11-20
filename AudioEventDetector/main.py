@@ -2,7 +2,7 @@ from WaveReader import WaveReader
 from WaveFileSearcher import WaveFileSearcher
 from Sample_dB_converter import SamplesConverter
 from PlotsMaker import Plotter
-import numpy as np
+from Detectors import TresholdCrossDetector
 import pydoc
 
 if __name__ == '__main__':
@@ -13,10 +13,21 @@ if __name__ == '__main__':
     for file in wave_files:
         print('[main;for]{}'.format(file))
         samples_converter = SamplesConverter(file)
-        all_samples = samples_converter.convert_all_file_samples()
-        print('I have {} samples with are {}'.format(len(all_samples), type(all_samples)))
+        # all_samples = samples_converter.convert_all_file_samples()
+        # print('I have {} samples with are {}'.format(len(all_samples), type(all_samples)))
         plotter = Plotter()
-        # plotter.simple_plot(all_samples)
+        samples_gen = samples_converter.convert_samples()
+        occurrence_gen = TresholdCrossDetector.count_occurence(-25)
+        occurrence = []
+        while True:
+            try:
+                samples = next(samples_gen)
+            except StopIteration:
+                break
+            next(occurrence_gen)
+            occurrence += occurrence_gen.send(samples)
+        print('i found {} occurrence'.format(len(occurrence)))
+        print(occurrence)
         print('tadam')
     print("JUUUUUUUUUUUHUUUUUUUUUUUU")
 
