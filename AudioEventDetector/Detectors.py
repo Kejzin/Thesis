@@ -26,8 +26,8 @@ class EventsOrganiser:
             events_starts_ends_lengths.append((events_starts[event_number],
                                                events_ends[event_number],
                                                events_length[event_number]))
-        print('{} events has been found.'.format(event_number+1))
-        print('{}'.format(events_starts_ends_lengths))
+        # print('{} events has been found.'.format(event_number+1))
+        # print('{}'.format(events_starts_ends_lengths))
         return events_starts_ends_lengths
 
 

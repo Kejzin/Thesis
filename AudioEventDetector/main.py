@@ -32,6 +32,7 @@ if __name__ == '__main__':
         print('i found {} events'.format(len(organised_events)))
         wave_file_writer = WaveWriter()
         count = 0
+        print(file)
         for event in organised_events:
             count += 1
             frames = wave_file_writer.read_defined_frames(file, event)

@@ -71,10 +71,12 @@ class WaveReader:
     # TODO: Check what exactly size must be here
     @staticmethod
     def decode_audio_chunk(samples):
+        print(samples[0:10])
         fmt = '<{}h'.format(len(samples)//2)
         print(struct.calcsize(fmt))
         print("FMT IS {}".format(fmt))
         decoded_samples = struct.unpack(fmt, samples)
+        print(decoded_samples[0:10])
         return list(decoded_samples)
 
 
