@@ -145,7 +145,7 @@ class SamplesConverter:
 
         Returns
         --------
-            list(time_weighted_samples): [float]
+            time_weighted_samples: [float]
                 list of samples weighted which defined time constant.
 
         """

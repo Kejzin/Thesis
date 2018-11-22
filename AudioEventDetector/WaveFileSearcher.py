@@ -6,9 +6,11 @@ import logging
 class WaveFileSearcher:
     def find_wave_files_paths(self, ):
         """
-        Find wave files under path given in cmd.
-        return:
-            wave_files_paths([str]) list of strings wave files path
+        Find wave files under path given in cmd. Path can be file or directory.
+        Returns
+        -------
+            wave_files_paths: [str]
+                list of strings wave files path
         """
         path = self._get_path_from_cmd()
         wave_files_paths = []
@@ -26,8 +28,10 @@ class WaveFileSearcher:
     def _get_path_from_cmd(self, ):
         """
         get firs argument from cmd. In use case it should be wave files path
-        return:
-            path(str): first argument from cmd, should be path to wave files
+        Returns
+        -------
+            path: str
+                first argument from cmd, should be path to wave files
         """
         try:
             path = sys.argv[1]

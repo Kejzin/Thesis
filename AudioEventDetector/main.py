@@ -2,7 +2,7 @@ from WaveReader import WaveReader, WaveWriter
 from WaveFileSearcher import WaveFileSearcher
 from Sample_dB_converter import SamplesConverter
 from PlotsMaker import Plotter
-from Detectors import TresholdCrossDetector
+from Detectors import ThresholdCrossDetector
 from Detectors import EventsOrganiser
 
 if __name__ == '__main__':
@@ -17,7 +17,7 @@ if __name__ == '__main__':
         # print('I have {} samples with are {}'.format(len(all_samples), type(all_samples)))
         plotter = Plotter()
         samples_gen = samples_converter.convert_samples()
-        events_generator = TresholdCrossDetector.count_occurence(-25)
+        events_generator = ThresholdCrossDetector.count_occurrence(-25)
         events = []
         while True:
             try:
