@@ -21,12 +21,13 @@ class EventsOrganiser:
             try:
                 events_length.append(events_ends[event_number] - events_starts[event_number])
             except IndexError:
-                print('{} events has been found.'.format(event_number))
                 print('there is an event which has only start')
                 break
             events_starts_ends_lengths.append((events_starts[event_number],
                                                events_ends[event_number],
                                                events_length[event_number]))
+        print('{} events has been found.'.format(event_number+1))
+        print('{}'.format(events_starts_ends_lengths))
         return events_starts_ends_lengths
 
 
@@ -58,9 +59,9 @@ class ThresholdCrossDetector:
                 if _found % 2 == 0 and value >= threshold:
                     events += [(value, data.index(value)+first_index_of_chunk)]
                     _found += 1
-                    print('event started in {} s'.format(data.index(value)+first_index_of_chunk))
+                    print('event started in {} sample'.format(data.index(value)+first_index_of_chunk))
                 if _found % 2 != 0 and value <= threshold:
                     events += [(value, data.index(value)+first_index_of_chunk)]
-                    print('event end in {} s'.format(data.index(value)+first_index_of_chunk))
+                    print('event end in {} sample'.format(data.index(value)+first_index_of_chunk))
                     _found += 1
             yield events

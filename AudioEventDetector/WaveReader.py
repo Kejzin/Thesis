@@ -6,6 +6,7 @@ class WaveWriter:
     def __init__(self,):
         """Write audio files which audio events."""
         pass
+
     def read_defined_frames(self, file_path, event):
         start, end, length = event
         audio_file = wave.open(file_path, 'rb')
@@ -13,14 +14,15 @@ class WaveWriter:
         frame_rate = audio_file.getframerate()
         audio_file.setpos(audio_file.tell() + start*frame_rate)
         frames = audio_file.readframes(length*frame_rate)
+        params = audio_file.getparams()
         print("[read_defined_frames] {}".format(len(frames)))
-        return frames
+        frames_and_params = (frames, params)
+        return frames_and_params
 
-    def write_defined_frames(self, file_name, frames):
-        audio_file = wave.open(file_name, 'wb')
-        audio_file.setsampwidth(2)
-        audio_file. setnchannels(1)
-        audio_file.setframerate(48000)
+    def write_defined_frames(self, file_path, frames_and_params):
+        frames, params = frames_and_params
+        audio_file = wave.open(file_path, 'wb')
+        audio_file.setparams(params)
         audio_file.writeframes(frames)
         print('new file is {} sampwidth'.format(audio_file.getsampwidth()))
         audio_file.close()
