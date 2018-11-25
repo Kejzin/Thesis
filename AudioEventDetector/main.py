@@ -6,28 +6,26 @@ from Detectors import ThresholdCrossDetector
 from Detectors import EventsOrganiser
 
 
-def find_events():
-    global events
+def find_events(file_path, reference_file_path):
+    samples_converter = SamplesConverter(file_path, reference_file_path)
     samples_gen = samples_converter.convert_samples()
-    events_generator = ThresholdCrossDetector.count_occurrence(-25)
-    events = []
+    events_generator = ThresholdCrossDetector.count_occurrence(25)
+    found_events = []
     while True:
         try:
             samples = next(samples_gen)
         except StopIteration:
             break
         next(events_generator)
-        events += events_generator.send(samples)
-    return events
+        found_events += events_generator.send(samples)
+    return found_events
 
 
 if __name__ == '__main__':
     wave_file_searcher = WaveFileSearcher()
-    wave_files = wave_file_searcher.find_wave_files_paths()
+    wave_files, reference_file_path = wave_file_searcher.find_wave_files_paths()
     for file in wave_files:
-        samples_converter = SamplesConverter(file)
-        plotter = Plotter()
-        events = find_events()
+        events = find_events(file)
         organised_events = EventsOrganiser.organise_events(events)
         print('i found {} events'.format(len(organised_events)))
         wave_file_writer = WaveWriter()

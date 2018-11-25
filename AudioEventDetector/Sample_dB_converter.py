@@ -7,6 +7,16 @@ from acoustics import standards
 
 class CmdInterface:
     @staticmethod
+    def get_reference_db_spl():
+        try:
+            reference_db_spl = sys.argv[3]
+            if type(reference_db_spl) != type(int):
+                raise ValueError('frequency weighting must be an int value, not {}'.format(reference_db_spl))
+        except IndexError:
+            reference_db_spl = '94'
+        return reference_db_spl
+
+    @staticmethod
     def get_frequency_weighting_from_cmd():
         """Read second argument from cmd which should be frequency weighting. Can be "A", "B" or "C".
         Returns:
@@ -40,11 +50,13 @@ class CmdInterface:
 class SamplesConverter:
     """Convert samples from given wave file to frequency and time weighted signal according to IEC 61672-1:2013"""
 
-    def __init__(self, file_path):
+    def __init__(self, file_path, reference_file_path):
         self.wave_reader_object = WaveReader(file_path)
+        self.reference_db_fs_value = self.convert_reference_file()
         self.audio_samples_generator = self.wave_reader_object.read_audio_data_chunk()
         self.frequency_weighting = CmdInterface.get_frequency_weighting_from_cmd()
         self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
+        self.reference_db_spl_value = CmdInterface.get_reference_db_spl()
 
     def convert_all_file_samples(self,):
         """Use convert_samples method to all samples in file.
@@ -56,7 +68,7 @@ class SamplesConverter:
         while True:
             try:
                 all_converted_samples += next(self.convert_samples())
-            except StopIteration as e:
+            except StopIteration:
                 break
         return all_converted_samples
 
@@ -76,7 +88,19 @@ class SamplesConverter:
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
             time_weighted_samples = self._filter_db_samples_samples_with_time_constant(frequency_weighted_samples**2)
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
-            yield db_fs_samples
+            db_spl_samples = self.convert_samples_to_db_spl(db_fs_samples, self.reference_db_fs_value)
+            yield db_spl_samples
+
+    def convert_reference_file(self, reference_file_path):
+        reference_file_converter = SamplesConverter(reference_file_path)
+        converted_samples = reference_file_converter.convert_all_file_samples()
+        reference = sum(converted_samples) / len(converted_samples)
+        return reference
+
+    def convert_samples_to_db_spl(self, db_fs_samples):
+        db_spl_samples = [sample*self.reference_db_spl_value / self.reference_db_fs_value for sample in db_fs_samples]
+        return db_fs_samples
+
 
     def _filter_samples_with_weighting_filter(self, samples):
         """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
