@@ -91,7 +91,8 @@ class SamplesConverter:
             db_spl_samples = self.convert_samples_to_db_spl(db_fs_samples, self.reference_db_fs_value)
             yield db_spl_samples
 
-    def convert_reference_file(self, reference_file_path):
+    @staticmethod
+    def convert_reference_file(reference_file_path):
         reference_file_converter = SamplesConverter(reference_file_path)
         converted_samples = reference_file_converter.convert_all_file_samples()
         reference = sum(converted_samples) / len(converted_samples)
@@ -99,8 +100,7 @@ class SamplesConverter:
 
     def convert_samples_to_db_spl(self, db_fs_samples):
         db_spl_samples = [sample*self.reference_db_spl_value / self.reference_db_fs_value for sample in db_fs_samples]
-        return db_fs_samples
-
+        return db_spl_samples
 
     def _filter_samples_with_weighting_filter(self, samples):
         """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672. Weighting is defined in
