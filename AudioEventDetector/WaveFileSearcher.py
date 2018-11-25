@@ -26,7 +26,8 @@ class WaveFileSearcher:
             logging.error('{} is no valid path'.format(path))
             raise FileNotFoundError('{} is not a valid path'.format(path))
         assert wave_files_paths, 'there is no any wave file under given path'
-        return (wave_files_paths, reference_file_path)
+        wave_files_and_reference_paths = (wave_files_paths, reference_file_path)
+        return wave_files_and_reference_paths
 
     def _get_path_from_cmd(self, ):
         """
