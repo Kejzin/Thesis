@@ -111,15 +111,15 @@ class SamplesConverter:
                 list of samples representing dynamic pressure level.
         Returns
         -------
-            samples_weighted: [float]
+            weighted_samples: [float]
                 list of samples representing weighted samples of dynamic pressure level.
 
         """
 
-        samples_weighted = splweighting.weight_signal(samples,
+        weighted_samples = splweighting.weight_signal(samples,
                                                       self.wave_reader_object.frame_rate,
                                                       self.frequency_weighting)
-        return samples_weighted
+        return weighted_samples
 
     def _convert_samples_to_db_fs(self, energy_samples):
         """Convert samples in energy unit(preferably p^2) to dB FS.
