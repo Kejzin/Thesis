@@ -86,7 +86,7 @@ class SamplesConverter:
             except StopIteration:
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
-            time_weighted_samples = self._filter_db_samples_samples_with_time_constant(frequency_weighted_samples**2)
+            time_weighted_samples = self._filter_db_samples_with_time_constant(frequency_weighted_samples ** 2)
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             db_spl_samples = self.convert_samples_to_db_spl(db_fs_samples, self.reference_db_fs_value)
             yield db_spl_samples
@@ -158,7 +158,7 @@ class SamplesConverter:
             result = np.log10(value)
         return result
 
-    def _filter_db_samples_samples_with_time_constant(self, samples):
+    def _filter_db_samples_with_time_constant(self, samples):
         """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
         Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
 
