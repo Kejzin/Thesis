@@ -17,6 +17,7 @@ def find_events(file_path, reference_db_fs_value):
     samples_converter = SamplesConverter(file_path, reference_db_fs_value)
     samples_gen = samples_converter.convert_samples()
     events_generator = ThresholdCrossDetector.count_occurrence(25)
+    time_weighting = samples_converter.time_weighting
     found_events = []
     while True:
         try:
@@ -25,7 +26,7 @@ def find_events(file_path, reference_db_fs_value):
             break
         next(events_generator)
         found_events += events_generator.send(samples)
-    return found_events
+    return found_events, time_weighting
 
 
 if __name__ == '__main__':
@@ -34,8 +35,8 @@ if __name__ == '__main__':
     reference_file_path = reference_file_path[0]
     reference_db_fs_value = convert_reference_file(reference_file_path)
     for file_path in wave_files_paths:
-        events = find_events(file_path, reference_db_fs_value)
-        organised_events = EventsOrganiser.organise_events(events)
+        events, time_constant_ms = find_events(file_path, reference_db_fs_value)
+        organised_events = EventsOrganiser.organise_events(events, time_constant_ms)
         print('i found {} events'.format(len(organised_events)))
         wave_file_writer = WaveWriter()
         count = 0
