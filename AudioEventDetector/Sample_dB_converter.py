@@ -50,9 +50,9 @@ class CmdInterface:
 class SamplesConverter:
     """Convert samples from given wave file to frequency and time weighted signal according to IEC 61672-1:2013"""
 
-    def __init__(self, file_path, reference_file_path):
+    def __init__(self, file_path, reference_db_fs_value):
         self.wave_reader_object = WaveReader(file_path)
-        self.reference_db_fs_value = self.convert_reference_file()
+        self.reference_db_fs_value = self.reference_db_fs_value
         self.audio_samples_generator = self.wave_reader_object.read_audio_data_chunk()
         self.frequency_weighting = CmdInterface.get_frequency_weighting_from_cmd()
         self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
@@ -91,12 +91,6 @@ class SamplesConverter:
             db_spl_samples = self.convert_samples_to_db_spl(db_fs_samples, self.reference_db_fs_value)
             yield db_spl_samples
 
-    @staticmethod
-    def convert_reference_file(reference_file_path):
-        reference_file_converter = SamplesConverter(reference_file_path)
-        converted_samples = reference_file_converter.convert_all_file_samples()
-        reference = sum(converted_samples) / len(converted_samples)
-        return reference
 
     def convert_samples_to_db_spl(self, db_fs_samples):
         db_spl_samples = [sample*self.reference_db_spl_value / self.reference_db_fs_value for sample in db_fs_samples]

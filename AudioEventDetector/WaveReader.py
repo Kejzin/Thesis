@@ -55,7 +55,7 @@ class WaveReader:
         chunk_size = seconds_to_read * self.frame_rate
         print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))
         print('start reading {}'.format(self.file_path))
-        print('total lenght is {}'.format(self.audio_file.getnframes()))
+        print('total length is {}'.format(self.audio_file.getnframes()))
         while True:
             print('[read_audio_data_chunk]')
             start = self.audio_file.tell()
