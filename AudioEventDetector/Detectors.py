@@ -1,6 +1,6 @@
 class EventsOrganiser:
     @staticmethod
-    def organise_events(events):
+    def organise_events(events, time_constant_ms):
         """Search in events list and prepare easy to use list of touples.
         Parameters
         ----------
@@ -13,8 +13,11 @@ class EventsOrganiser:
             events_starts_ends_lengths: [(float, float, float)]
                 List of three element touple which contains starts, endings and lengths of all founded events.
         """
-        events_starts = [time for _, time in events[::2]]
-        events_ends = [time for _, time in events[1::2]]
+        time_constant_ms = {'slow': 1,
+                            'fast': 0.125}
+
+        events_starts = [time*time_constant_ms for _, time in events[::2]]
+        events_ends = [time*time_constant_ms for _, time in events[1::2]]
         events_length = []
         events_starts_ends_lengths = []
         for event_number in range(len(events_starts)):
