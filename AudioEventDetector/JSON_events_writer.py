@@ -14,7 +14,7 @@ class JsonEventsWriter:
             start, end, length = event
             events_for_json['Event_{}'.format(count)] = {'start': start, 'end': end, 'length': length}
             count += 1
-        events_for_json["File_name": self.file_name]
+        # events_for_json["File_name": '{}'.format(self.file_name)]
         json_events = json.dumps(events_for_json)
         return json_events
 

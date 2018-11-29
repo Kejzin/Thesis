@@ -163,12 +163,14 @@ class SamplesDbFsConverter:
                 list of samples weighted which defined time constant.
 
         """
+        samples = [sample**2 for sample in samples]
         if self.time_weighting == 'slow':
             time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
-        elif self.time_weighting == 'fast':
-            time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
-                                                                    self.wave_reader_object.frame_rate)
+            print("slow constant is apllied ++++++++!+++++++++++")
+        # elif self.time_weighting == 'fast':
+         #    time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
+          #                                                           self.wave_reader_object.frame_rate)
         else:
             raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
 
@@ -203,6 +205,7 @@ class SamplesDbSPLConverter(SamplesDbFsConverter):
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
             time_weighted_samples = self._filter_db_samples_with_time_constant(frequency_weighted_samples ** 2)
+            print("Time weighting is made with {} frame rate".format(self.wave_reader_object.frame_rate))
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             db_spl_samples = self.convert_samples_to_db_spl(list(db_fs_samples))
             # from PlotsMaker import Plotter

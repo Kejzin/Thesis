@@ -9,10 +9,16 @@ class WaveWriter:
 
     def read_defined_frames(self, file_path, event):
         start, end, length = event
+        print("EVEEEENT {}".format(event))
+        print('START IS HERE: {}'.format(start))
         audio_file = wave.open(file_path, 'rb')
         audio_file.rewind()
+        print(audio_file.tell())
         frame_rate = audio_file.getframerate()
-        audio_file.setpos(audio_file.tell() + start*frame_rate)
+        print(frame_rate)
+        print("Where i should start: {}".format(audio_file.tell()+(start-1)*frame_rate))
+        print('total length is {}'.format(audio_file.getnframes()))
+        audio_file.setpos(audio_file.tell() + (start)*frame_rate)
         frames = audio_file.readframes(length*frame_rate)
         params = audio_file.getparams()
         print("[read_defined_frames] {}".format(len(frames)))
@@ -44,7 +50,7 @@ class WaveReader:
         self.channels = self.audio_file.getnchannels()
         self.frame_rate = self.audio_file.getframerate()
 
-    def read_audio_data_chunk(self, seconds_to_read=60):
+    def read_audio_data_chunk(self, seconds_to_read=30):
         """ Read audio data in chunks.
         Parameters
         ----------
@@ -57,7 +63,7 @@ class WaveReader:
         chunk_size = seconds_to_read * self.frame_rate
         print('start reading {}##############################################################'.format(self.file_path))
         print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))
-        print('total length is {}'.format(self.audio_file.getnframes()))
+        print('total length is {} s'.format(self.audio_file.getnframes()*self.audio_file.getframerate()))
         while True:
             print('[read_audio_data_chunk]')
             start = self.audio_file.tell()

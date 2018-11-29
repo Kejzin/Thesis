@@ -5,6 +5,7 @@ from Detectors import ThresholdCrossDetector
 from Detectors import EventsOrganiser
 from JSON_events_writer import JsonEventsWriter
 import ntpath
+from PlotsMaker import Plotter
 
 
 def convert_reference_file(reference_file_path):
@@ -17,16 +18,19 @@ def convert_reference_file(reference_file_path):
 def find_events(file_path, reference_db_fs_value):
     samples_db_spl_converter = SamplesDbSPLConverter(file_path, reference_db_fs_value)
     samples_gen = samples_db_spl_converter.convert_samples()
-    events_generator = ThresholdCrossDetector.count_occurrence(85)
+    events_generator = ThresholdCrossDetector.count_occurrence(80)
     time_weighting = samples_db_spl_converter.time_weighting
     found_events = []
+    samples_to_plot = []
     while True:
         try:
             samples = next(samples_gen)
+            samples_to_plot += samples
         except StopIteration:
             break
         next(events_generator)
         found_events += events_generator.send(samples)
+    # Plotter.simple_plot(samples)
     return found_events, time_weighting
 
 
@@ -48,10 +52,11 @@ if __name__ == '__main__':
             count += 1
             print("DO I EVEN GO HERE? %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             frames_and_params = wave_file_writer.read_defined_frames(file_path, event)
-            wave_file_writer.write_defined_frames('{}'.format(file_path.replace('.wav', '').replace('.WAV', '')),
+            wave_file_writer.write_defined_frames('{}_events'.format(file_path.replace('.wav', '').replace('.WAV', '')),
                                                   frames_and_params,
                                                   count)
             json_writer = JsonEventsWriter(organised_events, ntpath.basename(file_path), file_path.replace('.wav', ''))
+            json_writer.save_json_to_file()
         print("IT SHOULD NOT BE AT THE END")
 
     print("End")
