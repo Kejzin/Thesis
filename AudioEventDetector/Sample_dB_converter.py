@@ -168,9 +168,9 @@ class SamplesDbFsConverter:
             time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
             print("slow constant is apllied ++++++++!+++++++++++")
-        # elif self.time_weighting == 'fast':
-         #    time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
-          #                                                           self.wave_reader_object.frame_rate)
+        elif self.time_weighting == 'fast':
+            time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
+                                                                    self.wave_reader_object.frame_rate)
         else:
             raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
 
