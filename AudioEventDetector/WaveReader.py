@@ -1,6 +1,6 @@
 import wave
 import struct
-
+import os
 
 class WaveWriter:
     def __init__(self,):
@@ -19,9 +19,11 @@ class WaveWriter:
         frames_and_params = (frames, params)
         return frames_and_params
 
-    def write_defined_frames(self, file_path, frames_and_params):
+    def write_defined_frames(self, file_dir_path, frames_and_params, count):
         frames, params = frames_and_params
-        audio_file = wave.open(file_path, 'wb')
+        if not os.path.isdir(file_dir_path):
+            os.makedirs(file_dir_path)
+        audio_file = wave.open('{}/{}.wav'.format(file_dir_path, count), 'wb')
         audio_file.setparams(params)
         audio_file.writeframes(frames)
         print('new file is {} sampwidth'.format(audio_file.getsampwidth()))
@@ -53,8 +55,8 @@ class WaveReader:
             samples: [float]
                 list of value of audio samples."""
         chunk_size = seconds_to_read * self.frame_rate
+        print('start reading {}##############################################################'.format(self.file_path))
         print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))
-        print('start reading {}'.format(self.file_path))
         print('total length is {}'.format(self.audio_file.getnframes()))
         while True:
             print('[read_audio_data_chunk]')
@@ -64,6 +66,7 @@ class WaveReader:
             print('I try to read {} samples'.format(self.audio_file.tell()-start))
             if not samples:
                 print('end reading {}. Read {} frames'.format(self.file_path, self.audio_file.tell()))
+                self.audio_file.close()
                 return
             samples = self.decode_audio_chunk(samples)
             yield samples
@@ -71,12 +74,8 @@ class WaveReader:
     # TODO: Check what exactly size must be here
     @staticmethod
     def decode_audio_chunk(samples):
-        print(samples[0:10])
         fmt = '<{}h'.format(len(samples)//2)
-        print(struct.calcsize(fmt))
-        print("FMT IS {}".format(fmt))
         decoded_samples = struct.unpack(fmt, samples)
-        print(decoded_samples[0:10])
         return list(decoded_samples)
 
 

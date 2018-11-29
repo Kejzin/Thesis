@@ -1,6 +1,6 @@
 class EventsOrganiser:
     @staticmethod
-    def organise_events(events, time_constant_ms):
+    def organise_events(events, time_constant):
         """Search in events list and prepare easy to use list of touples.
         Parameters
         ----------
@@ -16,8 +16,8 @@ class EventsOrganiser:
         time_constant_ms = {'slow': 1,
                             'fast': 0.125}
 
-        events_starts = [time*time_constant_ms for _, time in events[::2]]
-        events_ends = [time*time_constant_ms for _, time in events[1::2]]
+        events_starts = [time*time_constant_ms[time_constant] for _, time in events[::2]]
+        events_ends = [time*time_constant_ms[time_constant] for _, time in events[1::2]]
         events_length = []
         events_starts_ends_lengths = []
         for event_number in range(len(events_starts)):
@@ -29,8 +29,6 @@ class EventsOrganiser:
             events_starts_ends_lengths.append((events_starts[event_number],
                                                events_ends[event_number],
                                                events_length[event_number]))
-        # print('{} events has been found.'.format(event_number+1))
-        # print('{}'.format(events_starts_ends_lengths))
         return events_starts_ends_lengths
 
 
@@ -54,7 +52,6 @@ class ThresholdCrossDetector:
         """
         while True:
             data = yield
-            print("I yield {}".format(data[0:5]))
             first_index_of_chunk = _last_previous_index
             _last_previous_index = len(data) + first_index_of_chunk
             events = []
