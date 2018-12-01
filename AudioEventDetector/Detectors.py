@@ -13,7 +13,7 @@ class EventsOrganiser:
             events_starts_ends_lengths: [(float, float, float)]
                 List of three element touple which contains starts, endings and lengths of all founded events.
         """
-        time_constant_ms = {'slow': 0.66,
+        time_constant_ms = {'slow': 1,
                             'fast': 0.125}
         print("events: {}".format(events[::2]))
         events_starts = [int(time*time_constant_ms[time_constant]) for _, time in events[::2]]

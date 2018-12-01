@@ -52,10 +52,11 @@ if __name__ == '__main__':
             count += 1
             print("DO I EVEN GO HERE? %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             frames_and_params = wave_file_writer.read_defined_frames(file_path, event)
-            wave_file_writer.write_defined_frames('{}_events'.format(file_path.replace('.wav', '').replace('.WAV', '')),
+            events_directory = '{}_events'.format(file_path.replace('.wav', '').replace('.WAV', ''))
+            wave_file_writer.write_defined_frames(events_directory,
                                                   frames_and_params,
                                                   count)
-            json_writer = JsonEventsWriter(organised_events, ntpath.basename(file_path), file_path.replace('.wav', ''))
+            json_writer = JsonEventsWriter(organised_events, ntpath.basename(file_path), events_directory)
             json_writer.save_json_to_file()
         print("IT SHOULD NOT BE AT THE END")
 
