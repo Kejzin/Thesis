@@ -20,9 +20,12 @@ class JsonEventsWriter:
 
     def save_json_to_file(self,):
         json_events = self.create_events_in_json()
-        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav','').replace('.WAV',''))
-        with open('{}/{}'.format(self.destination_directory, json_file_name), 'w') as json_file:
+        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav', '').replace('.WAV', ''))
+        json_file_path = '{}/{}'.format(self.destination_directory, json_file_name)
+        with open(json_file_path, 'w') as json_file:
             json_file.write(json_events)
+        print('JSON file with events has been saved to: {}'.format(json_file_path))
+        print('')
 
 
 

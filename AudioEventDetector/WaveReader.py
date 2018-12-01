@@ -1,38 +1,40 @@
 import wave
 import struct
-import os
+import ntpath
+
 
 class WaveWriter:
-    def __init__(self,):
+    def __init__(self, ):
         """Write audio files which audio events."""
         pass
 
     def read_defined_frames(self, file_path, event):
         start, end, length = event
-        print("EVEEEENT {}".format(event))
-        print('START IS HERE: {}'.format(start))
         audio_file = wave.open(file_path, 'rb')
         audio_file.rewind()
-        print(audio_file.tell())
         frame_rate = audio_file.getframerate()
-        print(frame_rate)
-        print("Where i should start: {}".format(audio_file.tell()+start*frame_rate))
-        print('total length is {}'.format(audio_file.getnframes()))
-        audio_file.setpos(audio_file.tell() + int(start*frame_rate))
-        frames_to_read = int(length*frame_rate)
-        print('TYPE: {} {}'.format(type(frames_to_read), frames_to_read))
+        start_position = audio_file.tell() + int(start * frame_rate)
+        audio_file.setpos(start_position)
+        frames_to_read = int(length * frame_rate)
+
+        print('Read frames from {} to {}'.format(start_position, start_position + frames_to_read))
+
         frames = audio_file.readframes(frames_to_read)
+
+        print('Samples from {} to {} has been read.'.format(start_position, audio_file.tell()))
+        print('')
+
         params = audio_file.getparams()
-        print("[read_defined_frames] {}".format(len(frames)))
         frames_and_params = (frames, params)
         return frames_and_params
 
     def write_defined_frames(self, file_dir_path, frames_and_params, count):
         frames, params = frames_and_params
-        audio_file = wave.open('{}/{}.wav'.format(file_dir_path, count), 'wb')
+        file_name = '{}/event_{}.wav'.format(file_dir_path, count)
+        audio_file = wave.open(file_name, 'wb')
         audio_file.setparams(params)
         audio_file.writeframes(frames)
-        print('new file is {} sampwidth'.format(audio_file.getsampwidth()))
+        print('Wrote file {}'.format(file_name))
         audio_file.close()
 
 
@@ -61,27 +63,31 @@ class WaveReader:
             samples: [float]
                 list of value of audio samples."""
         chunk_size = seconds_to_read * self.frame_rate
-        print('start reading {}##############################################################'.format(self.file_path))
-        print('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size))
-        print('total length is {} s'.format(self.audio_file.getnframes()*self.audio_file.getframerate()))
+        total_length = round(self.audio_file.getnframes() / self.audio_file.getframerate(), 2)
+        print('Read file {}'.format(ntpath.abspath(self.file_path)))
+        print(('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size)))
+        print('total length is {} s'.format(total_length))
+
         while True:
-            print('[read_audio_data_chunk]')
             start = self.audio_file.tell()
+
+            print('Read samples from {} to {}'.format(start,
+                                                               start + chunk_size))
             samples = self.audio_file.readframes(chunk_size)
-            print('I have read samples from {} to {}'.format(start, self.audio_file.tell()))
-            print('I try to read {} samples'.format(self.audio_file.tell()-start))
+
+            print('Samples from {} to {} has been read'.format(start, self.audio_file.tell()))
+
             if not samples:
-                print('end reading {}. Read {} frames'.format(self.file_path, self.audio_file.tell()))
+                print('End reading {}. Read {} frames '.format(ntpath.basename(self.file_path), self.audio_file.tell()))
+                print('')
                 self.audio_file.close()
                 return
+            print('')
             samples = self.decode_audio_chunk(samples)
             yield samples
 
-    # TODO: Check what exactly size must be here
     @staticmethod
     def decode_audio_chunk(samples):
-        fmt = '<{}h'.format(len(samples)//2)
+        fmt = '<{}h'.format(len(samples) // 2)
         decoded_samples = struct.unpack(fmt, samples)
         return list(decoded_samples)
-
-

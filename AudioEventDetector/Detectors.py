@@ -4,6 +4,8 @@ class EventsOrganiser:
         """Search in events list and prepare easy to use list of touples.
         Parameters
         ----------
+            time_constant: str
+                Time constant applied to a signal. Can be slow or fast.
             events: [(float, float)]
                 List of two element touples. Must contain list of all events to organise, where first value of every
                 touple is value of sample, second is number of it position in file. Must contain every starts
@@ -15,9 +17,7 @@ class EventsOrganiser:
         """
         time_constant_ms = {'slow': 1,
                             'fast': 0.125}
-        print("events: {}".format(events[::2]))
         events_starts = [time*time_constant_ms[time_constant] for _, time in events[::2]]
-        print("events_starts: {}".format(events_starts))
         events_ends = [time*time_constant_ms[time_constant] for _, time in events[1::2]]
         events_length = []
         events_starts_ends_lengths = []
@@ -30,7 +30,10 @@ class EventsOrganiser:
             events_starts_ends_lengths.append((events_starts[event_number],
                                                events_ends[event_number],
                                                events_length[event_number]))
-        print(events_starts_ends_lengths)
+
+        if events_starts_ends_lengths:
+            print('Events found are: {}'.format(events_starts_ends_lengths))
+            print('')
         return events_starts_ends_lengths
 
 
@@ -61,9 +64,7 @@ class ThresholdCrossDetector:
                 if _found % 2 == 0 and value >= threshold:
                     events += [(value, data.index(value)+first_index_of_chunk)]
                     _found += 1
-                    print('event started in {} sample'.format(data.index(value)+first_index_of_chunk))
                 if _found % 2 != 0 and value <= threshold:
                     events += [(value, data.index(value)+first_index_of_chunk)]
-                    print('event end in {} sample'.format(data.index(value)+first_index_of_chunk))
                     _found += 1
             yield events

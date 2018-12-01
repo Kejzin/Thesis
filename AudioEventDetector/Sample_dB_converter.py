@@ -16,7 +16,6 @@ class SamplesDbFsConverter:
         self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
         self.reference_db_spl_value = CmdInterface.get_reference_db_spl()
 
-
     def convert_all_file_samples(self,):
         """Use convert_samples method to all samples in file.
         Returns
@@ -82,10 +81,13 @@ class SamplesDbFsConverter:
                 list of samples in dB FS format.
         """
         # TODO: Verify if it is true dB FS, preferably in standard  AES17-1998,[13] IEC 61606
-        # TODO: Check how RMS is measured. Mean is already did by time integration!
-        max_value = 2**(self.wave_reader_object.sample_width*8 - 1)
-        samples_db_fs = [20 * self._log_10_dealing_with_0(np.sqrt(sample/max_value**2)*np.sqrt(2))
+        max_value = 2**(self.wave_reader_object.sample_width*8-1)
+        samples_db_fs = [10 * self._log_10_dealing_with_0((sample/max_value**2)*np.sqrt(2))
                          for sample in energy_samples]
+        print('{} energy unit samples has been converted to {} samples dB FS'.format(len(energy_samples),
+                                                                                     len(samples_db_fs)))
+        print('Full scale level is {}'.format(max_value))
+        print('')
         return list(samples_db_fs)
 
     def _log_10_dealing_with_0(self, value):
@@ -121,18 +123,21 @@ class SamplesDbFsConverter:
                 list of samples weighted which defined time constant.
 
         """
-        samples = [sample**2 for sample in samples]
         if self.time_weighting == 'slow':
             time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
-            print("slow constant is apllied ++++++++!+++++++++++")
+            print("Slow constant is applied")
         elif self.time_weighting == 'fast':
             time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
                                                                     self.wave_reader_object.frame_rate)
+            print("Fast constant is applied")
         else:
             raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
 
-        print('length changed from {} to {}'.format(len(samples), len(time_weighted_samples)))
+        print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
+                                                                                         len(time_weighted_samples),
+                                                                                         self.time_weighting))
+        print('')
         time_weighted_samples = list(time_weighted_samples)
         return time_weighted_samples
 
@@ -145,6 +150,17 @@ class SamplesDbSPLConverter(SamplesDbFsConverter):
     def convert_samples_to_db_spl(self, db_fs_samples):
         reference_db_spl_value = CmdInterface.get_reference_db_spl()
         db_spl_samples = [reference_db_spl_value + (sample - self.reference_db_fs_value) for sample in db_fs_samples]
+        print('{0} dB FS {1} {2} samples has been converted to {3} dB SPL {1} {2}samples'.format(len(db_fs_samples),
+                                                                                                 self.frequency_weighting,
+                                                                                                 self.time_weighting,
+                                                                                                 len(db_spl_samples)))
+        print('Reference value was {0} dB FS {1} {2} '
+              'with was equivalent to {3} dB SPL {1} {2}'.format(round(self.reference_db_fs_value, 2),
+                                                                 self.frequency_weighting,
+                                                                 self.time_weighting,
+                                                                 self. reference_db_spl_value, ))
+        print('')
+
         return db_spl_samples
 
     def convert_samples(self,):
@@ -163,9 +179,6 @@ class SamplesDbSPLConverter(SamplesDbFsConverter):
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
             time_weighted_samples = self._filter_db_samples_with_time_constant(frequency_weighted_samples ** 2)
-            print("Time weighting is made with {} frame rate".format(self.wave_reader_object.frame_rate))
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             db_spl_samples = self.convert_samples_to_db_spl(list(db_fs_samples))
-            # from PlotsMaker import Plotter
-            # Plotter.simple_plot(db_spl_samples)
             yield db_spl_samples
