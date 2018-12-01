@@ -13,7 +13,8 @@
 \usepackage{graphicx}
 \usepackage{subfigure}
 \usepackage{psfrag}
-
+% \usepackage{color}
+% \usepackage{xcolor}
 %pakiety dodające dużo dodatkowych poleceń matematycznych
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -23,6 +24,13 @@
 \usepackage{array}
 \usepackage{tabularx}
 \usepackage{hhline}
+
+\usepackage{listings}
+\lstset{language=Python,      % sets automatic line breaking
+ 		numbers=left,
+ 		showstringspaces=false,
+ 		numbersep=5pt,
+ 		basicstyle=\tiny}
 
 %pakiet wypisujący na marginesie etykiety równań i rysunków zdefiniowanych przez \label{}, chcąc wygenerować finalną wersję dokumentu wystarczy usunąć poniższą linię
 \usepackage{showlabels}
@@ -65,15 +73,52 @@ Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycz
 \end{enumerate}
 Autor ma \cite{Python_data_structures} nadzieję, że zaprojektowany w~ten sposób system pozwoli na późniejszy rozwój i~ułatwi powtórne wykorzystywanie tego narzędzia.
 \section{Motywacja}
-Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
+Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
 
-Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia to celów z~pozoru nie związanych z akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie ilości odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
+Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia to celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie ilości odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
 
 Biorąc pod uwagę, że przytoczone wyżej przykłady są jedynie wąskim wycinkiem zastosowań, które mogłyby przyjść do głowy komuś, kto ma widzę i~zainteresowanie w~innej dziedzinie niż autor pracy nie ulega wątpliwości, że warto posiadać takie oprogramowanie. Oczywiście wszystkie przytoczone sytuacje można analizować ręcznie, odsłuchując nagrane próbki. Analiza takich nagrań jednak pochłania dużo czasu i może być problematyczna. Z~pomocą stworzonego narzędzia można proces zupełnie lub częściowo zautomatyzować co w~obu przypadkach skutkuje znaczną oszczędnością czasu. 
 
-Praca powstała w połowie z chęci stworzenia użytecznego narzędzia a~w~połowie z~chęci Autora do poznania współczesnych metod analizy cyfrowych sygnałów fonicznych. Rozwinięcie wiedzy w zakresie tworzenia oprogramowania w~języki Python, pracy z systemem kontroli wersji oraz implementacja algorytmów znanych z~książek do realnie działającego programu jest procesem, który autor chciał poznać od podszewki. Przedstawienie wyników w formie zrozumiałej, czytelnej i~praktycznej jest nieraz jeszcze większym wyzwaniem i nie można nabyć w tym wprawy inaczej, niż pracując z~tymi wynikami i~samemu przekonać się na ile są one użyteczne.
+Praca powstała w połowie~z chęci stworzenia użytecznego narzędzia a~w~połowie z~chęci Autora do poznania współczesnych metod analizy cyfrowych sygnałów fonicznych. Rozwinięcie wiedzy w zakresie tworzenia oprogramowania w~języki Python, pracy z systemem kontroli wersji oraz implementacja algorytmów znanych z~książek do realnie działającego programu jest procesem, który autor chciał poznać od podszewki. Przedstawienie wyników w formie zrozumiałej, czytelnej i~praktycznej jest nieraz jeszcze większym wyzwaniem i~nie można nabyć~w tym wprawy inaczej, niż pracując z~tymi wynikami i~samemu przekonać się na ile są one użyteczne.
 
 Powyższe przesłanki zadecydowały o stworzeniu narzędzia. 
+
+\begin{lstlisting}[frame=single]
+def _filter_db_samples_with_time_constant(self, samples):
+    """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
+    Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
+
+    Parameters
+    ----------
+        samples: [float]
+        list of samples with dynamic pressure level.
+
+    Returns
+    --------
+        time_weighted_samples: [float]
+        list of samples weighted which defined time constant.
+
+    """
+    if self.time_weighting == 'slow':
+        time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
+                                    self.wave_reader_object.frame_rate)
+        print("Slow constant is applied")
+    elif self.time_weighting == 'fast':
+        time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
+                                    self.wave_reader_object.frame_rate)
+        print("Fast constant is applied")
+    else:
+        raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
+
+    print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
+                                             len(time_weighted_samples),
+                                             self.time_weighting))
+    print('')
+    time_weighted_samples = list(time_weighted_samples)
+    return time_weighted_samples
+
+\end{lstlisting}
+
 \chapter{Wprowadzenie}
 \section{Zdarzenie akustyczne}
 \section{Przyjęta definicja zdarzenia akustycznego}
