@@ -3,49 +3,7 @@ from pyfilterbank import splweighting
 import numpy as np
 from WaveReader import WaveReader
 from acoustics import standards
-
-
-class CmdInterface:
-    @staticmethod
-    def get_reference_db_spl():
-        try:
-            reference_db_spl = sys.argv[4]
-            reference_db_spl = int(reference_db_spl)
-            if type(reference_db_spl) != type(int):
-                raise ValueError('frequency weighting must be an int value, not {}'.format(reference_db_spl))
-        except IndexError:
-            reference_db_spl = 94
-        return reference_db_spl
-
-    @staticmethod
-    def get_frequency_weighting_from_cmd():
-        """Read second argument from cmd which should be frequency weighting. Can be "A", "B" or "C".
-        Returns:
-        -------
-            frequency_weighting: str
-        """
-        try:
-            frequency_weighting = sys.argv[2]
-            if frequency_weighting not in ['A', 'B', 'C']:
-                raise ValueError('frequency weighting must be "A", "B" or "C" not {}'.format(frequency_weighting))
-        except IndexError:
-            frequency_weighting = 'A'
-        return frequency_weighting
-
-    @staticmethod
-    def get_time_weighting_from_cmd():
-        """Read third argument from cmd which should be time weighting. Can be "slow" or "fast".
-        Returns:
-        -------
-            time_weighting: str
-        """
-        try:
-            time_weighting = sys.argv[3]
-            if time_weighting not in ['slow', 'fast']:
-                raise ValueError('time weighting must be "slow" or "fast", not {}'.format(time_weighting))
-        except IndexError:
-            time_weighting = 'slow'
-        return time_weighting
+from CmdInterface import CmdInterface
 
 
 class SamplesDbFsConverter:

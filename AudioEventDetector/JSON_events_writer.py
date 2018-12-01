@@ -8,7 +8,7 @@ class JsonEventsWriter:
         self.destination_directory = destination_directory
 
     def create_events_in_json(self, ):
-        events_for_json = {}
+        events_for_json = {'All_Events': len(self.organised_events)}
         count = 1
         for event in self.organised_events:
             start, end, length = event
@@ -20,7 +20,8 @@ class JsonEventsWriter:
 
     def save_json_to_file(self,):
         json_events = self.create_events_in_json()
-        with open('{}/{}_events'.format(self.destination_directory, self.file_name), 'w') as json_file:
+        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav','').replace('.WAV',''))
+        with open('{}/{}'.format(self.destination_directory, json_file_name), 'w') as json_file:
             json_file.write(json_events)
 
 

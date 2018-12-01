@@ -5,6 +5,8 @@ from Detectors import ThresholdCrossDetector
 from Detectors import EventsOrganiser
 from JSON_events_writer import JsonEventsWriter
 import ntpath
+import os
+from CmdInterface import CmdInterface
 from PlotsMaker import Plotter
 
 
@@ -16,9 +18,10 @@ def convert_reference_file(reference_file_path):
 
 
 def find_events(file_path, reference_db_fs_value):
+    threshold = CmdInterface.get_threshold()
     samples_db_spl_converter = SamplesDbSPLConverter(file_path, reference_db_fs_value)
     samples_gen = samples_db_spl_converter.convert_samples()
-    events_generator = ThresholdCrossDetector.count_occurrence(80)
+    events_generator = ThresholdCrossDetector.count_occurrence(threshold)
     time_weighting = samples_db_spl_converter.time_weighting
     found_events = []
     samples_to_plot = []
@@ -48,11 +51,15 @@ if __name__ == '__main__':
         print('i found {} events'.format(len(organised_events)))
         wave_file_writer = WaveWriter()
         count = 0
+        if not organised_events:
+            pass
         for event in organised_events:
             count += 1
             print("DO I EVEN GO HERE? %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
             frames_and_params = wave_file_writer.read_defined_frames(file_path, event)
             events_directory = '{}_events'.format(file_path.replace('.wav', '').replace('.WAV', ''))
+            if not os.path.isdir(events_directory):
+                os.makedirs(events_directory)
             wave_file_writer.write_defined_frames(events_directory,
                                                   frames_and_params,
                                                   count)

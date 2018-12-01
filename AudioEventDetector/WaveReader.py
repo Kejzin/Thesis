@@ -16,10 +16,12 @@ class WaveWriter:
         print(audio_file.tell())
         frame_rate = audio_file.getframerate()
         print(frame_rate)
-        print("Where i should start: {}".format(audio_file.tell()+(start-1)*frame_rate))
+        print("Where i should start: {}".format(audio_file.tell()+start*frame_rate))
         print('total length is {}'.format(audio_file.getnframes()))
-        audio_file.setpos(audio_file.tell() + (start)*frame_rate)
-        frames = audio_file.readframes(length*frame_rate)
+        audio_file.setpos(audio_file.tell() + int(start*frame_rate))
+        frames_to_read = int(length*frame_rate)
+        print('TYPE: {} {}'.format(type(frames_to_read), frames_to_read))
+        frames = audio_file.readframes(frames_to_read)
         params = audio_file.getparams()
         print("[read_defined_frames] {}".format(len(frames)))
         frames_and_params = (frames, params)
@@ -27,8 +29,6 @@ class WaveWriter:
 
     def write_defined_frames(self, file_dir_path, frames_and_params, count):
         frames, params = frames_and_params
-        if not os.path.isdir(file_dir_path):
-            os.makedirs(file_dir_path)
         audio_file = wave.open('{}/{}.wav'.format(file_dir_path, count), 'wb')
         audio_file.setparams(params)
         audio_file.writeframes(frames)

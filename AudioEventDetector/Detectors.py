@@ -16,9 +16,9 @@ class EventsOrganiser:
         time_constant_ms = {'slow': 1,
                             'fast': 0.125}
         print("events: {}".format(events[::2]))
-        events_starts = [int(time*time_constant_ms[time_constant]) for _, time in events[::2]]
+        events_starts = [time*time_constant_ms[time_constant] for _, time in events[::2]]
         print("events_starts: {}".format(events_starts))
-        events_ends = [int(time*time_constant_ms[time_constant]) for _, time in events[1::2]]
+        events_ends = [time*time_constant_ms[time_constant] for _, time in events[1::2]]
         events_length = []
         events_starts_ends_lengths = []
         for event_number in range(len(events_starts)):
