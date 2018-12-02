@@ -56,13 +56,13 @@
 \bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
 
 \maketitle %polecenie generujące stronę tytułową
-\dedication{6cm}{Dla rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem. Dziękuję.}
+\dedication{6cm}{Dla rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem.}
 
 \tableofcontents %spis treści
 
 \chapter{Wstęp}
 \section{Cel i zakres pracy}
-Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i sto dziesiątych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca zawiera cztery moduły:
+Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i sto dziesiątych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
 \begin{enumerate}
 \item Moduł odczytywania pliku,
 \item Moduł przetwarzania sygnału,
@@ -133,7 +133,24 @@ Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga on
 
 \section{Metoda wykrywania zakłóceń}
 
-Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. 
+Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące obliczenia:
+\begin{enumerate}
+\item Odnalezienie wszystkich plików wave i pliku referncyjnego w zadanym folderze,
+\item odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z,
+\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy, \cite{PN-EN_61672-1:2014-03}
+\item przeliczenie otrzymanych próbek na wartość dB FS,
+\item odczytanie fragmentu pliku wave zawierające badany sygnał
+\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy, \cite{PN-EN_61672-1:2014-03}
+\item przeliczenie otrzymanych próbek na wartości dB FS,
+\item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich z wartością referencyjną,
+\item wyszukanie przekroczeń ustalonego poziomu i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
+\item repetycja punktów 4--8 aż do końca pliku
+\item segregacja odnalezionych zdarzeń,
+\item ekstrakcja zdarzeń do osobnych plików wave w podfolderze folderu, w którym znajdowały się nagrania,
+\item zapisanie wyniku do pliku w formacie .json
+\item repetycja kroków 4--12 dla wszystkich znalezionych plików wave,
+\item wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
+\end{enumerate}
 \section{Istniejące rozwiązania do wykrywania zdarzeń akustycznych}
 \chapter{Metodologia}
 W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawione zostaną narzędzia użyte to stworzenia programu, oprogramowanie, środowisko programistyczne oraz język programowania.
@@ -196,12 +213,15 @@ Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnow
 
 
 \section{Środowisko programistyczne - Pycharm}
-Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie doświadczenie z~tym środowiskiem autor wybrał je aby je poznać i~sprawdzić jego działanie. Każde środowisko oferuje odmienny zestaw funkcjonalności i ułatwień użytkowania.
-\chapter{Struktura oraz działanie programu}
-\section{Struktura programu - aplikacja konsolowa}
-Decydując się na program, należy wybrać w jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
+Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie doświadczenie z~tym środowiskiem autor wybrał je aby je poznać i~sprawdzić jego działanie. Każde środowisko oferuje odmienny zestaw funkcjonalności i~ułatwień użytkowania.
 
-Oznacza to, że wywołuje się go z konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie})
+\section{Plik z informacjami o zdarzeniach: JSON}
+Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\cite{JSON}. JSON jest popularnym sposobem wyświetlania i przekazywania danych. Po raz kolejny o jego wyborze przesądziło jego rosnąca popularność i prostota użycia\cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
+\chapter{Struktura oraz działanie programu}
+\section{Sposób działania programu - aplikacja konsolowa}
+Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
+
+Oznacza to, że wywołuje się go z konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie}). Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
 \begin{figure}[hbtp]
 \label{wywolanie}
 \caption{Przykładowe wywołanie programu w konsoli systemu Windows}
@@ -209,17 +229,32 @@ Oznacza to, że wywołuje się go z konsoli systemu z odpowiednimi parametrami. 
 \includegraphics[width=0.8\textwidth]{cmd_wywolanie.PNG}
 \end{figure}
 
+Tego typu konstrukcja daje możliwość używania programu jako samodzielnego narzędzia. Jednocześnie, ze względu na ograniczony czas pracy nad programem stworzenie graficznego interfejsu mogłoby negatywnie wpłynąć na zadbanie o~poprawną funkcjonalność. W~ramach rozwoju programu Autor nie wyklucza dodania graficznego interfejsu użytkownika do programu.
+
+\section{Struktura programu}
+Struktura plików w programie przedstawiona została na rysunku (\ref{struktura})
+
+\begin{figure}[hbtp]
+\label{struktura}
+\caption{Struktura plików w programie}
+\centering
+\includegraphics[scale=1]{struktura.PNG}
+\end{figure}
+
+Katalog "AudioEventDetector" zawiera wszystkie pliki źródłowe używane w programie. Na początku widzimy plik "\_\_init\_\_.py", który informuje interpreter Pythona, że 
+katalog zawiera pythonowe pakiety.\cite{init}. 
+
+
 \chapter{Notatki}
 \begin{lstlisting}[frame=single]
 \end{lstlisting}
 \appendix
 \chapter{Kod Programu}
 
-
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
 
 %opcjonalnie może się tu pojawić spis rysunków i tabel
-% \listoffigures
+\listoffigures
 % \listoftables
 \end{document}

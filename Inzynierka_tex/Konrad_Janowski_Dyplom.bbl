@@ -1,5 +1,18 @@
 \begin{thebibliography}{}
 
+\bibitem[{Ecma International}, 2017]{JSON}
+{Ecma International} (2017).
+\newblock {\em ECMA-404 2 nd Edition / December 2017}.
+
+\bibitem[{Nikos Drakos, Ross Moore}, 2003]{init}
+{Nikos Drakos, Ross Moore} (2003).
+\newblock Przewodnik po języku python, 6.moduły.
+\newblock \url{https://pl.python.org/docs/tut/node8.html}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{PN-EN 61672-1:2014-03}, ]{PN-EN_61672-1:2014-03}
+{PN-EN 61672-1:2014-03}.
+
 \bibitem[{PN-ISO-1996-1:2006}, ]{PN-ISO-1996-1:2006}
 {PN-ISO-1996-1:2006}.
 
@@ -9,7 +22,7 @@
 \bibitem[Pohlmann, 2000]{Principles_of_digital_audio}
 Pohlmann, K.~C. (2000).
 \newblock {\em Principles of Digital Audio}.
-\newblock fourth edition.
+\newblock Mc Graww Hill, fourth edition.
 
 \bibitem[{Python Software Foundation}, 2016]{Python_end_of_life}
 {Python Software Foundation} (2016).
@@ -46,6 +59,13 @@ Reitz, K. and schulsser, T. (2018).
 \newblock Git, wprowadzenie.
 \newblock
   \url{https://git-scm.com/book/pl/v1/Pierwsze-kroki-Wprowadzenie-do-kontroli-wersji}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[Strassner, ]{JSON_popular}
+Strassner, T.
+\newblock Xml vs json.
+\newblock
+  \url{https://www.cs.tufts.edu/comp/150IDS/final_papers/tstras01.1/FinalReport/FinalReport.html}.
 \newblock Accessed: 2010-09-30.
 
 \end{thebibliography}
