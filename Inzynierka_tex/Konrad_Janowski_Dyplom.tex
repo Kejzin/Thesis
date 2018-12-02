@@ -605,7 +605,7 @@ Listing \ref{countoccurence} przedstawia funkcję znajdującą zdarzenia. Poniew
 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa ThresholdCrossDetector, metoda count\_occurrence},captionpos=b,label={countoccurence}]  
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa EventsOrganiser, metoda organise\_events},captionpos=b,label={organiseevents}]  
     def organise_events(events, time_constant):
 """Search in events list and prepare easy to use list of touples.
 Parameters
@@ -643,6 +643,43 @@ if events_starts_ends_lengths:
 return events_starts_ends_lengths
 \end{lstlisting}
 \end{minipage}
+
+Kod pokazany na listingu \ref{organiseevents} odpowiada za zestawienie zdarzeń w formie umożliwiającą ich dalszą obróbkę. W liniach 18--20 zapisuje istotne cechy zdarzenia, biorąc pod uwagę stałą czasową  z~którą zostało dokonane przetwarzanie próbek. Linie 25--27 zabezpieczają działanie programu w przypadku gdy na nagraniu pojawi się zdarzenie, które nie kończy się w czasie nagrania. Ponieważ funkcja przyjmuje jako parametr wejściowy listę znalezionych zdarzeń nie musi być przygotowana do operowania na dużych ilościach danych. Przetwarzanie odbywa się więc jednorazowo dla wszystkich próbek. 
+\section{Zapis pliku .json oraz plików wave}
+Po przejściu poprzednich etapów, otrzymujemy gotowe dane ze zdarzeniami akustycznymi. Jedyne co pozostaje do zrobienia to zapisać je do pliku .json oraz wyekstrahować je z~pliku w~którym zostały znalezione. 
+
+\subsection{JsonEventsWriter}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku JsonEventWriter.py, klasa JsonEventsWriter},captionpos=b,label={jsonevents}] 
+class JsonEventsWriter:
+    def __init__(self, organised_events, file_name, destination_directory):
+        self.organised_events = organised_events
+        self.file_name = file_name
+        self.destination_directory = destination_directory
+
+    def create_events_in_json(self, ):
+        events_for_json = {'All_Events': len(self.organised_events)}
+        count = 1
+        for event in self.organised_events:
+            start, end, length = event
+            events_for_json['Event_{}'.format(count)] = {'start': start, 'end': end, 'length': length}
+            count += 1
+        json_events = json.dumps(events_for_json)
+        return json_events
+
+    def save_json_to_file(self,):
+        json_events = self.create_events_in_json()
+        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav', '').replace('.WAV', ''))
+        json_file_path = '{}/{}'.format(self.destination_directory, json_file_name)
+        with open(json_file_path, 'w') as json_file:
+            json_file.write(json_events)
+        print('JSON file with events has been saved to: {}'.format(json_file_path))
+        print('')
+\end{lstlisting}
+\end{minipage}
+
+Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_events\_in\_json i~ save\_json\_to\_file. Pierwsza z nich odpowiada za przygotowanie obiektu JSON w Pythonie z listy zawierającej zdarzenia akustyczne. Następnie korzystając z~tak przygotowanego pliku metoda save\_json\_to\_file zapisze je w pliku z rozszerzeniem .json, w podkatalogu katalogu w~którym znajdowały się pliki audio.  
 
 \appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
