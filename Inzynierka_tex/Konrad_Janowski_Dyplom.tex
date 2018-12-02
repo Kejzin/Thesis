@@ -18,8 +18,6 @@
 %pakiety dodające dużo dodatkowych poleceń matematycznych
 \usepackage{amsmath}
 \usepackage{amsfonts}
-
-%pakiety wspomagające i poprawiające składanie tabel
 \usepackage{supertabular}
 \usepackage{array}
 \usepackage{tabularx}
@@ -96,8 +94,8 @@ Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas, w~kt
 
 Biorąc pod uwagę przytoczone wcześniej możliwe zastosowania stworzonego oprogramowania powyższa definicja dobrze opisuje te sytuacje, które mają być detekowane. Ponadto, wykonanie oprogramowania, które rozpoznaje zdarzenia opisane w normie daje perspektywy na możliwości jego praktycznego zastosowania.
 \section{Przyjęta definicja zdarzenia akustycznego}
-W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w~zakresie 10dB maksymalnego poziomu cićnienia akustycznego podczas zdarzenia. 
-Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity~w pamięci~a każda sekunda zawiera czterdzieści osiem tysięcy próbek.\cite{Principles_of_digital_audio} Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
+W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w~zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia. 
+Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek.\cite{Principles_of_digital_audio} Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
 \begin{equation}
 \text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}
 \end{equation}
@@ -111,7 +109,7 @@ Po przeliczeniu tego na jednostki bardziej sprzyjające interpretacji wyniku, pr
 \begin{equation}
 \frac{3.31776*10^10\;[b]}{8*10^9\;[\frac{b}{GB}]} = 4,1472 [GB]
 \end{equation}
-Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego pliku nie jest zadaniem trywialnym. Jeżeli program wczytywałby cały plik do pamięci RAM, potrzebowałby on około czterech gigabajtów tej pamięci na samo obsłużenie pliku. Gdy dodamy do tego potrzebę pamięci operacyjnej dla samego programu, potrzeby systemu operacyjnego oraz innych aplikacji działających równolegle z~programem zauważamy problem w~postaci braku tych zasobów. Nowoczesne stacje robocze poradziłyby sobie z~takim obciążeniem, jednak należy pamiętać o kilku rzeczach:
+Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego pliku nie jest zadaniem trywialnym. Jeżeli program wczytywałby cały plik do pamięci RAM, potrzebowałby on około czterech gigabajtów tej pamięci na samo obsłużenie pliku. Gdy dodamy do tego potrzebę pamięci operacyjnej dla samego programu, potrzeby systemu operacyjnego oraz innych aplikacji działających równolegle z~programem zauważamy problem w~postaci braku tych zasobów. Nowoczesne stacje robocze poradziłyby sobie z~takim obciążeniem, jednak należy pamiętać o~kilku rzeczach:
 \begin{itemize}
 \item Nie wszystkie firmy~i osoby fizyczne dysponują stacjami roboczymi, posiadającymi duże zasoby pamięci operacyjnej RAM,
 \item plik może być dłuższy,
@@ -131,7 +129,7 @@ Mając na uwadze powyższe przesłanki oraz możliwość późniejszego rozszerz
 "Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu."\cite{PN-ISO-1996-1:2006}
 \end{quote}
 
-Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga ona wiedzy~o pewnych danych środowiska~i zdarzenia, jak np. poziom tła akustycznego oraz przewidywany poziom ciśnienia akustycznego generowany podczas zdarzenia. Pomimo świadomości tych ograniczeń autor postanowił zastosować tę uproszczoną definicję, aby program realizował fragmentaryczne przetwarzanie danych~i tym samym spełniał w całości założenia pracy jednocześnie dając lepsze możliwości na jego rozwój w przyszłości. Autor ma nadzieję, że dodanie innego algorytmu do detekcji bazującego na przetwarzaniu sygnału partiami będzie prostsze niż przyszła zmiana samego centrum oprogramowania, czyli odczytywania~i zapisywania wyników. 
+Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga ona wiedzy o~pewnych danych środowiska i~zdarzenia, jak np. poziom tła akustycznego oraz przewidywany poziom ciśnienia akustycznego generowany podczas zdarzenia. Pomimo świadomości tych ograniczeń autor postanowił zastosować tę uproszczoną definicję, aby program realizował fragmentaryczne przetwarzanie danych i~tym samym spełniał w~całości założenia pracy jednocześnie dając lepsze możliwości na jego rozwój w przyszłości. Autor ma nadzieję, że dodanie innego algorytmu do detekcji bazującego na przetwarzaniu sygnału partiami będzie prostsze niż przyszła zmiana samego centrum oprogramowania, czyli odczytywania i~zapisywania wyników. 
 
 \section{Metoda wykrywania zakłóceń}
 
@@ -141,7 +139,7 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawione zostaną narzędzia użyte to stworzenia programu, oprogramowanie, środowisko programistyczne oraz język programowania.
 \section{System kontroli wersji - Git, GitHub, GitKraken}
 \subsection{System kontroli wersji}
-We współczesnym świecie istnieje bardzo wiele języków programowania. Każdy z~nich oferuje nieco inne możliwości i~funkcjonalności. Niezależnie jednak od wybranego języka, niezwykle istotnym jest system kontroli wersji. 
+We współczesnym świecie istnieje bardzo wiele języków programowania. Każdy z nich~oferuje nieco inne możliwości i~funkcjonalności. Niezależnie jednak od wybranego języka, niezwykle istotnym jest system kontroli wersji. 
 
 Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku.\cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
 
@@ -159,7 +157,7 @@ Jak zostało powiedziane, autor zdecydował się na skorzystanie z Git'a jako sy
 \subsection{GitKraken}
 Pomimo iż autor zadecydował się tworzyć oprogramowanie w ramach pracy dyplomowej inżynierskiej warto pamiętać o tym, że praca w przeznaczeniu jest skierowana do akustyków. W związku z tym poza efektywnością działania programu ważne jest też jego prostota i przejrzystość aby podczas pracy nad nim oraz przyszłej możliwej rozbudowy można skupiać się na istocie działania a nie odkrywaniu zawiłych sposobów obsługi oprogramowania towarzyszącego.
 
-Git w wersji podstawowej jest dostarczany z bardzo ubogim graficznym interfejsem użytkownika. Przykładowe okno zosało zaprezentowane na obrazie (\ref{git_gui})
+Git w wersji podstawowej jest dostarczany z~bardzo ubogim graficznym interfejsem użytkownika. Przykładowe okno zostało zaprezentowane na obrazie (\ref{git_gui})
 
 \begin{figure}[hbtp]  
 	\caption{Graficzny interfejs użytkownika GIT}
@@ -167,17 +165,56 @@ Git w wersji podstawowej jest dostarczany z bardzo ubogim graficznym interfejsem
 	\centering
 	\includegraphics[width=0.8\textwidth]{git_gui.PNG}
 \end{figure} 
-    
+ 
+Aby lepiej móc skupić się na logicznej strukturze programu autor zadecydował skorzystać z~programu GitKraken, który umożliwia pracę w~oparciu o system kontroli wersji Git w~bardziej przejrzystej i~czytelnej formie. Przykładowe drzewo kolejnych zmian zaprezentowano na obrazie (\ref{GitKraken})
+
+\begin{figure}[hbtp]
+\label{GitKraken}
+\caption{Graficzny interfejs użytkownika programu GitKraken}
+\centering
+\includegraphics[width=0.8\textwidth]{GitKraken.PNG}
+\end{figure}
+
+W~opinii autora dobranie odpowiednich narzędzi jest bardzo istotne w~procesie tworzenia aplikacji. Wielu twórców oprogramowania, którzy nie są ukierunkowani na programowanie a~jedynie używają go jako narzędzia do wykonania innych czynności zaniedbuje wyżej wymienione aspekty dbałości o~czystość kodu. Dostęp i~odpowiednie użycie graficznych narzędzi, które są znacznie wygodniejsze i~bardziej intuicyjne niż ich konsolowe lub ubogie odpowiedniki z~pewnością może zachęcić twórców do większej dbałości o~ten aspekt tworzenia programów
+
 \section{Język programowania - Python}
-\section{Struktura programu - Python Package}
+Mając pomysł na działanie programu oraz niezbędne narzędzie do kontrolowania postępów prac należy wybrac język programowania w~którym zostanie napisany program. Zdecydowano, że tym językiem będzie Python w wersji 3.7.1. Jest to najnowsza stabilna wersja tego języka\cite{Python_latest_release} w czasie tworzenia oprogramowania.
+
+Wybrano Pythona z~kilku powodów. Python jest obecnie jednym z~najpopularniejszych języków programowania\cite{Python_popular}. Rozwijanie programu i przyszła współpraca z~innymi twórcami może być dzięki temu ułatwiona. Łatwiej znaleźć innych ludzi posługujących się Pythonem niż innymi, mniej popularnymi językami. 
+
+Dodatkowo Python jest prosty w składni, intuicyjny i ma nieduży próg wejścia. Nawet osoba, która nie jest doświadczona w~programowaniu może stworzyć podstawowe aplikacje. Oczywiście bardziej zaawansowane struktury wymagają wiedzy, umiejętności i~ doświadczenia ale ta początkowa intuicyjność daje szansę zapoznania się z nim niezawodowym programistom.
+
+Ponadto Python ma rozbudowaną bazę bibliotek i~modułów, które można używać ponownie do swoich zastosowań.\cite{Pypie} Daje to ogromne możliwości tworzenia programów dopasowanych do potrzeb, korzystając z~gotowych modułów. Gdyby za każdym razem trzeba było zapisywać podstawowe operacje od nowa, proces kodowania byłby zdecydowanie dłuższy i~mógłby zajmować więcej czasu niż osoba zajmująca się inną dziedziną może przeznaczyć na opracowanie narzędzia. 
+
+Do tego Python ma doskonale opracowaną dokumentacje. Większość modułów jest opisana czytelnie i~zrozumiale. Zdecydowanie ułatwia to pracę z~tym językiem. 
+
+Co ważne, Python jest językiem interpretowanym a nie kompilowanym.\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem z kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
+
+Z podanych powodów, Python został wybrany do napisania pracy.
+
+Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnowszą wersją jest Python 3.7.1 ale równocześnie wspierany jest Python w wersji 2.6.x.\cite{Python_latest_release}. Niestety, zmiana z~Pythona wersji drugiej na wersję trzecią wiąże się ze znaczącymi zmianami w~funkcjonalności języka i~wersje te nie są ze sobą kompatybilne. Wiele modułów aktualnie dostępnych do użytku dalej funkcjonuje w~wersji drugiej języka. Można by więc pokusić się o napisanie programu w starszej wersji. Python wersji drugiej przestaje jednak być wspierany wraz z końcem 2020 roku. \cite{Python_end_of_life}. Oznacza to, że najprawdopodobniej ze względów bezpieczeństwa i~braku wsparcia większość nowych modułów będzie pisana w~Pythonie w~wersji trzeciej a~dodatkowo w~razie nieprawidłowości w działaniu wersji drugiej, nie będzie można liczyć na żadną pomoc.
+
+
 \section{Środowisko programistyczne - Pycharm}
+Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie doświadczenie z~tym środowiskiem autor wybrał je aby je poznać i~sprawdzić jego działanie. Każde środowisko oferuje odmienny zestaw funkcjonalności i ułatwień użytkowania.
 \chapter{Struktura oraz działanie programu}
+\section{Struktura programu - aplikacja konsolowa}
+Decydując się na program, należy wybrać w jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
+
+Oznacza to, że wywołuje się go z konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie})
+\begin{figure}[hbtp]
+\label{wywolanie}
+\caption{Przykładowe wywołanie programu w konsoli systemu Windows}
+\centering
+\includegraphics[width=0.8\textwidth]{cmd_wywolanie.PNG}
+\end{figure}
 
 \chapter{Notatki}
 \begin{lstlisting}[frame=single]
 \end{lstlisting}
 \appendix
 \chapter{Kod Programu}
+
 
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography

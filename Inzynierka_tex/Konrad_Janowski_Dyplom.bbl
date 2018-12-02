@@ -2,16 +2,44 @@
 
 \bibitem[{PN-ISO-1996-1:2006}, ]{PN-ISO-1996-1:2006}
 {PN-ISO-1996-1:2006}.
-\newblock {\em {PN-ISO-1996-1:2006}}.
 
 \bibitem[{PN-ISO-9612:2014}, ]{PN-ISO-9612:2014}
 {PN-ISO-9612:2014}.
-\newblock {\em {PN-ISO-9612:2014}}.
 
 \bibitem[Pohlmann, 2000]{Principles_of_digital_audio}
 Pohlmann, K.~C. (2000).
 \newblock {\em Principles of Digital Audio}.
 \newblock fourth edition.
+
+\bibitem[{Python Software Foundation}, 2016]{Python_end_of_life}
+{Python Software Foundation} (2016).
+\newblock Pep 373 -- python 2.7 release schedule.
+\newblock \url{https://legacy.python.org/dev/peps/pep-0373//}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{Python Software Foundation}, 2018a]{Python_latest_release}
+{Python Software Foundation} (2018a).
+\newblock Python 3.7.1 latest releases.
+\newblock \url{https://www.python.org/downloads/}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{Python Software Foundation}, 2018b]{Pypie}
+{Python Software Foundation} (2018b).
+\newblock The python package index.
+\newblock \url{https://pypi.org/}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{Rassmussen College}, 2017]{Python_popular}
+{Rassmussen College} (2017).
+\newblock 10 best programming languages based on earnings \& opportunities.
+\newblock
+  \url{https://www.rasmussen.edu/degrees/technology/blog/best-programming-languages-based-on-earnings-and-opportunities/}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[Reitz and schulsser, 2018]{Przewodnik_po_pythonie}
+Reitz, K. and schulsser, T. (2018).
+\newblock {\em Przewodnik po Pythonie}.
+\newblock Helion.
 
 \bibitem[{Software Freedom Conservancy}, 2018]{Git}
 {Software Freedom Conservancy} (2018).
