@@ -80,7 +80,6 @@ class SamplesDbFsConverter:
             list(samples_db_fs): [float]
                 list of samples in dB FS format.
         """
-        # TODO: Verify if it is true dB FS, preferably in standard  AES17-1998,[13] IEC 61606
         max_value = 2**(self.wave_reader_object.sample_width*8-1)
         samples_db_fs = [10 * self._log_10_dealing_with_0((sample/max_value**2)*np.sqrt(2))
                          for sample in energy_samples]
@@ -143,11 +142,20 @@ class SamplesDbFsConverter:
 
 
 class SamplesDbSPLConverter(SamplesDbFsConverter):
+    """Subclasses of SamplesDbFsConverter which add conversion to dB SPL"""
     def __init__(self, file_path, reference_db_fs_value):
         super().__init__(file_path)
         self.reference_db_fs_value = reference_db_fs_value
 
     def convert_samples_to_db_spl(self, db_fs_samples):
+        """Convert samples in dB FS to dB SPL using reference value given in command line
+        Parameters
+        ----------
+            db_fs_samples: [float]
+        Returns
+        -------
+            db_spl_samples [float]
+            """
         reference_db_spl_value = CmdInterface.get_reference_db_spl()
         db_spl_samples = [reference_db_spl_value + (sample - self.reference_db_fs_value) for sample in db_fs_samples]
         print('{0} dB FS {1} {2} samples has been converted to {3} dB SPL {1} {2}samples'.format(len(db_fs_samples),

@@ -53,6 +53,11 @@ class CmdInterface:
     
     @staticmethod
     def get_reference_db_spl():
+        """Read fourth argument from cmd which should be time reference dB SPL value.
+        Returns:
+        -------
+            reference_db_spl: str
+        """
         try:
             reference_db_spl = sys.argv[4]
             try:
@@ -67,6 +72,11 @@ class CmdInterface:
 
     @staticmethod
     def get_threshold():
+        """Read fifth argument from cmd which should be threshold in dB SPL.
+        Returns:
+        -------
+            threshold: str
+        """
         try:
             threshold = sys.argv[5]
             try:

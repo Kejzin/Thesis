@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from Sample_dB_converter import SamplesDbFsConverter
+from SampledBConverter import SamplesDbFsConverter
 from scipy import signal
 import numpy as np
 

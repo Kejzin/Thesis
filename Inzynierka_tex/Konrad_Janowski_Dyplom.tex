@@ -143,7 +143,7 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 \item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy, \cite{PN-EN_61672-1:2014-03}
 \item przeliczenie otrzymanych próbek na wartości dB FS,
 \item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich z wartością referencyjną,
-\item wyszukanie przekroczeń ustalonego poziomu i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
+\item wyszukanie przekroczeń ustalonego poziomu~i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
 \item repetycja punktów 4--8 aż do końca pliku
 \item segregacja odnalezionych zdarzeń,
 \item ekstrakcja zdarzeń do osobnych plików wave w podfolderze folderu, w którym znajdowały się nagrania,
@@ -205,7 +205,7 @@ Ponadto Python ma rozbudowaną bazę bibliotek i~modułów, które można używa
 
 Do tego Python ma doskonale opracowaną dokumentacje. Większość modułów jest opisana czytelnie i~zrozumiale. Zdecydowanie ułatwia to pracę z~tym językiem. 
 
-Co ważne, Python jest językiem interpretowanym a nie kompilowanym.\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem z kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
+Co ważne, Python jest językiem interpretowanym a nie kompilowanym.\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem~z kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
 
 Z podanych powodów, Python został wybrany do napisania pracy.
 
@@ -221,7 +221,7 @@ Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecm
 \section{Sposób działania programu - aplikacja konsolowa}
 Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
 
-Oznacza to, że wywołuje się go z konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie}). Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
+Oznacza to, że wywołuje się go z~konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie}). Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
 \begin{figure}[hbtp]
 \label{wywolanie}
 \caption{Przykładowe wywołanie programu w konsoli systemu Windows}
@@ -238,23 +238,244 @@ Struktura plików w programie przedstawiona została na rysunku (\ref{struktura}
 \label{struktura}
 \caption{Struktura plików w programie}
 \centering
-\includegraphics[scale=1]{struktura.PNG}
+\includegraphics[width=0.8\textwidth]{struktura.PNG}
 \end{figure}
 
 Katalog "AudioEventDetector" zawiera wszystkie pliki źródłowe używane w programie. Na początku widzimy plik "\_\_init\_\_.py", który informuje interpreter Pythona, że 
 katalog zawiera pythonowe pakiety.\cite{init}. 
 
+Plik "CmdInterface.py" odpowiada za komunikację z wierszem poleceń i odczytywaniem odpowiednich parametrów podanych przez użytkownika. "Detectors.py" to dwie klasy odpowiedzialne za detekowanie i~uporządkowanie zdarzeń akustycznych. "JsonEventWriter.py" zawiera funkcjonalność odpowiedzialną za zapisywanie wyniku to pliku .json. "main.py" to główna część programu, która wywołuje pozostałe moduły w~celu skonstruowania funkcjonalnej całości. "PlotsMaker.py" zawiera jedną klasę odpowiedzialną za zrobienie prostego wykresu z~danych. Nie jest ona używana w programie ale podczas rozwoju często przydaje się do wizualnej obserwacji danych. "SampleDbConverter.py" zawiera klasy odpowiedzialne za konwersję pliku z danych reprezentujących dynamiczny przebieg ciśnienia akustycznego na skorygowany częstotliwościowo uśredniony w czasie poziom ciśnienia akustycznego. "WaveFileSearcher.py" jest odpowiedzialny za odnalezienie plików wave do analizy oraz pliku referencyjnego."WaveRader.py" odpowiada za obsługę plików wave. Odczytuje fragmentami pliki na początku działania programu aby była możliwa ich analiza, na końcu programu zapisuje wybrane fragmenty do podfolderu. 
 
-\chapter{Notatki}
-\begin{lstlisting}[frame=single]
+Uważny czytelnik zauważy, że wszystkie nazwy modułów zachowane są w jednej konwencji, nazwanej "CamelCase", co w tłumaczeniu na polski można określić jako "StylWielbłąda". Autor zdecydował się na ten sposób notacji uwzględniając rekomendacje twórców języka.\cite{PEP8}Używanie spójnego nazewnictwa jest o~tyle istotne, że pozwala się w prosty sposób zorientować w strukturze programu. Jeżeli twórcy oprogramowania przestrzegają ustalonych, umownych zasad kod staje się z czasem coraz bardziej przejrzysty i~wymiana informacji jest dużo prostsza. 
+
+\chapter{Szczegółowe omówienie funkcji w programie}
+W tym rozdziale szczegółowo zostaną omówione na przykładzie kodu główne funkcję programu. Autor postara się, żeby funkcje były omówione w kolejności jak najbardziej zbliżonej do logiki programu. Należy mieć jednak na uwadze, że niektóre funkcje wykorzystywane są kilkukrotnie co wyklucza zupełnie liniowe rozumienie kodu.
+
+Warto w tym miejscu nadmienić, że istotnym elementem programu poza jego modularnością jako całości jest też zachowanie czystości kodu wewnątrz klas. Zasada pojedynczej odpowiedzialności, znaczących nazw jak i~inne dobre zasady pisania estetycznego kodu zostały zaczerpnięte z~literatury\cite{Czysty_kod}. Autor wierzy, że każdy kod powinien być możliwie łatwy do przeczytania przez człowieka, ponieważ to on jest głównym podmiotem pracującym nad nim. Być może zastosowanie tych zasad ułatwi a~może nawet i~uprzyjemni czytanie i~zrozumienie stworzonego kodu. 
+
+Należy mieć na uwadze, że w~umieszczonych fragmentach kodu może się zdarzyć ominięcie niektórych wcięć. Spowodowane jest to szerokością kodu, który do odczytu w~środowiskach powinien mieć 150 \cite{PEP8}. Taka szerokość jednak nie pozwala na komfortowe umieszczenie listingu na stronie formatu A4. Dołożono wszelkich starań, aby wszystkie wcięcia istotne dla zrozumienia logiki kodu zostały zachowane
+\newpage
+\section{Odnajdywanie plików wave}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveFileSearcher.py},captionpos=b,label={WaveFileSearcher}]
+class WaveFileSearcher:
+def find_wave_files_paths(self, ):
+"""
+Find wave files under path given in cmd. Path must be a directory containing wav files and REFERENCE.wav file.
+Returns
+-------
+   wave_files_and_reference_paths: [str]
+        touple of two list. First is wave files paths to analize, second is reference file path.
+"""
+path = CmdInterface.get_path_from_cmd()
+wave_files_paths = []
+if os.path.isfile(path):
+    raise NotADirectoryError('path is a file not a directory')
+elif os.path.isdir(path):
+    path_content = os.listdir(path)
+    wave_files_paths = ["{}/{}".format(path, file_path) for file_path in path_content if (".wav" in file_path
+                        or ".WAV" in file_path)and("REFERENCE" not in file_path)]
+    reference_file_path = ["{}/{}".format(path, file_path) for file_path in path_content
+                           if "REFERENCE" in file_path]
+else:
+    logging.error('{} is no valid path'.format(path))
+    raise FileNotFoundError('{} is not a valid path'.format(path))
+
+assert wave_files_paths, 'there is no any wave file under given path'
+assert reference_file_path, 'there is no REFERENCE.wav file'
+wave_files_names = [ntpath.basename(path) for path in wave_files_paths]
+
+print('I found {} files. Files names are: {}'.format(len(wave_files_names), wave_files_names))
+print('Found reference file under path: {}'.format(ntpath.abspath(reference_file_path[0])))
+print('')
+
+wave_files_and_reference_paths = (wave_files_paths, reference_file_path)
+return wave_files_and_reference_paths
+
 \end{lstlisting}
-\appendix
-\chapter{Kod Programu}
+\end{minipage}
+Pierwsze co zostało zapewnione w~tej funkcji to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w lini 33. zostaje zwrócony obiekt zawierający obie te  wartości.
 
+Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
+
+
+\section{Odczytywanie pliku Wave}
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveFileReader.py},captionpos=b,label={WaveFileReader}]
+def read_audio_data_chunk(self, seconds_to_read=30):
+""" Read audio data in chunks.
+Parameters
+----------
+    seconds_to_read: int
+        define how many seconds will be read from file.
+Returns
+-------
+    samples: [float]
+        list of value of audio samples."""
+chunk_size = seconds_to_read * self.frame_rate
+total_length = round(self.audio_file.getnframes() / self.audio_file.getframerate(), 2)
+print('Read file {}'.format(ntpath.abspath(self.file_path)))
+print(('frame rate is {}, chunk size is {}'.format(self.frame_rate, chunk_size)))
+print('total length is {} s'.format(total_length))
+
+while True:
+    start = self.audio_file.tell()
+
+    print('Read samples from {} to {}'.format(start, start + chunk_size))
+                                             
+    samples = self.audio_file.readframes(chunk_size)
+
+    print('Samples from {} to {} has been read'.format(start, self.audio_file.tell()))
+
+    if not samples:
+        print('End reading {}. Read {} frames '.format(ntpath.basename(self.file_path), self.audio_file.tell()))
+        print('')
+        self.audio_file.close()
+        return
+    print('')
+    samples = self.decode_audio_chunk(samples)
+    yield samples
+\end{lstlisting}
+\end{minipage}
+Na listingu \ref{WaveFileReader} widzimy moduł odpowiedzialny za odczytywanie danych z pliku wave. Jak zostało wspomniane wcześniej, funkcja jest przystosowana to działania wielokrotnie i odczytywania pliku w kawałkach. Aby to umożliwić, funkcja została zaprojektowana aby była używana jako generator.\cite{Generator}. Pozwala to na cykliczne zwracanie próbek, co dzieje się w linii 33. bez utraty informacji z poprzedniego wywołania. Istotnym elementem tej funkcji jest moment końca iteracji. Kiedy plik zostanie przeczytany do końca, zostaje wywołane słowo kluczowe "return"(linia 30) zamiast "yield"(linia 33). Jest to zgodne z rekomendacją do Pythona wersji trzeciej,\cite{return} która zmieniła działanie generatorów. W poprzednich wersjach przerwanie iteracji wykonywało się zazwyczaj poprzez instrukcję "raise(StopIteration)". 
+
+Ilość czytanych danych jest z góry zdefiniowana w linii 1. Jest ona przeliczana w linii 11 na rozmiar czytanego fragmentu w bitach. 
+
+\section{Konwersja pliku}
+Konwersja pliku odbywa się wewnątrz piku SampledBConverter. 
+
+wewnątrz znajdują się dwie klasy:
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbFSConverter},captionpos=b,label={SamplesDbFsConverter}]
+
+class SamplesDbFsConverter:
+"""Convert samples from given wave file to frequency and time weighted signal according to IEC 61672-1:2013"""
+
+    def __init__(self, file_path):
+        self.wave_reader_object = WaveReader(file_path)
+        self.audio_samples_generator = self.wave_reader_object.read_audio_data_chunk()
+        self.frequency_weighting = CmdInterface.get_frequency_weighting_from_cmd()
+        self.time_weighting = CmdInterface.get_time_weighting_from_cmd()
+        self.reference_db_spl_value = CmdInterface.get_reference_db_spl()
+\end{lstlisting}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter},captionpos=b,label={SamplesDbSPLConverter}]
+
+class SamplesDbSPLConverter(SamplesDbFsConverter):
+    """Subclasses of SamplesDbFsConverter which add conversion to dB SPL"""
+    def __init__(self, file_path, reference_db_fs_value):
+        super().__init__(file_path)
+        self.reference_db_fs_value = reference_db_fs_value
+
+\end{lstlisting}
+\end{minipage}
+
+Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbFsConverter}) oraz  SamplesDbSPLConverter (\ref{SamplesDbSPLConverter}). Jak widać, klasa SamplesDbSPLConverter to dziedziczy po klasie SamplesDbFsConverter. Pokazuje to linia 2 listingu \ref{SamplesDbSPLConverter} gdzie w linii 2. widzimy odziedziczenie wszystkich metod i w linii 5. wywołanie konstruktora klasy nadrzędnej. Rozwiązanie to zastosowano, ponieważ klasa SamplesDbFsConverter zostaje użyta to konwersji pliku referencyjnego. Gdyby od razu zaimplementować pełną funkcjonalności klasy SamplesDbSPLConverter, z oczywistej przyczyzny referencyjna wartość "reference\_db\_fs\_value" nie mogłaby być jeszcze znana. 
+
+
+Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda \_convert\_samples\_to\_db\_fs},captionpos=b,label={converttofs}]
+
+    def _convert_samples_to_db_fs(self, energy_samples):
+        """Convert samples in energy unit(preferably p^2) to dB FS according do AES17-2015.
+        FS value is calculated from sample_width of read object.
+        Parameters
+        ----------
+            energy_samples: [float]
+                list of samples in energy unit (e.x p^2).
+        Returns
+        -------
+            list(samples_db_fs): [float]
+                list of samples in dB FS format.
+        """
+        max_value = 2**(self.wave_reader_object.sample_width*8-1)
+        samples_db_fs = [10 * self._log_10_dealing_with_0((sample/max_value**2)*np.sqrt(2))
+                         for sample in energy_samples]
+        print('{} energy unit samples has been converted to {} samples dB FS'.format(len(energy_samples),
+                                                                                     len(samples_db_fs)))
+        print('Full scale level is {}'.format(max_value))
+        print('')
+        return list(samples_db_fs)
+    
+\end{lstlisting}
+\end{minipage}
+
+Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14.na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave.\cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES\cite{AES17}.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda \_filte\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
+    def _filter_db_samples_with_time_constant(self, samples):
+        """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
+        Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
+
+        Parameters
+        ----------
+            samples: [float]
+                list of samples with dynamic pressure level.
+
+        Returns
+        --------
+            time_weighted_samples: [float]
+                list of samples weighted which defined time constant.
+
+        """
+        if self.time_weighting == 'slow':
+            time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
+                                                                    self.wave_reader_object.frame_rate)
+            print("Slow constant is applied")
+        elif self.time_weighting == 'fast':
+            time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
+                                                                    self.wave_reader_object.frame_rate)
+            print("Fast constant is applied")
+        else:
+            raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
+
+        print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
+                                                                            len(time_weighted_samples),
+                                                                                   self.time_weighting))
+        print('')
+        time_weighted_samples = list(time_weighted_samples)
+        return time_weighted_samples
+\end{lstlisting}
+\end{minipage}
+
+Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w czasie zgodnie z normą \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z atrybutów klasy. W tej funkcji wykorzystana zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
+   def _filter_samples_with_weighting_filter(self, samples):
+"""Filter samples with weighting filter. Use one of the weighting defined in IEC-61672.
+ Weighting is defined in class variable.
+        Parameters
+        ----------
+            samples: [float]
+                list of samples representing dynamic pressure level.
+        Returns
+        -------
+            weighted_samples: [float]
+                list of samples representing weighted samples of dynamic pressure level.
+
+        """
+
+        weighted_samples = splweighting.weight_signal(samples,
+                                                      self.wave_reader_object.frame_rate,
+                                                      self.frequency_weighting)
+        return weighted_samples
+\end{lstlisting}
+\end{minipage}
+
+Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtrowanie próbek zgodnie z krzywą częstotliwościową A, B lub C zdefiniowane w normie \cite{IEC-61672-2013}. Wykorzystano tutaj funkcję weight\_signal() z biblioteki splweighting.\cite{splweighting}
+\appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
 
 %opcjonalnie może się tu pojawić spis rysunków i tabel
 \listoffigures
+\lstlistoflistings
 % \listoftables
 \end{document}

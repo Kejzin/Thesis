@@ -9,6 +9,18 @@ class WaveWriter:
         pass
 
     def read_defined_frames(self, file_path, event):
+        """Read events from audio file
+        Params
+        ------
+            file_path: str
+                path to audio file which will be read
+            event: (float, float, float)
+                touple containing start, end and lenth of event
+        Returns
+        -------
+            frames_and_params: (b, ())
+                touple containing frames which event and params of file.
+            """
         start, end, length = event
         audio_file = wave.open(file_path, 'rb')
         audio_file.rewind()
@@ -29,6 +41,15 @@ class WaveWriter:
         return frames_and_params
 
     def write_defined_frames(self, file_dir_path, frames_and_params, count):
+        """Write frames to file under defined path.
+        Params
+        ------
+            file_dir_path: str
+                path to dir where file should be save.
+            frames_and_params: (b, ())
+                frames to write and params of audio file
+            count: int
+                value to different each event"""
         frames, params = frames_and_params
         file_name = '{}/event_{}.wav'.format(file_dir_path, count)
         audio_file = wave.open(file_name, 'wb')
@@ -71,8 +92,7 @@ class WaveReader:
         while True:
             start = self.audio_file.tell()
 
-            print('Read samples from {} to {}'.format(start,
-                                                               start + chunk_size))
+            print('Read samples from {} to {}'.format(start, start + chunk_size))
             samples = self.audio_file.readframes(chunk_size)
 
             print('Samples from {} to {} has been read'.format(start, self.audio_file.tell()))

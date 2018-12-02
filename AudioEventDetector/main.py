@@ -1,9 +1,9 @@
 from WaveReader import WaveReader, WaveWriter
 from WaveFileSearcher import WaveFileSearcher
-from Sample_dB_converter import SamplesDbFsConverter, SamplesDbSPLConverter
+from SampledBConverter import SamplesDbFsConverter, SamplesDbSPLConverter
 from Detectors import ThresholdCrossDetector
 from Detectors import EventsOrganiser
-from JSON_events_writer import JsonEventsWriter
+from JsonEventsWriter import JsonEventsWriter
 import ntpath
 import os
 from CmdInterface import CmdInterface

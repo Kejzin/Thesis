@@ -1,14 +1,39 @@
 \begin{thebibliography}{}
 
+\bibitem[{Audio Engineering Society, Inc}, 2018]{AES17}
+{Audio Engineering Society, Inc} (2018).
+\newblock {\em AES17-2015, AES standard method for digital audio engineering
+  — Measurement of digital audio equipment}.
+
+\bibitem[Drakos and Moore, 2003]{init}
+Drakos, N. and Moore, R. (2003).
+\newblock Przewodnik po języku python, 6.moduły.
+\newblock \url{https://pl.python.org/docs/tut/node8.html}.
+\newblock Accessed: 2010-09-30.
+
 \bibitem[{Ecma International}, 2017]{JSON}
 {Ecma International} (2017).
 \newblock {\em ECMA-404 2 nd Edition / December 2017}.
 
-\bibitem[{Nikos Drakos, Ross Moore}, 2003]{init}
-{Nikos Drakos, Ross Moore} (2003).
-\newblock Przewodnik po języku python, 6.moduły.
-\newblock \url{https://pl.python.org/docs/tut/node8.html}.
+\bibitem[Ewing, 2009]{return}
+Ewing, G. (2009).
+\newblock Syntax for delegating to a subgenerator.
+\newblock \url{https://www.python.org/dev/peps/pep-0380/}.
 \newblock Accessed: 2010-09-30.
+
+\bibitem[Gündert, 2014]{splweighting}
+Gündert, S. (2014).
+\newblock Spectral weighting filter.
+\newblock \url{http://siggigue.github.io/pyfilterbank/splweighting.html}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{IEC-61672-2013}, ]{IEC-61672-2013}
+{IEC-61672-2013}.
+
+\bibitem[Martin, 2014]{Czysty_kod}
+Martin, R.~C. (2014).
+\newblock {\em Czysty Kod Podręcznik dobrego programisty}.
+\newblock Helion.
 
 \bibitem[{PN-EN 61672-1:2014-03}, ]{PN-EN_61672-1:2014-03}
 {PN-EN 61672-1:2014-03}.
@@ -30,14 +55,20 @@ Pohlmann, K.~C. (2000).
 \newblock \url{https://legacy.python.org/dev/peps/pep-0373//}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{Python Software Foundation}, 2018a]{Python_latest_release}
+\bibitem[{Python Software Foundation}, 2018a]{Generator}
 {Python Software Foundation} (2018a).
+\newblock Python 3.7.1 generator objects.
+\newblock \url{https://docs.python.org/3/c-api/gen.html}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{Python Software Foundation}, 2018b]{Python_latest_release}
+{Python Software Foundation} (2018b).
 \newblock Python 3.7.1 latest releases.
 \newblock \url{https://www.python.org/downloads/}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{Python Software Foundation}, 2018b]{Pypie}
-{Python Software Foundation} (2018b).
+\bibitem[{Python Software Foundation}, 2018c]{Pypie}
+{Python Software Foundation} (2018c).
 \newblock The python package index.
 \newblock \url{https://pypi.org/}.
 \newblock Accessed: 2010-09-30.
@@ -54,6 +85,12 @@ Reitz, K. and schulsser, T. (2018).
 \newblock {\em Przewodnik po Pythonie}.
 \newblock Helion.
 
+\bibitem[Rietdijk, 2013]{acoustics}
+Rietdijk, F. (2013).
+\newblock python acoustics.
+\newblock \url{http://python-acoustics.github.io/python-acoustics/}.
+\newblock Accessed: 2010-09-30.
+
 \bibitem[{Software Freedom Conservancy}, 2018]{Git}
 {Software Freedom Conservancy} (2018).
 \newblock Git, wprowadzenie.
@@ -67,5 +104,16 @@ Strassner, T.
 \newblock
   \url{https://www.cs.tufts.edu/comp/150IDS/final_papers/tstras01.1/FinalReport/FinalReport.html}.
 \newblock Accessed: 2010-09-30.
+
+\bibitem[van Rossum et~al., 2001]{PEP8}
+van Rossum, G., Warsaw, B., and Coghlan, N. (2001).
+\newblock Style guide for python code.
+\newblock \url{https://www.python.org/dev/peps/pep-0008/#names-to-avoid}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[Zieliński, 2005]{Cyfrowe_przetwarzanie_sygnalow}
+Zieliński, T.~P. (2005).
+\newblock {\em Cyfrowe przetwarzanie sygnałów Od teorii do zastosowań}.
+\newblock Wydawnictwa Komunikacji i Łączności Warszawa.
 
 \end{thebibliography}
