@@ -69,7 +69,7 @@ class SamplesDbFsConverter:
         return weighted_samples
 
     def _convert_samples_to_db_fs(self, energy_samples):
-        """Convert samples in energy unit(preferably p^2) to dB FS.
+        """Convert samples in energy unit(preferably p^2) to dB FS according do AES17-2015.
         FS value is calculated from sample_width of read object.
         Parameters
         ----------
