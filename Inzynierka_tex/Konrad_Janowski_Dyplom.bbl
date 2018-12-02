@@ -30,6 +30,11 @@ Gündert, S. (2014).
 \bibitem[{IEC-61672-2013}, ]{IEC-61672-2013}
 {IEC-61672-2013}.
 
+\bibitem[Lutz, 2011]{Wprowadzenie_python}
+Lutz, M. (2011).
+\newblock {\em Wprowadzenie Python}.
+\newblock Helion.
+
 \bibitem[Martin, 2014]{Czysty_kod}
 Martin, R.~C. (2014).
 \newblock {\em Czysty Kod Podręcznik dobrego programisty}.
@@ -55,20 +60,27 @@ Pohlmann, K.~C. (2000).
 \newblock \url{https://legacy.python.org/dev/peps/pep-0373//}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{Python Software Foundation}, 2018a]{Generator}
+\bibitem[{Python Software Foundation}, 2018a]{Python_data_structures}
 {Python Software Foundation} (2018a).
+\newblock Python 3.7.1 documentation, data structures.
+\newblock
+  \url{http://web.archive.org/web/20080207010024/http://www.808multimedia.com/winnt/kernel.html}.
+\newblock Accessed: 2010-09-30.
+
+\bibitem[{Python Software Foundation}, 2018b]{Generator}
+{Python Software Foundation} (2018b).
 \newblock Python 3.7.1 generator objects.
 \newblock \url{https://docs.python.org/3/c-api/gen.html}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{Python Software Foundation}, 2018b]{Python_latest_release}
-{Python Software Foundation} (2018b).
+\bibitem[{Python Software Foundation}, 2018c]{Python_latest_release}
+{Python Software Foundation} (2018c).
 \newblock Python 3.7.1 latest releases.
 \newblock \url{https://www.python.org/downloads/}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{Python Software Foundation}, 2018c]{Pypie}
-{Python Software Foundation} (2018c).
+\bibitem[{Python Software Foundation}, 2018d]{Pypie}
+{Python Software Foundation} (2018d).
 \newblock The python package index.
 \newblock \url{https://pypi.org/}.
 \newblock Accessed: 2010-09-30.
