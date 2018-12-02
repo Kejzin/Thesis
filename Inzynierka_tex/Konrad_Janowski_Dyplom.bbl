@@ -13,4 +13,11 @@ Pohlmann, K.~C. (2000).
 \newblock {\em Principles of Digital Audio}.
 \newblock fourth edition.
 
+\bibitem[{Software Freedom Conservancy}, 2018]{Git}
+{Software Freedom Conservancy} (2018).
+\newblock Git, wprowadzenie.
+\newblock
+  \url{https://git-scm.com/book/pl/v1/Pierwsze-kroki-Wprowadzenie-do-kontroli-wersji}.
+\newblock Accessed: 2010-09-30.
+
 \end{thebibliography}
