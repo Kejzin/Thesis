@@ -25,7 +25,7 @@
 \usepackage{tabularx}
 \usepackage{hhline}
 
-\usepackage{listings}
+\usepackage{listings}		  %pozwalającyu listingować
 \lstset{language=Python,      % sets automatic line breaking
  		numbers=left,
  		showstringspaces=false,
@@ -58,7 +58,7 @@
 \bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
 
 \maketitle %polecenie generujące stronę tytułową
-\dedication{6cm}{Moją pracę chciałbym zadedykować moim rodzicom, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się w kierunku, który pragnąłem. Bez was ta praca byłaby niemożliwa. Dziękuję.}
+\dedication{6cm}{Dla rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem. Dziękuję.}
 
 \tableofcontents %spis treści
 
@@ -71,7 +71,7 @@ Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycz
 \item Moduł detekcji zdarzeń,
 \item Moduł zapisu wyników do pliku.
 \end{enumerate}
-Autor ma \cite{Python_data_structures} nadzieję, że zaprojektowany w~ten sposób system pozwoli na późniejszy rozwój i~ułatwi powtórne wykorzystywanie tego narzędzia.
+Autor ma nadzieję, że zaprojektowany w~ten sposób system pozwoli na późniejszy rozwój i~ułatwi powtórne wykorzystywanie tego narzędzia.
 \section{Motywacja}
 Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
 
@@ -83,45 +83,55 @@ Praca powstała w połowie~z chęci stworzenia użytecznego narzędzia a~w~poło
 
 Powyższe przesłanki zadecydowały o stworzeniu narzędzia. 
 
-\begin{lstlisting}[frame=single]
-def _filter_db_samples_with_time_constant(self, samples):
-    """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
-    Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
-
-    Parameters
-    ----------
-        samples: [float]
-        list of samples with dynamic pressure level.
-
-    Returns
-    --------
-        time_weighted_samples: [float]
-        list of samples weighted which defined time constant.
-
-    """
-    if self.time_weighting == 'slow':
-        time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
-                                    self.wave_reader_object.frame_rate)
-        print("Slow constant is applied")
-    elif self.time_weighting == 'fast':
-        time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
-                                    self.wave_reader_object.frame_rate)
-        print("Fast constant is applied")
-    else:
-        raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
-
-    print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
-                                             len(time_weighted_samples),
-                                             self.time_weighting))
-    print('')
-    time_weighted_samples = list(time_weighted_samples)
-    return time_weighted_samples
-
-\end{lstlisting}
-
 \chapter{Wprowadzenie}
+W tym rozdziale zostaną wprowadzone podstawowe pojęcia, którymi autor posługiwał się podczas tworzenia pracy. Omówione zostaną teoretyczne podstawy problemu oraz ogólna struktura logiczna programu.
 \section{Zdarzenie akustyczne}
+Jak wspomniano w powyższym rozdziale, nie ma jednej ogólnej definicji zdarzenia akustycznego, które odnosi się do wszystkich dziedzin akustyki. Jedna~z możliwych definicji podana jest w normie \cite{PN-ISO-1996-1:2006} dotyczącej akustyki środowiskowej. Zapis normatywny mówi:
+
+\begin{quotation}
+"Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu. 
+
+Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas,~w którym poziom ciśnienia akustycznego mieści się w zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia."\cite{PN-ISO-1996-1:2006}
+\end{quotation}
+
+Biorąc pod uwagę przytoczone wcześniej możliwe zastosowania stworzonego oprogramowania powyższa definicja dobrze opisuje te sytuacje, które mają być detekowane. Ponadto, wykonanie oprogramowania, które rozpoznaje zdarzenia opisane w normie daje perspektywy na możliwości jego praktycznego zastosowania.
 \section{Przyjęta definicja zdarzenia akustycznego}
+W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas,~w którym poziom ciśnienia akustycznego mieści się~w zakresie 10dB maksymalnego poziomu cićnienia akustycznego podczas zdarzenia. 
+Nie można zapomnieć, że pomiary w akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity~w pamięci~a każda sekunda zawiera czterdzieści osiem tysięcy próbek.\cite{Principles_of_digital_audio} Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
+\begin{equation}
+\text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}
+\end{equation}
+\begin{equation}
+24\;[b] * 48000\;[\frac{1}{s}] * 8*60*60\;[s] = 24\;[b] * 48000 \;[\frac{1}{s}] * 28800\;[s] = 3.31776*10^{10} \;[b] 
+\end{equation}
+
+Po przeliczeniu tego na jednostki bardziej sprzyjające interpretacji wyniku, przybliżając że $$1GB \approx 8*10^9 [b]$$ otrzymamy:
+
+
+\begin{equation}
+\frac{3.31776*10^10\;[b]}{8*10^9\;[\frac{b}{GB}]} = 4,1472 [GB]
+\end{equation}
+Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego pliku nie jest zadaniem trywialnym. Jeżeli program wczytywałby cały plik do pamięci RAM, potrzebowałby on około czterech gigabajtów tej pamięci na samo obsłużenie pliku. Gdy dodamy do tego potrzebę pamięci operacyjnej dla samego programu, potrzeby systemu operacyjnego oraz innych aplikacji działających równolegle z programem zauważamy problem w postaci braku tych zasobów. Nowoczesne stacje robocze poradziłyby sobie z takim obciążeniem, jednak należy pamiętać o kilku rzeczach:
+\begin{itemize}
+\item Nie wszystkie firmy i osoby fizyczne dysponują stacjami roboczymi, posiadającymi duże zasoby pamięci operacyjnej RAM,
+\item plik może być dłuższy,
+\item plik może zostać nagrany z wyższą częstotliwością próbkowania,
+\item może nastąpić potrzeba współdzielenia pamięci z innymi programami bez możliwości ich wyłączenia.
+\end{itemize}
+
+Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój program oprzeć o przetwarzanie sygnału fragmentarycznie. Dokładny sposób działania programu zostanie omówiony w dalszej części pracy. Co istotne w tym punkcie to to, że wracając do definicji przytoczonej w normie \cite{PN-ISO-1996-1:2006} zadaniem nietrywialnym jest osiągnąć jednocześnie obie te funkcjonalności:
+\begin{enumerate}
+\item Odczytywanie programu fragmentarycznie.
+\item Zapamiętanie wszystkich poprzednich wartości próbek aby w razie potrzeby cofnąć się do poprzedniego fragmentu celem odnalezienia spadku poziomu o 10 dB.
+\end{enumerate}
+
+Mając na uwadze powyższe przesłanki oraz możliwość późniejszego rozszerzania funkcjonalności programu, autor zadecydował się aby ograniczyć definicję zdarzenia akustycznego do definicji:
+
+\begin{quote}
+"Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu."\cite{PN-ISO-1996-1:2006}
+\end{quote}
+
+Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga ona wiedzy o pewnych danych środowiska i zdarzenia, jak np. poziom tła akustycznego oraz przewidywany poziom ciśnienia akustycznego generowany podczas zdarzenia. Pomimo świadomości tych ograniczeń autor postanowił zastosować tę uproszczoną definicję, aby program realizował fragmentaryczne przetwarzanie danych i tym samym spełniał w całości założenia pracy jednocześnie dając lepsze możliwości na jego rozwój w przyszłości. Autor ma nadzieję, że dodanie innego algorytmu do detekcji bazującego na przetwarzaniu sygnału partiami będzie prostsze niż przyszła zmiana samego centrum oprogramowania, czyli odczytywania i zapisywania wyników. 
 \section{Metoda wykrywania zakłóceń}
 \section{Istniejące rozwiązania do wykrywania zdarzeń akustycznych}
 \chapter{Metodologia}
@@ -132,11 +142,8 @@ def _filter_db_samples_with_time_constant(self, samples):
 \chapter{Struktura oraz działanie programu}
 
 \chapter{Notatki}
-\section{PN-ISO-1996-1:2006 zdarzenie akustyczne}
-\begin{description}
-\item[5.1.2] Należy podawać czas trwania zdarzenia w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu. 
-PRZYKŁAD czas trwania zdarzenia można zdefiniować jako całkowity czas, w którym poziom ciśnienia akustycznego mieści się w zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia. 
-\end{description}
+\begin{lstlisting}[frame=single]
+\end{lstlisting}
 \appendix
 \chapter{Kod Programu}
 

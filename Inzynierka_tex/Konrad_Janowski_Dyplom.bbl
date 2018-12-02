@@ -1,10 +1,16 @@
 \begin{thebibliography}{}
 
-\bibitem[Foundation, 2018]{Python_data_structures}
-Foundation, P.~S. (2018).
-\newblock Python 3.7.1 documentation, data structures.
-\newblock
-  \url{http://web.archive.org/web/20080207010024/http://www.808multimedia.com/winnt/kernel.htm}.
-\newblock Accessed: 2010-09-30.
+\bibitem[{PN-ISO-1996-1:2006}, ]{PN-ISO-1996-1:2006}
+{PN-ISO-1996-1:2006}.
+\newblock {\em {PN-ISO-1996-1:2006}}.
+
+\bibitem[{PN-ISO-9612:2014}, ]{PN-ISO-9612:2014}
+{PN-ISO-9612:2014}.
+\newblock {\em {PN-ISO-9612:2014}}.
+
+\bibitem[Pohlmann, 2000]{Principles_of_digital_audio}
+Pohlmann, K.~C. (2000).
+\newblock {\em Principles of Digital Audio}.
+\newblock fourth edition.
 
 \end{thebibliography}
