@@ -73,9 +73,9 @@ Autor ma nadzieję, że zaprojektowany w~ten sposób system pozwoli na później
 \section{Motywacja}
 Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
 
-Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia to celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie ilości odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
+Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia do celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie ilości odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
 
-Biorąc pod uwagę, że przytoczone wyżej przykłady są jedynie wąskim wycinkiem zastosowań, które mogłyby przyjść do głowy komuś, kto ma widzę i~zainteresowanie w~innej dziedzinie niż autor pracy nie ulega wątpliwości, że warto posiadać takie oprogramowanie. Oczywiście wszystkie przytoczone sytuacje można analizować ręcznie, odsłuchując nagrane próbki. Analiza takich nagrań jednak pochłania dużo czasu i może być problematyczna. Z~pomocą stworzonego narzędzia można proces zupełnie lub częściowo zautomatyzować co w~obu przypadkach skutkuje znaczną oszczędnością czasu. 
+Biorąc pod uwagę, że przytoczone wyżej przykłady są jedynie wąskim wycinkiem zastosowań, które mogłyby przyjść do głowy komuś, kto ma wiedzę i~zainteresowanie w~innej dziedzinie niż autor pracy nie ulega wątpliwości, że warto posiadać takie oprogramowanie. Oczywiście wszystkie przytoczone sytuacje można analizować ręcznie, odsłuchując nagrane próbki. Analiza takich nagrań jednak pochłania dużo czasu i może być problematyczna. Z~pomocą stworzonego narzędzia można proces zupełnie lub częściowo zautomatyzować co w~obu przypadkach skutkuje znaczną oszczędnością czasu. 
 
 Praca powstała w połowie z~chęci stworzenia użytecznego narzędzia a~w~połowie z~chęci Autora do poznania współczesnych metod analizy cyfrowych sygnałów fonicznych. Rozwinięcie wiedzy w zakresie tworzenia oprogramowania w~języki Python, pracy z~systemem kontroli wersji oraz implementacja algorytmów znanych z~książek do realnie działającego programu jest procesem, który autor chciał zgłębić. Przedstawienie wyników w~formie zrozumiałej, czytelnej i~praktycznej jest nieraz jeszcze większym wyzwaniem i~nie można nabyć~w tym wprawy inaczej, niż pracując z~tymi wynikami i~samemu przekonać się na ile są one użyteczne.
 
@@ -218,7 +218,7 @@ Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie do
 \section{Plik z informacjami o zdarzeniach: JSON}
 Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\cite{JSON}. JSON jest popularnym sposobem wyświetlania i~przekazywania danych. Po raz kolejny o~jego wyborze przesądziło jego rosnąca popularność i~prostota użycia\cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i~przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i~ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
 \chapter{Struktura oraz działanie programu}
-\section{Sposób działania programu - aplikacja konsolowa}
+\section{Sposób działania programu - aplikacja konsolowa}\label{sposób}
 Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
 
 Oznacza to, że wywołuje się go z~konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie}). Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
@@ -679,8 +679,152 @@ class JsonEventsWriter:
 \end{lstlisting}
 \end{minipage}
 
-Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_events\_in\_json i~ save\_json\_to\_file. Pierwsza z nich odpowiada za przygotowanie obiektu JSON w Pythonie z listy zawierającej zdarzenia akustyczne. Następnie korzystając z~tak przygotowanego pliku metoda save\_json\_to\_file zapisze je w pliku z rozszerzeniem .json, w podkatalogu katalogu w~którym znajdowały się pliki audio.  
+Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_events\_in\_json i~ save\_json\_to\_file. Pierwsza z nich odpowiada za przygotowanie obiektu JSON w Pythonie z listy zawierającej zdarzenia akustyczne. Następnie korzystając z~tak przygotowanego pliku metoda save\_json\_to\_file zapisze je w pliku z rozszerzeniem .json, w podkatalogu katalogu w~którym znajdowały się pliki audio.  Przykładowy plik zapisany przy pomocy tej klasy widzimy na listingu \ref{jsoncontent}. 
 
+\begin{lstlisting}[caption={Przykładowa zawartość pliku .json},captionpos=b,label={jsoncontent}] 
+{"All_Events": 2, "Event_1": {"start": 11, "end": 20, "length": 9},
+ "Event_2": {"start": 30, "end": 43, "length": 13}}
+\end{lstlisting}
+
+\subsection{Ekstrakcja z plików wav}
+Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z analizowanych plików. Zajmuje się tym klasa WaveWriter umieszczona w pliku WaveReader.py. Posiada ona dwie metody. Pierwszą z nich widzimy na listingu \ref{readdefinedframes}.
+
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py, klasa WaveWriter, metoda read\_defined\_frames},captionpos=b,label={readdefinedframes}] 
+
+   def read_defined_frames(self, file_path, event):
+        """Read events from audio file
+        Params
+        ------
+            file_path: str
+                path to audio file which will be read
+            event: (float, float, float)
+                touple containing start, end and lenth of event
+        Returns
+        -------
+            frames_and_params: (b, ())
+                touple containing frames which event and params of file.
+            """
+        start, end, length = event
+        audio_file = wave.open(file_path, 'rb')
+        audio_file.rewind()
+        frame_rate = audio_file.getframerate()
+        start_position = audio_file.tell() + int(start * frame_rate)
+        audio_file.setpos(start_position)
+        frames_to_read = int(length * frame_rate)
+
+        print('Read frames from {} to {}'.format(start_position, start_position + frames_to_read))
+
+        frames = audio_file.readframes(frames_to_read)
+
+        print('Samples from {} to {} has been read.'.format(start_position, audio_file.tell()))
+        print('')
+
+        params = audio_file.getparams()
+        frames_and_params = (frames, params)
+        return frames_and_params
+\end{lstlisting}
+\end{minipage}
+Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie akustyczne. Linie 15--21 odpowiadają za przygotowanie wskaźników na obsługiwanym pliku aby odczytać odpowiednią ilość bitów z odpowiedniego miejsca. Linia 25 odczytuje zadane wcześniej bity. Zwracana jest krotka zawierająca bity oraz parametry które powinny zostać nagrane do pliku wave. Metoda ta jest wywoływana przez drugą metodę, widoczną na listingu \ref{writedefinedframes}.
+
+\begin{minipage}{\linewidth}
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py, klasa WaveWriter. metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
+    def write_defined_frames(self, file_dir_path, frames_and_params, count):
+        """Write frames to file under defined path.
+        Params
+        ------
+            file_dir_path: str
+                path to dir where file should be save.
+            frames_and_params: (b, ())
+                frames to write and params of audio file
+            count: int
+                value to different each event"""
+        frames, params = frames_and_params
+        file_name = '{}/event_{}.wav'.format(file_dir_path, count)
+        audio_file = wave.open(file_name, 'wb')
+        audio_file.setparams(params)
+        audio_file.writeframes(frames)
+        print('Wrote file {}'.format(file_name))
+        audio_file.close()
+\end{lstlisting}
+\end{minipage}
+Funkcja ta ma za zadanie zapisać odczytane wcześniej bity do pliku o nazwie stworzonej w linii 11. używając parametrów zgodnych z plikiem wejściowym. 
+W ten sposób zamyka ona proces detekcji i ekstrakcji zdarzenia z zadanego pliku. 
+
+\chapter{Sposób użycie i testy}
+Ta część dotyczyć będzie sposobu użycia programu z punktu widzenia użytkownika oraz przeprowadzonych przez autora testów w celu weryfikacji poprawności działania.
+\section{Sposób użycia}
+Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolowa. Oznacza to, że wywołanie następuje poprzez wiersz poleceń systemu operacyjnego. Rozpatrzmy dokładniej wywołanie programu pokazane na rysunku \ref{cmd2}.
+
+\begin{figure}[hbtp]
+\label{cmd2}
+\caption{przykładowe wywołanie z wiersza poleceń}
+\centering
+\includegraphics[width=0.8\textwidth]{cmd_wywolanie_2.PNG}
+\end{figure}
+
+Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z nich to:
+
+\begin{minipage}{\linewidth}
+\begin{enumerate}
+\item To ścieżka prowadząca to pliku main.py, który uruchamia cały program,
+\item To ścieżka do folderu, w którym znajdują się pliki wave oraz plik referencyjny,
+\item Tefiniuje krzywą korekcji częstotliwościowej, która zostanie użyta do filtracji sygnału. Możliwe opcje to "A", "B" lub "C".
+\item Definiuje stałą czasową, według której zostaną uśrednione próbki. Dopuszczalne wartości to "slow" oraz "fast".
+\item To poziom w dB SPL pliku referencyjnego. Jeżeli sygnał referencyjny był o częstotliwości innej niż 1kHz, lub użyty został mikrofon do którego wymagane jest wprowadzenie poprawki do odczytu z pistofonu poprawka ta musi zostać wprowadzona w tym miejscu. Dozwolona jest dowolna liczba zmiennoprzecinkowa mieszcząca się w zakresie typy float.
+\item To próg wykrycia zdarzenia. Program odnajdzie wszystkie fragmenty pliku, który poziom mierzony w dB SPL przekroczy zadaną wartość. Dozwolona jest dowolna liczba zmiennoprzecinkowa mieszcząca się w zakresie typy float.
+\end{enumerate}
+\end{minipage}   
+
+Należy zwrócić uwagę na strukturę folderu w którym trzymane są pliki do analizy. Przykładowa zawartość katalogu przedstawiona została na rysunku \ref{katalog}
+
+\begin{figure}[hbtp]
+\label{katalog}
+\caption{Przykładowa struktura katalogu z plikami wave}
+\centering
+\includegraphics[width=0.8\textwidth]{katalog_przyklad.PNG}
+\end{figure}
+
+Na szczególną uwagę zasługuje plik REFERENCE.wav. Jest on niezbędny do zadziałania programu. Powinien znajdować się w nim sygnał referencyjny o znanym poziomie ciśnienia akustycznego. Nie może zawierać w sobie ciszy. Reszta plików może posiadać dowolne nazwy i być dowolnej długości. Jeżeli detekcja ma odbyć się prawidłowo niezbędne jest aby wszystkie pliki były nagrane tym samym zestawem pomiarowym bez zmian nastaw w czasie nagrań. Jeżeli wystąpi konieczność zmiany wzmocnienia podczas nagrania, należy nagrać nowy plik referencyjny i rozdzielić nagrania na dwa katalogi dzieląc je według parametrów nagrania. Po uruchomieniu programu możemy spodziewać się powstania katalogów ze znalezionymi zdarzeniami podobnych do tych pokazanych na rysunku \ref{wydarzenia}
+
+\begin{figure}[hbtp]
+\label{wydarzenia} 
+\caption{Przykładowy katalog zawierający podkatalogi ze znalezionymi zdarzeniami}
+\centering
+\includegraphics[width=0.8\textwidth]{katalog__eventy_przyklad.PNG}
+\end{figure}
+
+A zawartość każdego z nich powinna zawierać pliki .wav zawierające zdarzenia akustyczne oraz plik .json podsumowujący wyszukiwanie. Przykładowy wygląd podkatalogu prezentuje rysunek \ref{podkatalog}
+
+\begin{figure}[hbtp]
+\label{podkatalog}
+\caption{Przykładowa struktura podkatalogu zawierającego zdarzenia }
+\centering
+\includegraphics[width=0.8\textwidth]{podkatalog.PNG}
+\end{figure}
+
+\section{Zachowanie podczas normalnego działania}
+Podczas normalnego działania program wypisuje do wiersza poleceń informacje o stanie jego działania. W razie błędu pomaga to zorientować się co go powoduje. Na rysunku \ref{poprawne_dzialanie} możemy zobaczyć przykład poprawnego działania programu a na rysunku \ref{bład} przykład wypisania informacji o błędzie. 
+
+\begin{figure}[hbtp]
+\label{poprawne_dzialanie}
+\caption{Przykład wiersza poleceń podczas poprawnego działania programu}
+\centering
+\includegraphics[scale=1]{poprawne_dzialanie.PNG}
+\end{figure}
+
+\section{Testy}
+W celu weryfikacji działania programu przeprowadzono testy. Próbki dźwiękowe nagrano przy pomocy miernika poziomu dźwięku Svantek 959 kalibrowanego kalibratorem Larson Davis CAL200. W celu kalibracji nagrano 3 pliki dźwiękowe, 2 z poziomem 94 dB SPL oraz jeden z poziomem 114dB SPL. Następnie nagrano różne zdarzenia akustyczne, następujące po sobie w zmieniającej się kolejności. Zdarzenia te to:
+\begin{itemize}
+\item działanie odkurzacza,
+\item działanie wiatraka,
+\item uderzanie młotem w kowadło,
+\item odtwarzanie muzyki z głośników laptopa,
+\item wiatrak od komputera.
+\end{itemize}
+
+Nagrano łącznie 9 nagrań o różnej długości. Dodatkowo aby sprawdzić działanie programu podczas przetwarzania długich plików, za pomocą programu AudaCity stworzono jeden ponad pięciogodzinny plik składający się z kombinacji poprzednich, krótkich nagrań. 
 \appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography

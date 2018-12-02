@@ -11,3 +11,6 @@
 \contentsline {lstlisting}{\numberline {5.11}fragment kodu \IeC {\'z}r\IeC {\'o}d\IeC {\l }owego pliku Detectors.py, klasa ThresholdCrossDetector, metoda count\_occurrence}{22}
 \contentsline {lstlisting}{\numberline {5.12}fragment kodu \IeC {\'z}r\IeC {\'o}d\IeC {\l }owego pliku Detectors.py, klasa EventsOrganiser, metoda organise\_events}{22}
 \contentsline {lstlisting}{\numberline {5.13}fragment kodu \IeC {\'z}r\IeC {\'o}d\IeC {\l }owego pliku JsonEventWriter.py, klasa JsonEventsWriter}{23}
+\contentsline {lstlisting}{\numberline {5.14}Przyk\IeC {\l }adowa zawarto\IeC {\'s}\IeC {\'c} pliku .json}{23}
+\contentsline {lstlisting}{\numberline {5.15}fragment kodu \IeC {\'z}r\IeC {\'o}d\IeC {\l }owego pliku WaveReader.py, klasa WaveWriter, metoda read\_defined\_frames}{24}
+\contentsline {lstlisting}{\numberline {5.16}fragment kodu \IeC {\'z}r\IeC {\'o}d\IeC {\l }owego pliku WaveReader.py, klasa WaveWriter. metoda write\_defined\_frames}{24}
