@@ -19,3 +19,6 @@ kontroli wersji oraz implementacja algorytmów znanych z ksi¡»ek do realnie dz
 programu jest procesem, który autor chciaa zga¦bi¢." Inny przypadek? ... języku Python, ... oraz implementacji - może tak byłoby lepiej? BTW Rz pisze Pan Autor, innym rzem autor - proszę ujednolicić.
 Stona (5) 9: Treść normy proponowałbym napisać kursywą.
 Strona 5 (9) Czy przecinek jest tu przez przypadek, czy będzie jeszcze jakieś odnieienie? "[PN-ISO-9612:2014, ]"
+Strona 5 (9) "a ka»da se-
+kunda zawiera czterdzie±ci osiem tysi¦cy próbek.[Pohlmann, 2000]" Kropka po cytowaniu
+Strona 6 (10) Uwaga ogólna - po wzorach, obliczeniach proszę wstawiać przecinki i kropki, tak jak w zwykłym zdaniu.
