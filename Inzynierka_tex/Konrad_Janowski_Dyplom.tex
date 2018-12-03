@@ -752,16 +752,16 @@ Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie ak
 Funkcja ta ma za zadanie zapisać odczytane wcześniej bity do pliku o nazwie stworzonej w linii 11. używając parametrów zgodnych z plikiem wejściowym. 
 W ten sposób zamyka ona proces detekcji i ekstrakcji zdarzenia z zadanego pliku. 
 
-\chapter{Sposób użycie i testy}
-Ta część dotyczyć będzie sposobu użycia programu z punktu widzenia użytkownika oraz przeprowadzonych przez autora testów w celu weryfikacji poprawności działania.
-\section{Sposób użycia}
-Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolowa. Oznacza to, że wywołanie następuje poprzez wiersz poleceń systemu operacyjnego. Rozpatrzmy dokładniej wywołanie programu pokazane na rysunku \ref{cmd2}.
+
+\chapter{Sposób użycia}
+Ta część dotyczyć będzie sposobu użycia programu z punktu widzenia użytkownika
+Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolowa. Oznacza to, że wywołanie następuje poprzez wiersz poleceń systemu operacyjnego. Rozpatrzmy dokładniej wywołanie programu pokazane na rysunku \ref{cmd}.
 
 \begin{figure}[hbtp]
-\label{cmd2}
 \caption{przykładowe wywołanie z wiersza poleceń}
 \centering
 \includegraphics[width=0.8\textwidth]{cmd_wywolanie_2.PNG}
+\label{cmd}
 \end{figure}
 
 Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z nich to:
@@ -780,41 +780,50 @@ Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza
 Należy zwrócić uwagę na strukturę folderu w którym trzymane są pliki do analizy. Przykładowa zawartość katalogu przedstawiona została na rysunku \ref{katalog}
 
 \begin{figure}[hbtp]
-\label{katalog}
 \caption{Przykładowa struktura katalogu z plikami wave}
 \centering
 \includegraphics[width=0.8\textwidth]{katalog_przyklad.PNG}
+\label{katalog}
 \end{figure}
 
 Na szczególną uwagę zasługuje plik REFERENCE.wav. Jest on niezbędny do zadziałania programu. Powinien znajdować się w nim sygnał referencyjny o znanym poziomie ciśnienia akustycznego. Nie może zawierać w sobie ciszy. Reszta plików może posiadać dowolne nazwy i być dowolnej długości. Jeżeli detekcja ma odbyć się prawidłowo niezbędne jest aby wszystkie pliki były nagrane tym samym zestawem pomiarowym bez zmian nastaw w czasie nagrań. Jeżeli wystąpi konieczność zmiany wzmocnienia podczas nagrania, należy nagrać nowy plik referencyjny i rozdzielić nagrania na dwa katalogi dzieląc je według parametrów nagrania. Po uruchomieniu programu możemy spodziewać się powstania katalogów ze znalezionymi zdarzeniami podobnych do tych pokazanych na rysunku \ref{wydarzenia}
 
 \begin{figure}[hbtp]
-\label{wydarzenia} 
 \caption{Przykładowy katalog zawierający podkatalogi ze znalezionymi zdarzeniami}
 \centering
 \includegraphics[width=0.8\textwidth]{katalog__eventy_przyklad.PNG}
+\label{wydarzenia} 
 \end{figure}
 
 A zawartość każdego z nich powinna zawierać pliki .wav zawierające zdarzenia akustyczne oraz plik .json podsumowujący wyszukiwanie. Przykładowy wygląd podkatalogu prezentuje rysunek \ref{podkatalog}
 
 \begin{figure}[hbtp]
-\label{podkatalog}
 \caption{Przykładowa struktura podkatalogu zawierającego zdarzenia }
 \centering
 \includegraphics[width=0.8\textwidth]{podkatalog.PNG}
+\label{podkatalog}
 \end{figure}
 
 \section{Zachowanie podczas normalnego działania}
-Podczas normalnego działania program wypisuje do wiersza poleceń informacje o stanie jego działania. W razie błędu pomaga to zorientować się co go powoduje. Na rysunku \ref{poprawne_dzialanie} możemy zobaczyć przykład poprawnego działania programu a na rysunku \ref{bład} przykład wypisania informacji o błędzie. 
+Podczas normalnego działania program wypisuje do wiersza poleceń informacje o stanie jego działania. W razie błędu pomaga to zorientować się co go powoduje. Na rysunku \ref{poprawne_dzialanie} możemy zobaczyć przykład poprawnego działania programu a na rysunku \ref{blad} przykład wypisania informacji o błędzie spowodowanego nieprawidłowym wywołaniem programu. 
 
 \begin{figure}[hbtp]
-\label{poprawne_dzialanie}
 \caption{Przykład wiersza poleceń podczas poprawnego działania programu}
 \centering
-\includegraphics[scale=1]{poprawne_dzialanie.PNG}
+\includegraphics[width=0.8\textwidth]{poprawne_dzialanie.PNG}
+\label{poprawne_dzialanie}
 \end{figure}
 
-\section{Testy}
+\begin{figure}[hbtp]
+\caption{Przykład wiersza poleceń podczas wykrycia błędu}
+\centering
+\includegraphics[scale=1]{blad.PNG}
+\label{blad}
+\end{figure}
+
+
+
+\chapter{Testy}
 W celu weryfikacji działania programu przeprowadzono testy. Próbki dźwiękowe nagrano przy pomocy miernika poziomu dźwięku Svantek 959 kalibrowanego kalibratorem Larson Davis CAL200. W celu kalibracji nagrano 3 pliki dźwiękowe, 2 z poziomem 94 dB SPL oraz jeden z poziomem 114dB SPL. Następnie nagrano różne zdarzenia akustyczne, następujące po sobie w zmieniającej się kolejności. Zdarzenia te to:
 \begin{itemize}
 \item działanie odkurzacza,
@@ -824,7 +833,17 @@ W celu weryfikacji działania programu przeprowadzono testy. Próbki dźwiękowe
 \item wiatrak od komputera.
 \end{itemize}
 
-Nagrano łącznie 9 nagrań o różnej długości. Dodatkowo aby sprawdzić działanie programu podczas przetwarzania długich plików, za pomocą programu AudaCity stworzono jeden ponad pięciogodzinny plik składający się z kombinacji poprzednich, krótkich nagrań. 
+Nagrano łącznie 9 nagrań o różnej długości. Dodatkowo aby sprawdzić działanie programu podczas przetwarzania długich plików, za pomocą programu AudaCity stworzono jeden ponad pięciogodzinny plik składający się z kombinacji poprzednich, krótkich nagrań.
+
+Poza czase pracy program nie wykazywał różnic w zachowaniu przy odczycie i zapisie plików krótkich jak i pliku długiego. Pomimo bardzo długiego plików zawierających wiele zdarzeń program nie obciążał urządzeń mocniej niż podczas normalnej pracy. Folder utworzony podczas pracy prezentuje rysunek \ref{dlugiewyniki}
+
+\begin{figure}[hbtp]
+\caption{Folder utworzony po przeszukaniu pliku o długości ponad 5 godzin}
+\centering
+\includegraphics[width=0.8\textwidth]{long_file_found.PNG}
+\label{dlugiewyniki}
+\end{figure}
+
 \appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
