@@ -844,6 +844,24 @@ Poza czase pracy program nie wykazywał różnic w zachowaniu przy odczycie i za
 \label{dlugiewyniki}
 \end{figure}
 
+W celu weryfikacji czy program odnalazł tylko fragmenty zawierające zdarzenia akustyczne, posłużono się wizualizacją dostępną w programie AudaCity. Przykłady znalezionych zdarzeń prezentuje rysunek \ref{znalezione_zdarzenia}. Zdarzenia zostały znalezione w pliku "SVAN0007.wav" którego pełny przebieg wraz z zaznaczonymi obszarami  gdzie zostały odnalezione zdarzenia oznaczono kolorem czerwonym pokazuje \ref{przebieg}. Podany przykład został przetestowany z parametrami "A slow 94 85"
+
+\begin{figure}[hbtp]
+\caption{Zdarzenia akustyczne prezentowane w formie graficznej przy użyciu programu AudaCity}
+\centering
+\includegraphics[width=0.8\textwidth]{zdarzeniaAuda.PNG}
+\label{znalezione_zdarzenia}
+\end{figure}
+
+\begin{figure}[hbtp]
+\caption{Wizualna reprezentacja pliku z którego ekstrahowano zdarzenia}
+\centering
+\includegraphics[width=0.8\textwidth]{oryginalAuda.PNG}
+\label{przebieg}
+\end{figure}
+
+Testy zostały przeprowadzone dla tych samych plików używają referencji z pliku 94 dB SPL oraz 114 dB SPL. W obu przypadkach program wyszukiwał tyle samo zdarzeń akustycznych we wszystkich plikach przy tym samym progu zadziałania. Testowano również stałe czasowe i różne krzywe ważenia. Dla wszystkich kombinacji program działał zgodnie z oczekiwaniami. 
+
 \appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
