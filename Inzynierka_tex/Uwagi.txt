@@ -1,7 +1,15 @@
 Uwagi:
 Strona 1 (tytułowa) - przenieść literę i do nowego wiersza (dr Maciej Walczyński, Katedra Akutyki i Multimediów (W4/K5)
 Strona 3 Rodziców wielką literą
-Strona 7 Proszę zastanowić się nad zdaniem "Oprogramowanie zostaao stworzone do obsaugi plików w formacie wa-
+Strona (3) 7 Proszę zastanowić się nad zdaniem "Oprogramowanie zostaao stworzone do obsaugi plików w formacie wa-
 ve o rozdzielczo±ci bitowej szesna±cie(16) i dwadzie±cia cztery(24) bity oraz cz¦stotliwo±ci
 próbkowania czterdzie±ci cztery i sto dziesi¡tych (44,1) kilo Herca i czterdzie±ci osiem (48)
 kilo Herca." - proszę sprawdzić, czy nie używa się pojęcia rozdzielczość bitowa dźwięku (vide: https://pl.wikipedia.org/wiki/Rozdzielczo%C5%9B%C4%87_bitowa_d%C5%BAwi%C4%99ku). 2 - czterdzie±ci cztery i sto dziesi¡tych -> raczej dziesięć setnych.
+Strona (4) 8 W zdaniu "Gdyby kto± chciaa policzy¢ ile razy zostaaa odbita
+piaka do koszykówki podczas badania jej wytrzymaao±ci, jednym z mo»liwych sposobów na
+zliczenie ilo±ci odbi¢" powinno być liczby odbić (zamiast ilości) - są one policzalne
+Strona (4) 8 "Jak wida¢, wyszukiwanie zdarze« akustycznych wraz
+z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu z pozoru nie zwi¡zanych
+z tym dziedzinach." Tu brakuje przecinków lub -. Np: Jak wida¢, wyszukiwanie zdarze« akustycznych wraz
+z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu - z pozoru nie zwi¡zanych
+z tym - dziedzinach.
