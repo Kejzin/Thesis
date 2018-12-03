@@ -1,3 +1,7 @@
 Uwagi:
 Strona 1 (tytułowa) - przenieść literę i do nowego wiersza (dr Maciej Walczyński, Katedra Akutyki i Multimediów (W4/K5)
-Stona 2
+Strona 3 Rodziców wielką literą
+Strona 7 Proszę zastanowić się nad zdaniem "Oprogramowanie zostaao stworzone do obsaugi plików w formacie wa-
+ve o rozdzielczo±ci bitowej szesna±cie(16) i dwadzie±cia cztery(24) bity oraz cz¦stotliwo±ci
+próbkowania czterdzie±ci cztery i sto dziesi¡tych (44,1) kilo Herca i czterdzie±ci osiem (48)
+kilo Herca." - proszę sprawdzić, czy nie używa się pojęcia rozdzielczość bitowa dźwięku (vide: https://pl.wikipedia.org/wiki/Rozdzielczo%C5%9B%C4%87_bitowa_d%C5%BAwi%C4%99ku). 2 - czterdzie±ci cztery i sto dziesi¡tych -> raczej dziesięć setnych.
