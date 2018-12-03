@@ -13,3 +13,9 @@ z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu z pozoru nie zwi¡z
 z tym dziedzinach." Tu brakuje przecinków lub -. Np: Jak wida¢, wyszukiwanie zdarze« akustycznych wraz
 z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu - z pozoru nie zwi¡zanych
 z tym - dziedzinach.
+Strona (4) 8 Nie za bardzo rozumiem to zdanie: "Roz-
+wini¦cie wiedzy w zakresie tworzenia oprogramowania w j¦zyki Python, pracy z systemem
+kontroli wersji oraz implementacja algorytmów znanych z ksi¡»ek do realnie dziaaaj¡cego
+programu jest procesem, który autor chciaa zga¦bi¢." Inny przypadek? ... języku Python, ... oraz implementacji - może tak byłoby lepiej? BTW Rz pisze Pan Autor, innym rzem autor - proszę ujednolicić.
+Stona (5) 9: Treść normy proponowałbym napisać kursywą.
+Strona 5 (9) Czy przecinek jest tu przez przypadek, czy będzie jeszcze jakieś odnieienie? "[PN-ISO-9612:2014, ]"
