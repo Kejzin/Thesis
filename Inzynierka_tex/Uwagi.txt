@@ -22,3 +22,9 @@ Strona 5 (9) Czy przecinek jest tu przez przypadek, czy będzie jeszcze jakieś 
 Strona 5 (9) "a ka»da se-
 kunda zawiera czterdzie±ci osiem tysi¦cy próbek.[Pohlmann, 2000]" Kropka po cytowaniu
 Strona 6 (10) Uwaga ogólna - po wzorach, obliczeniach proszę wstawiać przecinki i kropki, tak jak w zwykłym zdaniu.
+TUTAJ SKOŃCZYŁEM CZYTANIE!
+
+Inne uwagi:
+Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
+Na niektórych stronach w pdf pojawiają się metadane - np.: 6.
+definedframes}
