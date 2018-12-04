@@ -44,13 +44,20 @@ Strona 12:
   - kropki i wcięcia: a nie kompilowanym.[Reitz and schulsser, 2018].
   - "wybraa je aby je pozna¢ i" -> dodać przecinek i usunąć drugie je
   - "orze przes¡dziao jego rosn¡ca popularno±" -> przesądziłą zamiast przesądziło
-
+Strona 15:
+  - "W tym rozdziale szczegóaowo zostan¡ omówione" -> szyk zdania
 TUTAJ SKOŃCZYŁEM CZYTANIE!
+Strona 16:
+  - rozjechała się,
+  - rozdział, podrozdział i inne nie powinny zaczynać się od obrazka (tu listingu) -> powinien być tekst
 
 Strona 20
   - zamiast o funkcji lepiej pisać o metodzie lub funkcji składowej (jeśli mówimy o funkcji zdefiniowanej wewnątrz klasy)
   - "Aby zobaczy¢ co si¦ tam dzieje nale»y spojrze¢
 na listing" brzmi trochę za kolokwialnie - > "Aby prześledzić działanie ... "
+Strona 21:
+  "Tam nastepuje" -> ę, w tym samym zdaniu proszę dodać porównnie czego z wartością referncyjną
+  
 
 Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
