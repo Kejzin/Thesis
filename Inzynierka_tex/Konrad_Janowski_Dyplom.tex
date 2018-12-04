@@ -41,7 +41,7 @@
 \title{Narzędzie do detekcji i ekstrakcji zdarzeń akustycznych w materiale audio}
 \engtitle{A tool for detecting and extracting acoustic events in an audio material}
 \author{Konrad Kamil Janowski}
-\supervisor{dr Maciej Walczyński, Katedra Akustyki~i Multimediów (W4/K5)}
+\supervisor{dr Maciej Walczyński, Katedra Akustyki i~Multimediów (W4/K5)}
 
 %\guardian{dr hab. inż. Imię Nazwisko Prof. PWr, I-6} %nie używać jeśli opiekun jest tą samą osobą co prowadzący pracę
 
@@ -56,13 +56,13 @@
 \bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
 
 \maketitle %polecenie generujące stronę tytułową
-\dedication{6cm}{Dla rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem.}
+\dedication{6cm}{Dla Rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem.}
 
 \tableofcontents %spis treści
 
 \chapter{Wstęp}
 \section{Cel i zakres pracy}
-Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i sto dziesiątych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
+Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i dziesięć setnych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
 \begin{enumerate}
 \item Moduł odczytywania pliku,
 \item Moduł przetwarzania sygnału,
@@ -73,7 +73,7 @@ Autor ma nadzieję, że zaprojektowany w~ten sposób system pozwoli na później
 \section{Motywacja}
 Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
 
-Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia do celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie ilości odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
+Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia do celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie liczby odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
 
 Biorąc pod uwagę, że przytoczone wyżej przykłady są jedynie wąskim wycinkiem zastosowań, które mogłyby przyjść do głowy komuś, kto ma wiedzę i~zainteresowanie w~innej dziedzinie niż autor pracy nie ulega wątpliwości, że warto posiadać takie oprogramowanie. Oczywiście wszystkie przytoczone sytuacje można analizować ręcznie, odsłuchując nagrane próbki. Analiza takich nagrań jednak pochłania dużo czasu i może być problematyczna. Z~pomocą stworzonego narzędzia można proces zupełnie lub częściowo zautomatyzować co w~obu przypadkach skutkuje znaczną oszczędnością czasu. 
 
@@ -95,7 +95,7 @@ Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas, w~kt
 Biorąc pod uwagę przytoczone wcześniej możliwe zastosowania stworzonego oprogramowania powyższa definicja dobrze opisuje te sytuacje, które mają być detekowane. Ponadto, wykonanie oprogramowania, które rozpoznaje zdarzenia opisane w normie daje perspektywy na możliwości jego praktycznego zastosowania.
 \section{Przyjęta definicja zdarzenia akustycznego}
 W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w~zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia. 
-Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek.\cite{Principles_of_digital_audio} Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
+Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek\cite{Principles_of_digital_audio}. Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
 \begin{equation}
 \text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}
 \end{equation}
@@ -133,7 +133,7 @@ Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga on
 
 \section{Metoda wykrywania zakłóceń}
 
-Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące obliczenia:
+Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące operacje:
 \begin{enumerate}
 \item Odnalezienie wszystkich plików wave i pliku referncyjnego w zadanym folderze,
 \item odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z,
@@ -158,7 +158,7 @@ W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawion
 \subsection{System kontroli wersji}
 We współczesnym świecie istnieje bardzo wiele języków programowania. Każdy z nich~oferuje nieco inne możliwości i~funkcjonalności. Niezależnie jednak od wybranego języka, niezwykle istotnym jest system kontroli wersji. 
 
-Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku.\cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
+Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku\cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
 
 Pomimo iż praca dyplomowa inżynierska jest projektem jednoosobowym, system kontroli wersji spełnia swoją rolę i~w takim przypadku. Praca z~kodem jest nierozłącznie związana z~wielokrotnymi zmianami wcześniej wprowadzonych rozwiązań. Czasami wynika to z~faktu odkrycia nowych, lepszych rozwiązań. Bywają też przypadki, kiedy w zaawansowanym stadium pracy okaże się, że już na samym początku został popełniony błąd w~logice działania i~trzeba coś zmienić w~jedne funkcji. Często te zmiany wymagają powrotu do momentu pracy sprzed paru dni a nawet tygodni, ponieważ kolejne fragmenty kodu opierały swoje funkcjonowanie na działaniu tych wadliwych elementów. Nie jest możliwym pamiętanie wszystkich tych zmian i~płynny powrót do nich poprzez przepisanie kodu. W takiej sytuacji, system kontroli wersji jest niezawodnym narzędziem, które pomaga zorganizować rozwój oprogramowania. 
 
