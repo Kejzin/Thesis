@@ -22,6 +22,11 @@ Strona 5 (9) Czy przecinek jest tu przez przypadek, czy będzie jeszcze jakieś 
 Strona 5 (9) "a ka»da se-
 kunda zawiera czterdzie±ci osiem tysi¦cy próbek.[Pohlmann, 2000]" Kropka po cytowaniu
 Strona 6 (10) Uwaga ogólna - po wzorach, obliczeniach proszę wstawiać przecinki i kropki, tak jak w zwykłym zdaniu.
+Strona 7 (11) "program wykonuje następujące obliczenia można zamienić na ... operacje (zamiast obliczenia).
+Strona 7 (11) Na liście numerowanej:
+  - pierwszy item małą literą,
+  - 3 i 6 rozbić na dwie linijki,
+  - 5, 10 i 13 - dodać przecinki na końcu linijek
 TUTAJ SKOŃCZYŁEM CZYTANIE!
 
 Inne uwagi:
