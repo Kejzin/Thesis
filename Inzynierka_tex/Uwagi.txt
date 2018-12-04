@@ -46,7 +46,6 @@ Strona 12:
   - "orze przes¡dziao jego rosn¡ca popularno±" -> przesądziłą zamiast przesądziło
 Strona 15:
   - "W tym rozdziale szczegóaowo zostan¡ omówione" -> szyk zdania
-TUTAJ SKOŃCZYŁEM CZYTANIE!
 Strona 16:
   - rozjechała się,
   - rozdział, podrozdział i inne nie powinny zaczynać się od obrazka (tu listingu) -> powinien być tekst
@@ -64,7 +63,7 @@ Strona 21:
   
 Strona 19 (23):
   - W tej funkcji wykorzystana zostaay wykorzystane -> zostały wykorzystane
-
+TUTAJ SKOŃCZYŁEM CZYTANIE! - reszta wieczorem lub jutro
 Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
 Na niektórych stronach w pdf pojawiają się metadane - np.: 6.
