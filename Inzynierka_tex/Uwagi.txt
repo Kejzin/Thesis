@@ -49,6 +49,8 @@ TUTAJ SKOŃCZYŁEM CZYTANIE!
 
 Strona 20
   - zamiast o funkcji lepiej pisać o metodzie lub funkcji składowej (jeśli mówimy o funkcji zdefiniowanej wewnątrz klasy)
+  - "Aby zobaczy¢ co si¦ tam dzieje nale»y spojrze¢
+na listing" brzmi trochę za kolokwialnie - > "Aby prześledzić działanie ... "
 
 Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
