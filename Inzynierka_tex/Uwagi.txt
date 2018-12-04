@@ -50,7 +50,11 @@ TUTAJ SKOŃCZYŁEM CZYTANIE!
 Strona 16:
   - rozjechała się,
   - rozdział, podrozdział i inne nie powinny zaczynać się od obrazka (tu listingu) -> powinien być tekst
-
+  - "rogram dziaaa jedynie gdy zostanie podana" -> "Program działa jedynie wtedy, gdy ..."
+Strona 18:
+  - "ak wida¢, klasa SamplesDbSPLConverter to dziedziczy po
+klasie SamplesDbFsConverter." -> Czy chodziło o : Jak wida¢, to klasa SamplesDbSPLConverter dziedziczy po
+klasie SamplesDbFsConverter."?
 Strona 20
   - zamiast o funkcji lepiej pisać o metodzie lub funkcji składowej (jeśli mówimy o funkcji zdefiniowanej wewnątrz klasy)
   - "Aby zobaczy¢ co si¦ tam dzieje nale»y spojrze¢
@@ -58,6 +62,8 @@ na listing" brzmi trochę za kolokwialnie - > "Aby prześledzić działanie ... 
 Strona 21:
   "Tam nastepuje" -> ę, w tym samym zdaniu proszę dodać porównnie czego z wartością referncyjną
   
+Strona 19 (23):
+  - W tej funkcji wykorzystana zostaay wykorzystane -> zostały wykorzystane
 
 Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
