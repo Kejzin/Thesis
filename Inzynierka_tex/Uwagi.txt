@@ -27,7 +27,28 @@ Strona 7 (11) Na liście numerowanej:
   - pierwszy item małą literą,
   - 3 i 6 rozbić na dwie linijki,
   - 5, 10 i 13 - dodać przecinki na końcu linijek
+Strona 8 (12) - rozumiem, że tutaj pojawi się tekst
+Strona 9 - apisywania wielu wersji pliku.[Software Freedom Conservancy, 2018]. - o jedną kropkę za dużo
+Strona 9 - "Ostatnim ale na pewno nie najmniej wa»nym elementem jest mo»liwo±¢ przechowywa-
+nia caaego programu na zdalnym serwerze" -> "Ostatnim - ale na pewno nie najmniej wa»nym - elementem  jest mo»liwo±¢ przechowywa-
+nia caaego programu na zdalnym serwerze"
+Strona 11:
+  - metadane w pdf,
+  - "Maj¡c pomysa na dziaaanie programu oraz niezb¦dne narz¦dzie do kontrolowania post¦pów
+prac nale»y wybrac j¦zyk programowania w którym zostanie napisany program." - dodać przecinek
+  - programowania[Rassmussen College, 2017]. - brak spacji przed [
+  - Kropka w innym miejscu: "Ponadto Python ma rozbudowan¡ baz¦ bibliotek i moduaów, które mo»na u»ywa¢
+ponownie do swoich zastosowa«.[Python Software Foundation, 2018e]"
+Strona 12:
+  - "opracowan¡ dokumentacje." -> dokumentację
+  - kropki i wcięcia: a nie kompilowanym.[Reitz and schulsser, 2018].
+  - "wybraa je aby je pozna¢ i" -> dodać przecinek i usunąć drugie je
+  - "orze przes¡dziao jego rosn¡ca popularno±" -> przesądziłą zamiast przesądziło
+
 TUTAJ SKOŃCZYŁEM CZYTANIE!
+
+Strona 20
+  - zamiast o funkcji lepiej pisać o metodzie lub funkcji składowej (jeśli mówimy o funkcji zdefiniowanej wewnątrz klasy)
 
 Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
