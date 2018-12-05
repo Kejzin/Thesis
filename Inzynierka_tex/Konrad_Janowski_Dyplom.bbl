@@ -27,8 +27,9 @@ Gündert, S. (2014).
 \newblock \url{http://siggigue.github.io/pyfilterbank/splweighting.html}.
 \newblock Accessed: 2010-09-30.
 
-\bibitem[{IEC-61672-2013}, ]{IEC-61672-2013}
-{IEC-61672-2013}.
+\bibitem[{IEC-61672-2013}, 2013]{IEC-61672-2013}
+{IEC-61672-2013} (2013).
+\newblock {\em Electroacoustics - Sound level meters - Part 1: Specifications}.
 
 \bibitem[Lutz, 2011]{Wprowadzenie_python}
 Lutz, M. (2011).
@@ -40,14 +41,20 @@ Martin, R.~C. (2014).
 \newblock {\em Czysty Kod Podręcznik dobrego programisty}.
 \newblock Helion.
 
-\bibitem[{PN-EN 61672-1:2014-03}, ]{PN-EN_61672-1:2014-03}
-{PN-EN 61672-1:2014-03}.
+\bibitem[{PN-EN 61672-1:2014-03}, 2015]{PN-EN_61672-1:2014-03}
+{PN-EN 61672-1:2014-03} (2015).
+\newblock {\em Elektroakustyka -- Mierniki poziomu dźwięku -- Część 1:
+  Wymagania}.
 
-\bibitem[{PN-ISO-1996-1:2006}, ]{PN-ISO-1996-1:2006}
-{PN-ISO-1996-1:2006}.
+\bibitem[{PN-ISO-1996-1:2006}, 2006]{PN-ISO-1996-1:2006}
+{PN-ISO-1996-1:2006} (2006).
+\newblock {\em Akustyka -- Opis, pomiary i ocena hałasu środowiskowego --
+  Część 1: Wielkości podstawowe i procedury oceny}.
 
-\bibitem[{PN-ISO-9612:2014}, ]{PN-ISO-9612:2014}
-{PN-ISO-9612:2014}.
+\bibitem[{PN-ISO-9612:2011}, 2011]{PN-ISO-9612:2011}
+{PN-ISO-9612:2011} (2011).
+\newblock {\em Akustyka -- Wyznaczanie zawodowej ekspozycji na hałas -- Metoda
+  techniczna}.
 
 \bibitem[Pohlmann, 2000]{Principles_of_digital_audio}
 Pohlmann, K.~C. (2000).

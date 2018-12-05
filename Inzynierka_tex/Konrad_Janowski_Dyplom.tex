@@ -23,15 +23,16 @@
 \usepackage{tabularx}
 \usepackage{hhline}
 
+\usepackage{color}
 \usepackage{listings}		  %pozwalającyu listingować
-\lstset{language=Python,      % sets automatic line breaking
+\lstset{language=python, 
  		numbers=left,
  		showstringspaces=false,
  		numbersep=5pt,
  		basicstyle=\tiny}
 
 %pakiet wypisujący na marginesie etykiety równań i rysunków zdefiniowanych przez \label{}, chcąc wygenerować finalną wersję dokumentu wystarczy usunąć poniższą linię
-\usepackage{showlabels}
+%\usepackage{showlabels}
 
 %definicje własnych poleceń
 \newcommand{\R}{I\!\!R} %symbol liczb rzeczywistych, działa tylko w trybie matematycznym
@@ -53,8 +54,8 @@
 
 %tutaj zaczyna się właściwa treść dokumentu
 \begin{document}
+ 
 \bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
-
 \maketitle %polecenie generujące stronę tytułową
 \dedication{6cm}{Dla Rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, który pragnąłem.}
 
@@ -89,25 +90,25 @@ Jak wspomniano w powyższym rozdziale, nie ma jednej ogólnej definicji zdarzeni
 \begin{quotation}
 "Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu. 
 
-Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia."\cite{PN-ISO-1996-1:2006}
+Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia\\\cite{PN-ISO-1996-1:2006}."
 \end{quotation}
 
 Biorąc pod uwagę przytoczone wcześniej możliwe zastosowania stworzonego oprogramowania powyższa definicja dobrze opisuje te sytuacje, które mają być detekowane. Ponadto, wykonanie oprogramowania, które rozpoznaje zdarzenia opisane w normie daje perspektywy na możliwości jego praktycznego zastosowania.
 \section{Przyjęta definicja zdarzenia akustycznego}
 W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w~zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia. 
-Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy\cite{PN-ISO-9612:2014}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek\cite{Principles_of_digital_audio}. Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
+Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy \cite{PN-ISO-9612:2011}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek \cite{Principles_of_digital_audio}. Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
 \begin{equation}
-\text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}
+\text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}.
 \end{equation}
 \begin{equation}
-24\;[b] * 48000\;[\frac{1}{s}] * 8*60*60\;[s] = 24\;[b] * 48000 \;[\frac{1}{s}] * 28800\;[s] = 3.31776*10^{10} \;[b] 
+24\;[b] * 48000\;[\frac{1}{s}] * 8*60*60\;[s] = 24\;[b] * 48000 \;[\frac{1}{s}] * 28800\;[s] = 3.31776*10^{10} \;[b] .
 \end{equation}
 
-Po przeliczeniu tego na jednostki bardziej sprzyjające interpretacji wyniku, przybliżając że $$1GB \approx 8*10^9 [b]$$ otrzymamy:
+Po przeliczeniu tego na jednostki bardziej sprzyjające interpretacji wyniku, przybliżając że $$1GB \approx 8*10^9 [b]$$, otrzymamy:
 
 
 \begin{equation}
-\frac{3.31776*10^10\;[b]}{8*10^9\;[\frac{b}{GB}]} = 4,1472 [GB]
+\frac{3.31776*10^10\;[b]}{8*10^9\;[\frac{b}{GB}]} = 4,1472 [GB].
 \end{equation}
 Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego pliku nie jest zadaniem trywialnym. Jeżeli program wczytywałby cały plik do pamięci RAM, potrzebowałby on około czterech gigabajtów tej pamięci na samo obsłużenie pliku. Gdy dodamy do tego potrzebę pamięci operacyjnej dla samego programu, potrzeby systemu operacyjnego oraz innych aplikacji działających równolegle z~programem zauważamy problem w~postaci braku tych zasobów. Nowoczesne stacje robocze poradziłyby sobie z~takim obciążeniem, jednak należy pamiętać o~kilku rzeczach:
 \begin{itemize}
@@ -117,7 +118,7 @@ Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego plik
 \item może nastąpić potrzeba współdzielenia pamięci~z innymi programami bez możliwości ich wyłączenia.
 \end{itemize}
 
-Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój program oprzeć o~przetwarzanie sygnału fragmentarycznie. Dokładny sposób działania programu zostanie omówiony w dalszej części pracy. Co istotne w tym punkcie, wracając do definicji przytoczonej w normie \cite{PN-ISO-1996-1:2006} zadaniem nietrywialnym jest osiągnąć jednocześnie obie te funkcjonalności:
+Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój program oprzeć o~przetwarzanie sygnału fragmentarycznie. Dokładny sposób działania programu zostanie omówiony w dalszej części pracy. Co istotne w tym punkcie, wracając do definicji przytoczonej w normie \cite{PN-ISO-1996-1:2006}, zadaniem nietrywialnym jest osiągnąć jednocześnie obie te funkcjonalności:
 \begin{enumerate}
 \item Odczytywanie programu fragmentarycznie.
 \item Zapamiętanie wszystkich poprzednich wartości próbek aby w razie potrzeby cofnąć się do poprzedniego fragmentu celem odnalezienia spadku poziomu~o 10 dB.
@@ -126,7 +127,7 @@ Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój progra
 Mając na uwadze powyższe przesłanki oraz możliwość późniejszego rozszerzania funkcjonalności programu, autor zadecydował się aby ograniczyć definicję zdarzenia akustycznego do definicji:
 
 \begin{quote}
-"Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu."\cite{PN-ISO-1996-1:2006}
+"Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu \newline \cite{PN-ISO-1996-1:2006}."
 \end{quote}
 
 Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga ona wiedzy o~pewnych danych środowiska i~zdarzenia, jak np. poziom tła akustycznego oraz przewidywany poziom ciśnienia akustycznego generowany podczas zdarzenia. Pomimo świadomości tych ograniczeń autor postanowił zastosować tę uproszczoną definicję, aby program realizował fragmentaryczne przetwarzanie danych i~tym samym spełniał w~całości założenia pracy jednocześnie dając lepsze możliwości na jego rozwój w przyszłości. Autor ma nadzieję, że dodanie innego algorytmu do detekcji bazującego na przetwarzaniu sygnału partiami będzie prostsze niż przyszła zmiana samego centrum oprogramowania, czyli odczytywania i~zapisywania wyników. 
@@ -137,17 +138,21 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 \begin{enumerate}
 \item Odnalezienie wszystkich plików wave i pliku referncyjnego w zadanym folderze,
 \item odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z,
-\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy, \cite{PN-EN_61672-1:2014-03}
+\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy
+  
+\cite{PN-EN_61672-1:2014-03},
 \item przeliczenie otrzymanych próbek na wartość dB FS,
 \item odczytanie fragmentu pliku wave zawierające badany sygnał
-\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy, \cite{PN-EN_61672-1:2014-03}
+\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy 
+
+\cite{PN-EN_61672-1:2014-03},
 \item przeliczenie otrzymanych próbek na wartości dB FS,
 \item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich z wartością referencyjną,
 \item wyszukanie przekroczeń ustalonego poziomu~i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
-\item repetycja punktów 4--8 aż do końca pliku
+\item repetycja punktów 4--8 aż do końca pliku,
 \item segregacja odnalezionych zdarzeń,
 \item ekstrakcja zdarzeń do osobnych plików wave w podfolderze folderu, w którym znajdowały się nagrania,
-\item zapisanie wyniku do pliku w formacie .json
+\item zapisanie wyniku do pliku w formacie .json,
 \item repetycja kroków 4--12 dla wszystkich znalezionych plików wave,
 \item wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
 \end{enumerate}
@@ -158,13 +163,13 @@ W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawion
 \subsection{System kontroli wersji}
 We współczesnym świecie istnieje bardzo wiele języków programowania. Każdy z nich~oferuje nieco inne możliwości i~funkcjonalności. Niezależnie jednak od wybranego języka, niezwykle istotnym jest system kontroli wersji. 
 
-Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku\cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
+Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku \cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
 
 Pomimo iż praca dyplomowa inżynierska jest projektem jednoosobowym, system kontroli wersji spełnia swoją rolę i~w takim przypadku. Praca z~kodem jest nierozłącznie związana z~wielokrotnymi zmianami wcześniej wprowadzonych rozwiązań. Czasami wynika to z~faktu odkrycia nowych, lepszych rozwiązań. Bywają też przypadki, kiedy w zaawansowanym stadium pracy okaże się, że już na samym początku został popełniony błąd w~logice działania i~trzeba coś zmienić w~jedne funkcji. Często te zmiany wymagają powrotu do momentu pracy sprzed paru dni a nawet tygodni, ponieważ kolejne fragmenty kodu opierały swoje funkcjonowanie na działaniu tych wadliwych elementów. Nie jest możliwym pamiętanie wszystkich tych zmian i~płynny powrót do nich poprzez przepisanie kodu. W takiej sytuacji, system kontroli wersji jest niezawodnym narzędziem, które pomaga zorganizować rozwój oprogramowania. 
 
 Dodatkowo nie można nie docenić możliwości porównywania wersji roboczej pliku z~dowolną wersją tego pliku przechowywaną na serwerze. Daje to możliwość ocenienia wprowadzonych zmian, zastanowienia się czy wszystkie były konieczne oraz odpowiedniego przypomnienia sobie od czego zaczynaliśmy. Wszystkie te elementy pozwalają pracować w sposób efektywny i uporządkowany.
 
-Ostatnim ale na pewno nie najmniej ważnym elementem jest możliwość przechowywania całego programu na zdalnym serwerze. W dobie komputeryzacji bardzo często zdarza się, że pracujemy na kilku różnych urządzeniach nad tym samym projektem. Korzystając z tego udogodnienia nie występuje problem przenoszenia danych pomiędzy urządzeniami. Dodatkowo w razie utraty sprzętu postępy pracy nie zostają stracone.
+Ostatnim --- ale na pewno nie najmniej ważnym---elementem jest możliwość przechowywania całego programu na zdalnym serwerze. W dobie komputeryzacji bardzo często zdarza się, że pracujemy na kilku różnych urządzeniach nad tym samym projektem. Korzystając z tego udogodnienia nie występuje problem przenoszenia danych pomiędzy urządzeniami. Dodatkowo w razie utraty sprzętu postępy pracy nie zostają stracone.
  
 Powyżej omówione aspekty jednoznacznie wskazują, że pracując nad oprogramowaniem, chcąc robić to w~sposób odpowiedzialny i~umożliwiający przyszłą współpracę korzystanie z systemu kontroli wersji jest nieodzownym elementem pracy. Dbanie o czystość i~przejrzystość wprowadzanych zmian również jest elementem, którym powinna cechować się dobrze wykonana praca. 
 
@@ -195,28 +200,29 @@ Aby lepiej móc skupić się na logicznej strukturze programu autor zadecydował
 W~opinii autora dobranie odpowiednich narzędzi jest bardzo istotne w~procesie tworzenia aplikacji. Wielu twórców oprogramowania, którzy nie są ukierunkowani na programowanie a~jedynie używają go jako narzędzia do wykonania innych czynności zaniedbuje wyżej wymienione aspekty dbałości o~czystość kodu. Dostęp i~odpowiednie użycie graficznych narzędzi, które są znacznie wygodniejsze i~bardziej intuicyjne niż ich konsolowe lub ubogie odpowiedniki z~pewnością może zachęcić twórców do większej dbałości o~ten aspekt tworzenia programów
 
 \section{Język programowania - Python}\label{wybrany_jezyk}
-Mając pomysł na działanie programu oraz niezbędne narzędzie do kontrolowania postępów prac należy wybrac język programowania w~którym zostanie napisany program. Zdecydowano, że tym językiem będzie Python w wersji 3.7.1. Jest to najnowsza stabilna wersja tego języka\cite{Python_latest_release} w czasie tworzenia oprogramowania.
+Mając pomysł na działanie programu oraz niezbędne narzędzie do kontrolowania postępów prac należy wybrać język programowania, w~którym zostanie napisany program. Zdecydowano, że tym językiem będzie Python w wersji 3.7.1. Jest to najnowsza stabilna wersja tego języka \cite{Python_latest_release} w czasie tworzenia oprogramowania.
 
-Wybrano Pythona z~kilku powodów. Python jest obecnie jednym z~najpopularniejszych języków programowania\cite{Python_popular}. Rozwijanie programu i przyszła współpraca z~innymi twórcami może być dzięki temu ułatwiona. Łatwiej znaleźć innych ludzi posługujących się Pythonem niż innymi, mniej popularnymi językami. 
+Wybrano Pythona z~kilku powodów. Python jest obecnie jednym z~najpopularniejszych języków programowania  \cite{Python_popular}. Rozwijanie programu i przyszła współpraca z~innymi twórcami może być dzięki temu ułatwiona. Łatwiej znaleźć innych ludzi posługujących się Pythonem niż innymi, mniej popularnymi językami. 
 
 Dodatkowo Python jest prosty w składni, intuicyjny i ma nieduży próg wejścia. Nawet osoba, która nie jest doświadczona w~programowaniu może stworzyć podstawowe aplikacje. Oczywiście bardziej zaawansowane struktury wymagają wiedzy, umiejętności i~ doświadczenia ale ta początkowa intuicyjność daje szansę zapoznania się z nim niezawodowym programistom.
 
-Ponadto Python ma rozbudowaną bazę bibliotek i~modułów, które można używać ponownie do swoich zastosowań.\cite{Pypie} Daje to ogromne możliwości tworzenia programów dopasowanych do potrzeb, korzystając z~gotowych modułów. Gdyby za każdym razem trzeba było zapisywać podstawowe operacje od nowa, proces kodowania byłby zdecydowanie dłuższy i~mógłby zajmować więcej czasu niż osoba zajmująca się inną dziedziną może przeznaczyć na opracowanie narzędzia. 
+Ponadto Python ma rozbudowaną bazę bibliotek i~modułów, które można używać ponownie do swoich zastosowań\cite{Pypie}. Daje to ogromne możliwości tworzenia programów dopasowanych do potrzeb, korzystając z~gotowych modułów. Gdyby za każdym razem trzeba było zapisywać podstawowe operacje od nowa, proces kodowania byłby zdecydowanie dłuższy i~mógłby zajmować więcej czasu niż osoba zajmująca się inną dziedziną może przeznaczyć na opracowanie narzędzia. 
 
-Do tego Python ma doskonale opracowaną dokumentacje. Większość modułów jest opisana czytelnie i~zrozumiale. Zdecydowanie ułatwia to pracę z~tym językiem. 
+Do tego Python ma doskonale opracowaną dokumentację. Większość modułów jest opisana czytelnie i~zrozumiale. Zdecydowanie ułatwia to pracę z~tym językiem. 
 
-Co ważne, Python jest językiem interpretowanym a nie kompilowanym.\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem~z kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
+Co ważne, Python jest językiem interpretowanym a nie kompilowanym \newline
+\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem z~kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
 
 Z podanych powodów, Python został wybrany do napisania pracy.
 
-Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnowszą wersją jest Python 3.7.1 ale równocześnie wspierany jest Python w wersji 2.6.x.\cite{Python_latest_release}. Niestety, zmiana z~Pythona wersji drugiej na wersję trzecią wiąże się ze znaczącymi zmianami w~funkcjonalności języka i~wersje te nie są ze sobą kompatybilne. Wiele modułów aktualnie dostępnych do użytku dalej funkcjonuje w~wersji drugiej języka. Można by więc pokusić się o napisanie programu w starszej wersji. Python wersji drugiej przestaje jednak być wspierany wraz z końcem 2020 roku. \cite{Python_end_of_life}. Oznacza to, że najprawdopodobniej ze względów bezpieczeństwa i~braku wsparcia większość nowych modułów będzie pisana w~Pythonie w~wersji trzeciej a~dodatkowo w~razie nieprawidłowości w działaniu wersji drugiej, nie będzie można liczyć na żadną pomoc.
+Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnowszą wersją jest Python 3.7.1 ale równocześnie wspierany jest Python w wersji 2.7.x \newline\cite{Python_latest_release}. Niestety, zmiana z~Pythona wersji drugiej na wersję trzecią wiąże się ze znaczącymi zmianami w~funkcjonalności języka i~wersje te nie są ze sobą kompatybilne. Wiele modułów aktualnie dostępnych do użytku dalej funkcjonuje w~wersji drugiej języka. Można by więc pokusić się o napisanie programu w starszej wersji. Python wersji drugiej przestaje jednak być wspierany wraz z końcem 2020 roku \cite{Python_end_of_life}. Oznacza to, że najprawdopodobniej ze względów bezpieczeństwa i~braku wsparcia większość nowych modułów będzie pisana w~Pythonie w~wersji trzeciej a~dodatkowo w~razie nieprawidłowości w działaniu wersji drugiej, nie będzie można liczyć na żadną pomoc.
 
 
 \section{Środowisko programistyczne - Pycharm}
 Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie doświadczenie z~tym środowiskiem autor wybrał je aby je poznać i~sprawdzić jego działanie. Każde środowisko oferuje odmienny zestaw funkcjonalności i~ułatwień użytkowania.
 
 \section{Plik z informacjami o zdarzeniach: JSON}
-Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\cite{JSON}. JSON jest popularnym sposobem wyświetlania i~przekazywania danych. Po raz kolejny o~jego wyborze przesądziło jego rosnąca popularność i~prostota użycia\cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i~przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i~ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
+Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\newline\cite{JSON}. JSON jest popularnym sposobem wyświetlania i~przekazywania danych. Po raz kolejny o~jego wyborze przesądziło jego rosnąca popularność i~prostota użycia \cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i~przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i~ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
 \chapter{Struktura oraz działanie programu}
 \section{Sposób działania programu - aplikacja konsolowa}\label{sposób}
 Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
@@ -242,16 +248,16 @@ Struktura plików w programie przedstawiona została na rysunku (\ref{struktura}
 \end{figure}
 
 Katalog "AudioEventDetector" zawiera wszystkie pliki źródłowe używane w programie. Na początku widzimy plik "\_\_init\_\_.py", który informuje interpreter Pythona, że 
-katalog zawiera pythonowe pakiety.\cite{init}. 
+katalog zawiera pythonowe pakiety \cite{init}. 
 
 Plik "CmdInterface.py" odpowiada za komunikację z wierszem poleceń i odczytywaniem odpowiednich parametrów podanych przez użytkownika. "Detectors.py" to dwie klasy odpowiedzialne za detekowanie i~uporządkowanie zdarzeń akustycznych. "JsonEventWriter.py" zawiera funkcjonalność odpowiedzialną za zapisywanie wyniku to pliku .json. "main.py" to główna część programu, która wywołuje pozostałe moduły w~celu skonstruowania funkcjonalnej całości. "PlotsMaker.py" zawiera jedną klasę odpowiedzialną za zrobienie prostego wykresu z~danych. Nie jest ona używana w programie ale podczas rozwoju często przydaje się do wizualnej obserwacji danych. "SampleDbConverter.py" zawiera klasy odpowiedzialne za konwersję pliku z danych reprezentujących dynamiczny przebieg ciśnienia akustycznego na skorygowany częstotliwościowo uśredniony w czasie poziom ciśnienia akustycznego. "WaveFileSearcher.py" jest odpowiedzialny za odnalezienie plików wave do analizy oraz pliku referencyjnego."WaveRader.py" odpowiada za obsługę plików wave. Odczytuje fragmentami pliki na początku działania programu aby była możliwa ich analiza, na końcu programu zapisuje wybrane fragmenty do podfolderu. 
 
-Uważny czytelnik zauważy, że wszystkie nazwy modułów zachowane są w jednej konwencji, nazwanej "CamelCase", co w tłumaczeniu na polski można określić jako "StylWielbłąda". Autor zdecydował się na ten sposób notacji uwzględniając rekomendacje twórców języka.\cite{PEP8}Używanie spójnego nazewnictwa jest o~tyle istotne, że pozwala się w prosty sposób zorientować w strukturze programu. Jeżeli twórcy oprogramowania przestrzegają ustalonych, umownych zasad kod staje się z czasem coraz bardziej przejrzysty i~wymiana informacji jest dużo prostsza. 
+Uważny czytelnik zauważy, że wszystkie nazwy modułów zachowane są w jednej konwencji, nazwanej "CamelCase", co w tłumaczeniu na polski można określić jako "StylWielbłąda". Autor zdecydował się na ten sposób notacji uwzględniając rekomendacje twórców języka \cite{PEP8}Używanie spójnego nazewnictwa jest o~tyle istotne, że pozwala się w prosty sposób zorientować w strukturze programu. Jeżeli twórcy oprogramowania przestrzegają ustalonych, umownych zasad kod staje się z czasem coraz bardziej przejrzysty i~wymiana informacji jest dużo prostsza. 
 
 \chapter{Szczegółowe omówienie funkcji w programie}
-W tym rozdziale szczegółowo zostaną omówione na przykładzie kodu główne funkcję programu. Autor postara się, żeby funkcje były omówione w kolejności jak najbardziej zbliżonej do logiki programu. Należy mieć jednak na uwadze, że niektóre funkcje wykorzystywane są kilkukrotnie co wyklucza zupełnie liniowe rozumienie kodu.
+W tym rozdziale na przykładzie kodu szczegółowo zostaną omówione główne funkcję programu. Autor postara się, żeby funkcje były omówione w kolejności jak najbardziej zbliżonej do logiki programu. Należy mieć jednak na uwadze, że niektóre funkcje wykorzystywane są kilkukrotnie co wyklucza zupełnie liniowe rozumienie kodu.
 
-Warto w tym miejscu nadmienić, że istotnym elementem programu poza jego modularnością jako całości jest też zachowanie czystości kodu wewnątrz klas. Zasada pojedynczej odpowiedzialności, znaczących nazw jak i~inne dobre zasady pisania estetycznego kodu zostały zaczerpnięte z~literatury\cite{Czysty_kod}. Autor wierzy, że każdy kod powinien być możliwie łatwy do przeczytania przez człowieka, ponieważ to on jest głównym podmiotem pracującym nad nim. Być może zastosowanie tych zasad ułatwi a~może nawet i~uprzyjemni czytanie i~zrozumienie stworzonego kodu. 
+Warto w tym miejscu nadmienić, że istotnym elementem programu poza jego modularnością jako całości jest też zachowanie czystości kodu wewnątrz klas. Zasada pojedynczej odpowiedzialności, znaczących nazw jak i~inne dobre zasady pisania estetycznego kodu zostały zaczerpnięte z~literatury \cite{Czysty_kod}. Autor wierzy, że każdy kod powinien być możliwie łatwy do przeczytania przez człowieka, ponieważ to on jest głównym podmiotem pracującym nad nim. Być może zastosowanie tych zasad ułatwi a~może nawet i~uprzyjemni czytanie i~zrozumienie stworzonego kodu. 
 
 Należy mieć na uwadze, że w~umieszczonych fragmentach kodu może się zdarzyć ominięcie niektórych wcięć. Spowodowane jest to szerokością kodu, który do odczytu w~środowiskach powinien mieć 150 \cite{PEP8}. Taka szerokość jednak nie pozwala na komfortowe umieszczenie listingu na stronie formatu A4. Dołożono wszelkich starań, aby wszystkie wcięcia istotne dla zrozumienia logiki kodu zostały zachowane
 \newpage
@@ -261,11 +267,13 @@ Należy mieć na uwadze, że w~umieszczonych fragmentach kodu może się zdarzy�
 class WaveFileSearcher:
 def find_wave_files_paths(self, ):
 """
-Find wave files under path given in cmd. Path must be a directory containing wav files and REFERENCE.wav file.
+Find wave files under path given in cmd. Path must be a directory containing wav files
+and REFERENCE.wav file.
 Returns
 -------
    wave_files_and_reference_paths: [str]
-        touple of two list. First is wave files paths to analize, second is reference file path.
+        touple of two list. First is wave files paths to analize,
+         second is reference file path.
 """
 path = CmdInterface.get_path_from_cmd()
 wave_files_paths = []
@@ -273,7 +281,8 @@ if os.path.isfile(path):
     raise NotADirectoryError('path is a file not a directory')
 elif os.path.isdir(path):
     path_content = os.listdir(path)
-    wave_files_paths = ["{}/{}".format(path, file_path) for file_path in path_content if (".wav" in file_path
+    wave_files_paths = ["{}/{}".format(path, file_path) for file_path
+    in path_content if (".wav" in file_path
                         or ".WAV" in file_path)and("REFERENCE" not in file_path)]
     reference_file_path = ["{}/{}".format(path, file_path) for file_path in path_content
                            if "REFERENCE" in file_path]
@@ -294,9 +303,9 @@ return wave_files_and_reference_paths
 
 \end{lstlisting}
 \end{minipage}
-Pierwsze co zostało zapewnione w~tej funkcji to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w lini 33. zostaje zwrócony obiekt zawierający obie te  wartości.
+Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w lini 33. zostaje zwrócony obiekt zawierający obie te  wartości.
 
-Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
+Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\newline\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
 
 
 \section{Odczytywanie pliku Wave}
@@ -328,7 +337,8 @@ while True:
     print('Samples from {} to {} has been read'.format(start, self.audio_file.tell()))
 
     if not samples:
-        print('End reading {}. Read {} frames '.format(ntpath.basename(self.file_path), self.audio_file.tell()))
+        print('End reading {}. Read {} frames '.format(ntpath.basename(self.file_path),
+         self.audio_file.tell()))
         print('')
         self.audio_file.close()
         return
@@ -337,7 +347,7 @@ while True:
     yield samples
 \end{lstlisting}
 \end{minipage}
-Na listingu \ref{WaveFileReader} widzimy moduł odpowiedzialny za odczytywanie danych z pliku wave. Jak zostało wspomniane wcześniej, funkcja jest przystosowana to działania wielokrotnie i odczytywania pliku w kawałkach. Aby to umożliwić, funkcja została zaprojektowana aby była używana jako generator.\cite{Generator}. Pozwala to na cykliczne zwracanie próbek, co dzieje się w linii 33. bez utraty informacji z poprzedniego wywołania. Istotnym elementem tej funkcji jest moment końca iteracji. Kiedy plik zostanie przeczytany do końca, zostaje wywołane słowo kluczowe "return"(linia 30) zamiast "yield"(linia 33). Jest to zgodne z rekomendacją do Pythona wersji trzeciej,\cite{return} która zmieniła działanie generatorów. W poprzednich wersjach przerwanie iteracji wykonywało się zazwyczaj poprzez instrukcję "raise(StopIteration)". 
+Na listingu \ref{WaveFileReader} widzimy moduł odpowiedzialny za odczytywanie danych z pliku wave. Jak zostało wspomniane wcześniej, funkcja jest przystosowana to działania wielokrotnie i odczytywania pliku w kawałkach. Aby to umożliwić, funkcja została zaprojektowana aby była używana jako generator \cite{Generator}. Pozwala to na cykliczne zwracanie próbek, co dzieje się w linii 33. bez utraty informacji z poprzedniego wywołania. Istotnym elementem tej funkcji jest moment końca iteracji. Kiedy plik zostanie przeczytany do końca, zostaje wywołane słowo kluczowe "return"(linia 30) zamiast "yield"(linia 33). Jest to zgodne z rekomendacją do Pythona wersji trzeciej, \cite{return} która zmieniła działanie generatorów. W poprzednich wersjach przerwanie iteracji wykonywało się zazwyczaj poprzez instrukcję "raise(StopIteration)". 
 
 Ilość czytanych danych jest z góry zdefiniowana w linii 1. Jest ona przeliczana w linii 11 na rozmiar czytanego fragmentu w bitach. 
 
@@ -347,10 +357,11 @@ Konwersja pliku odbywa się wewnątrz piku SampledBConverter.
 wewnątrz znajdują się dwie klasy:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbFSConverter},captionpos=b,label={SamplesDbFsConverter}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter},captionpos=b,label={SamplesDbFsConverter}]
 
 class SamplesDbFsConverter:
-"""Convert samples from given wave file to frequency and time weighted signal according to IEC 61672-1:2013"""
+"""Convert samples from given wave file to frequency and time weighted signal
+ according to IEC 61672-1:2013"""
 
     def __init__(self, file_path):
         self.wave_reader_object = WaveReader(file_path)
@@ -373,13 +384,13 @@ class SamplesDbSPLConverter(SamplesDbFsConverter):
 \end{lstlisting}
 \end{minipage}
 
-Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbFsConverter}) oraz  SamplesDbSPLConverter (\ref{SamplesDbSPLConverter}). Jak widać, klasa SamplesDbSPLConverter to dziedziczy po klasie SamplesDbFsConverter. Pokazuje to linia 2 listingu \ref{SamplesDbSPLConverter} gdzie w linii 2. widzimy odziedziczenie wszystkich metod i w linii 5. wywołanie konstruktora klasy nadrzędnej. Rozwiązanie to zastosowano, ponieważ klasa SamplesDbFsConverter zostaje użyta to konwersji pliku referencyjnego. Gdyby od razu zaimplementować pełną funkcjonalności klasy SamplesDbSPLConverter, z oczywistej przyczyzny referencyjna wartość "reference\_db\_fs\_value" nie mogłaby być jeszcze znana. 
+Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbFsConverter}) oraz  SamplesDbSPLConverter (\ref{SamplesDbSPLConverter}). Jak widać, klasa SamplesDbSPLConverter dziedziczy po klasie SamplesDbFsConverter. Pokazuje to linia 2 listingu \ref{SamplesDbSPLConverter} gdzie w linii 2. widzimy odziedziczenie wszystkich metod i w linii 5. wywołanie konstruktora klasy nadrzędnej. Rozwiązanie to zastosowano, ponieważ klasa SamplesDbFsConverter zostaje użyta to konwersji pliku referencyjnego. Gdyby od razu zaimplementować pełną funkcjonalności klasy SamplesDbSPLConverter, z oczywistej przyczyzny referencyjna wartość "reference\_db\_fs\_value" nie mogłaby być jeszcze znana. 
 
 
 Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbFSConverter, metoda \_convert\_samples\_to\_db\_fs},captionpos=b,label={converttofs}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_convert\_samples\_to\_db\_fs},captionpos=b,label={converttofs}]
 
     def _convert_samples_to_db_fs(self, energy_samples):
         """Convert samples in energy unit(preferably p^2) to dB FS according do AES17-2015.
@@ -396,8 +407,8 @@ Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
         max_value = 2**(self.wave_reader_object.sample_width*8-1)
         samples_db_fs = [10 * self._log_10_dealing_with_0((sample/max_value**2)*np.sqrt(2))
                          for sample in energy_samples]
-        print('{} energy unit samples has been converted to {} samples dB FS'.format(len(energy_samples),
-                                                                                     len(samples_db_fs)))
+        print('{} energy unit samples has been converted
+        to {} samples dB FS'.format(len(energy_samples), len(samples_db_fs)))
         print('Full scale level is {}'.format(max_value))
         print('')
         return list(samples_db_fs)
@@ -405,13 +416,15 @@ Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
 \end{lstlisting}
 \end{minipage}
 
-Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14.na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave.\cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES\cite{AES17}. Ciekawym momentem jest linia 15, która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki.\cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym.\cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
+Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14.na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave \cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES \cite{AES17}. Ciekawym momentem jest linia 15, która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki \cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym \cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbFSConverter, metoda \_filte\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_filte\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
     def _filter_db_samples_with_time_constant(self, samples):
-        """Take dynamic pressure samples and integrate it with time constant defined in IEC-61672-2013.
-        Interact which command line do take time constant to use. Allowed constants are "slow" or "fast".
+        """Take dynamic pressure samples and integrate it with time
+        constant defined in IEC-61672-2013.
+        Interact which command line do take time constant to use.
+        Allowed constants are "slow" or "fast".
 
         Parameters
         ----------
@@ -433,21 +446,22 @@ Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odp
                                                                     self.wave_reader_object.frame_rate)
             print("Fast constant is applied")
         else:
-            raise ValueError('time weighting must be "slow" or "fast", not {}'.format(self.time_weighting))
+            raise ValueError('time weighting must be "slow" or "fast"
+            , not {}'.format(self.time_weighting))
 
         print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
                                                                             len(time_weighted_samples),
-                                                                                   self.time_weighting))
+                                                                            self.time_weighting))
         print('')
         time_weighted_samples = list(time_weighted_samples)
         return time_weighted_samples
 \end{lstlisting}
 \end{minipage}
 
-Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w czasie zgodnie z normą \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z atrybutów klasy. W tej funkcji wykorzystana zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}
+Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w czasie zgodnie z normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z atrybutów klasy. W tej funkcji zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbFSConverter, metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
    def _filter_samples_with_weighting_filter(self, samples):
 """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672.
  Weighting is defined in class variable.
@@ -470,7 +484,7 @@ Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśredn
 \end{minipage}
 
 
-Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtrowanie próbek zgodnie z krzywą częstotliwościową A, B lub C zdefiniowane w normie \cite{IEC-61672-2013}. Wykorzystano tutaj funkcję weight\_signal() z biblioteki splweighting.\cite{splweighting}
+Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtrowanie próbek zgodnie z krzywą częstotliwościową A, B lub C zdefiniowane w normie \cite{IEC-61672-2013}. Wykorzystano tutaj funkcję weight\_signal() z biblioteki splweighting \cite{splweighting}.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamples}]
@@ -489,7 +503,8 @@ Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtr
             except StopIteration:
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
-            time_weighted_samples = self._filter_db_samples_with_time_constant(frequency_weighted_samples ** 2)
+            time_weighted_samples = self._filter_db_samples_with_time_constant(
+            frequency_weighted_samples ** 2)
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             yield db_fs_samples
 \end{lstlisting}
@@ -502,7 +517,8 @@ Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonal
 \begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
     def convert_samples(self,):
         """
-        Make full conversion to dB SPL from dynamic representation to frequency and time weighted samples according
+        Make full conversion to dB SPL from dynamic representation to
+        frequency and time weighted samples according
         to IEC-61672.
         Returns
         -------
@@ -515,7 +531,8 @@ Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonal
             except StopIteration:
                 return
             frequency_weighted_samples = self._filter_samples_with_weighting_filter(samples)
-            time_weighted_samples = self._filter_db_samples_with_time_constant(frequency_weighted_samples ** 2)
+            time_weighted_samples = self._filter_db_samples_with_time_constant(
+            frequency_weighted_samples ** 2)
             db_fs_samples = self._convert_samples_to_db_fs(time_weighted_samples)
             db_spl_samples = self.convert_samples_to_db_spl(list(db_fs_samples))
             yield db_spl_samples
@@ -526,7 +543,7 @@ Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonal
 
 % Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z listingu \ref{convertsamples} rozszerzając ją o linię 18, odpowiedzialną za konwersję na dB SPL. Aby zobaczyć co się tam dzieję należy popatrzeć na listing % \ref{samplesToDbSPL}
 
-Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z~listingu \ref{convertsamples} rozszerzając ją o~linię 18, odpowiedzialną za konwersję na dB SPL. Aby zobaczyć co się tam dzieje należy spojrzeć na listing 
+Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z~listingu \ref{convertsamples} rozszerzając ją o~linię 18, odpowiedzialną za konwersję na dB SPL. Aby prześledzić jej działanie należy spojrzeć na listing \ref{samplesToDbSPL}.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples\_to\_db\_spl},captionpos=b,label={samplesToDbSPL}]     
@@ -543,7 +560,8 @@ Returns
 reference_db_spl_value = CmdInterface.get_reference_db_spl()
 db_spl_samples = [reference_db_spl_value + (sample - self.reference_db_fs_value)
  for sample in db_fs_samples]
-print('{0} dB FS {1} {2} samples has been converted to {3} dB SPL {1} {2}samples'.format(len(db_fs_samples),
+print('{0} dB FS {1} {2} samples has been converted to
+{3} dB SPL {1} {2}samples'.format(len(db_fs_samples),
                                                                    self.frequency_weighting,
                                                                    self.time_weighting,
                                                                    len(db_spl_samples)))
@@ -562,13 +580,13 @@ return db_spl_samples
 \end{lstlisting}
 \end{minipage}
 
-Za konwersję odpowiedzialna jest linia 11. Tam nastepuje porównanie z wartością referencyjną i~odpowiednia korekcja wskazania, zależna od zadeklarowanej wartości odniesienia w dB SPL oraz obliczonej wcześniej wartości odniesienia w~dB FS.
+Za konwersję odpowiedzialna jest linia 11. Tam następuje porównanie obliczonej wartości dB FS z wartością referencyjną i~odpowiednia korekcja wskazania, zależna od zadeklarowanej wartości odniesienia w dB SPL oraz obliczonej wcześniej wartości odniesienia w~dB FS.
 W ten sposób program konwertuje próbki z~reprezentacji dynamicznego ciśnienia akustycznego na skorygowany częstotliwościowo, uśredniony w czasie poziom ciśnienia akustycznego. W następnej części przyjrzymy się części odpowiedzialną za odnajdywanie i~organizowanie zdarzeń.
 \section{Detekcja i organizacja zdarzeń}
-Za detekcję i organizowanie zdarzeń odpowiedzialny jest plik "Detectors.py". Zawiera on dwie klasy, "count\_occurrence" oraz "organise\_events". Razem pozwalają na zdetekowanie i przygotowanie w formie możliwej do dalszej analizy zdarzeń akustycznych. Moduł ten na razie zawiera tylko jedna klasę detekującą. W dalszym rozwoju możliwe jest dodanie kolejnych. Wystarczy aby każda z klas zwracała wyniki w odpowiedniej formie a wtedy dodając tylko jej wywołanie do struktury programu "main.py" będzie można dodać dodatkową detekcję zdarzeń. 
+Za detekcję i organizowanie zdarzeń odpowiedzialny jest plik "Detectors.py". Zawiera on dwie klasy, "count\_occurrence" oraz "organise\_events". Razem pozwalają na zdetekowanie i~przygotowanie w formie możliwej do dalszej analizy zdarzeń akustycznych. Moduł ten na razie zawiera tylko jedna klasę detekującą. W dalszym rozwoju możliwe jest dodanie kolejnych. Wystarczy aby każda z klas zwracała wyniki w~odpowiedniej formie a~wtedy dodając tylko jej wywołanie do struktury programu "main.py" będzie można dodać dodatkową detekcję zdarzeń. 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa ThresholdCrossDetector, metoda count\_occurrence},captionpos=b,label={countoccurence}]     
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py,\newline klasa ThresholdCrossDetector, metoda count\_occurrence},captionpos=b,label={countoccurence}]     
     def count_occurrence(threshold, _last_previous_index=0, _found=0):
 """Detect starts and ends acoustic events. Events are all samples above threshold.
 Parameters
@@ -582,7 +600,8 @@ Parameters
 Returns
 -------
     events: [(float, float)]
-        List of touples of two parameters. First defined detected value, second number of sampel in whole file
+        List of touples of two parameters. First defined detected value,
+        second number of sampel in whole file
         If use properly it keep memory of previous data.
 """
 while True:
@@ -605,7 +624,7 @@ Listing \ref{countoccurence} przedstawia funkcję znajdującą zdarzenia. Poniew
 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa EventsOrganiser, metoda organise\_events},captionpos=b,label={organiseevents}]  
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa EventsOrganiser,\newline metoda organise\_events},captionpos=b,label={organiseevents}]  
     def organise_events(events, time_constant):
 """Search in events list and prepare easy to use list of touples.
 Parameters
@@ -613,7 +632,8 @@ Parameters
     time_constant: str
         Time constant applied to a signal. Can be slow or fast.
     events: [(float, float)]
-        List of two element touples. Must contain list of all events to organise, where first value of every
+        List of two element touples. Must contain list of all events
+        to organise where first value of every
         touple is value of sample, second is number of it position in file. Must contain every starts
         and endings of events(except first and last).
 Returns
@@ -651,7 +671,7 @@ Po przejściu poprzednich etapów, otrzymujemy gotowe dane ze zdarzeniami akusty
 \subsection{JsonEventsWriter}
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku JsonEventWriter.py, klasa JsonEventsWriter},captionpos=b,label={jsonevents}] 
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku JsonEventWriter.py,\newline klasa JsonEventsWriter},captionpos=b,label={jsonevents}] 
 class JsonEventsWriter:
     def __init__(self, organised_events, file_name, destination_directory):
         self.organised_events = organised_events
@@ -663,15 +683,19 @@ class JsonEventsWriter:
         count = 1
         for event in self.organised_events:
             start, end, length = event
-            events_for_json['Event_{}'.format(count)] = {'start': start, 'end': end, 'length': length}
+            events_for_json['Event_{}'.format(count)] = {'start': start, 
+            						'end': end, 
+            						'length': length}
             count += 1
         json_events = json.dumps(events_for_json)
         return json_events
 
     def save_json_to_file(self,):
         json_events = self.create_events_in_json()
-        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav', '').replace('.WAV', ''))
-        json_file_path = '{}/{}'.format(self.destination_directory, json_file_name)
+        json_file_name = '{}_events.json'.format(self.file_name.replace('.wav',
+         '').replace('.WAV', ''))
+        json_file_path = '{}/{}'.format(self.destination_directory,
+        								json_file_name)
         with open(json_file_path, 'w') as json_file:
             json_file.write(json_events)
         print('JSON file with events has been saved to: {}'.format(json_file_path))
@@ -679,7 +703,7 @@ class JsonEventsWriter:
 \end{lstlisting}
 \end{minipage}
 
-Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_events\_in\_json i~ save\_json\_to\_file. Pierwsza z nich odpowiada za przygotowanie obiektu JSON w Pythonie z listy zawierającej zdarzenia akustyczne. Następnie korzystając z~tak przygotowanego pliku metoda save\_json\_to\_file zapisze je w pliku z rozszerzeniem .json, w podkatalogu katalogu w~którym znajdowały się pliki audio.  Przykładowy plik zapisany przy pomocy tej klasy widzimy na listingu \ref{jsoncontent}. 
+Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_events\_in\_json i~save\_json\_to\_file. Pierwsza z nich odpowiada za przygotowanie obiektu JSON w~Pythonie z~listy zawierającej zdarzenia akustyczne. Następnie korzystając z~tak przygotowanego pliku metoda save\_json\_to\_file zapisze je w pliku z rozszerzeniem .json, w~podkatalogu katalogu w~którym znajdowały się pliki audio.  Przykładowy plik zapisany przy pomocy tej klasy widzimy na listingu \ref{jsoncontent}. 
 
 \begin{lstlisting}[caption={Przykładowa zawartość pliku .json},captionpos=b,label={jsoncontent}] 
 {"All_Events": 2, "Event_1": {"start": 11, "end": 20, "length": 9},
@@ -691,7 +715,7 @@ Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z ana
 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py, klasa WaveWriter, metoda read\_defined\_frames},captionpos=b,label={readdefinedframes}] 
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter, metoda read\_defined\_frames},captionpos=b,label={readdefinedframes}] 
 
    def read_defined_frames(self, file_path, event):
         """Read events from audio file
@@ -729,7 +753,7 @@ Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z ana
 Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie akustyczne. Linie 15--21 odpowiadają za przygotowanie wskaźników na obsługiwanym pliku aby odczytać odpowiednią ilość bitów z odpowiedniego miejsca. Linia 25 odczytuje zadane wcześniej bity. Zwracana jest krotka zawierająca bity oraz parametry które powinny zostać nagrane do pliku wave. Metoda ta jest wywoływana przez drugą metodę, widoczną na listingu \ref{writedefinedframes}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py, klasa WaveWriter. metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter. metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
     def write_defined_frames(self, file_dir_path, frames_and_params, count):
         """Write frames to file under defined path.
         Params
@@ -764,7 +788,7 @@ Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolow
 \label{cmd}
 \end{figure}
 
-Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z nich to:
+Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \\ \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z nich to:
 
 \begin{minipage}{\linewidth}
 \begin{enumerate}
@@ -817,7 +841,7 @@ Podczas normalnego działania program wypisuje do wiersza poleceń informacje o 
 \begin{figure}[hbtp]
 \caption{Przykład wiersza poleceń podczas wykrycia błędu}
 \centering
-\includegraphics[scale=1]{blad.PNG}
+\includegraphics[width=0.8\textwidth]{blad.PNG}
 \label{blad}
 \end{figure}
 
@@ -844,7 +868,7 @@ Poza czase pracy program nie wykazywał różnic w zachowaniu przy odczycie i za
 \label{dlugiewyniki}
 \end{figure}
 
-W celu weryfikacji czy program odnalazł tylko fragmenty zawierające zdarzenia akustyczne, posłużono się wizualizacją dostępną w programie AudaCity. Przykłady znalezionych zdarzeń prezentuje rysunek \ref{znalezione_zdarzenia}. Zdarzenia zostały znalezione w pliku "SVAN0007.wav" którego pełny przebieg wraz z zaznaczonymi obszarami  gdzie zostały odnalezione zdarzenia oznaczono kolorem czerwonym pokazuje \ref{przebieg}. Podany przykład został przetestowany z parametrami "A slow 94 85"
+W celu weryfikacji czy program odnalazł tylko fragmenty zawierające zdarzenia akustyczne, posłużono się wizualizacją dostępną w programie AudaCity. Przykłady znalezionych zdarzeń prezentuje rysunek \ref{znalezione_zdarzenia}. Zdarzenia zostały znalezione w pliku \\"SVAN0007.wav" którego pełny przebieg wraz z~zaznaczonymi obszarami  gdzie zostały odnalezione zdarzenia oznaczono kolorem czerwonym pokazuje \ref{przebieg}. Podany przykład został przetestowany z~parametrami "A slow 94 85"
 
 \begin{figure}[hbtp]
 \caption{Zdarzenia akustyczne prezentowane w formie graficznej przy użyciu programu AudaCity}
