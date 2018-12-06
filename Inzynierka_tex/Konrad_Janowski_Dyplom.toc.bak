@@ -1,0 +1,31 @@
+\contentsline {chapter}{\numberline {1}Wst\IeC {\k e}p}{3}
+\contentsline {section}{\numberline {1.1}Cel i zakres pracy}{3}
+\contentsline {section}{\numberline {1.2}Motywacja}{3}
+\contentsline {chapter}{\numberline {2}Wprowadzenie}{5}
+\contentsline {section}{\numberline {2.1}Zdarzenie akustyczne}{5}
+\contentsline {section}{\numberline {2.2}Przyj\IeC {\k e}ta definicja zdarzenia akustycznego}{5}
+\contentsline {section}{\numberline {2.3}Metoda wykrywania zak\IeC {\l }\IeC {\'o}ce\IeC {\'n}}{7}
+\contentsline {section}{\numberline {2.4}Istniej\IeC {\k a}ce rozwi\IeC {\k a}zania do wykrywania zdarze\IeC {\'n} akustycznych}{8}
+\contentsline {chapter}{\numberline {3}Metodologia}{9}
+\contentsline {section}{\numberline {3.1}System kontroli wersji - Git, GitHub, GitKraken}{9}
+\contentsline {subsection}{\numberline {3.1.1}System kontroli wersji}{9}
+\contentsline {subsection}{\numberline {3.1.2}Git}{10}
+\contentsline {subsection}{\numberline {3.1.3}GitKraken}{10}
+\contentsline {section}{\numberline {3.2}J\IeC {\k e}zyk programowania - Python}{11}
+\contentsline {section}{\numberline {3.3}\IeC {\'S}rodowisko programistyczne - Pycharm}{12}
+\contentsline {section}{\numberline {3.4}Plik z informacjami o zdarzeniach: JSON}{12}
+\contentsline {chapter}{\numberline {4}Struktura oraz dzia\IeC {\l }anie programu}{13}
+\contentsline {section}{\numberline {4.1}Spos\IeC {\'o}b dzia\IeC {\l }ania programu - aplikacja konsolowa}{13}
+\contentsline {section}{\numberline {4.2}Struktura programu}{13}
+\contentsline {chapter}{\numberline {5}Szczeg\IeC {\'o}\IeC {\l }owe om\IeC {\'o}wienie funkcji w programie}{15}
+\contentsline {section}{\numberline {5.1}Odnajdywanie plik\IeC {\'o}w wave}{16}
+\contentsline {section}{\numberline {5.2}Odczytywanie pliku wave}{17}
+\contentsline {section}{\numberline {5.3}Konwersja pliku}{17}
+\contentsline {section}{\numberline {5.4}Detekcja i organizacja zdarze\IeC {\'n}}{21}
+\contentsline {section}{\numberline {5.5}Zapis pliku .json oraz plik\IeC {\'o}w wave}{23}
+\contentsline {subsection}{\numberline {5.5.1}JsonEventsWriter}{23}
+\contentsline {subsection}{\numberline {5.5.2}Ekstrakcja z plik\IeC {\'o}w wave}{23}
+\contentsline {chapter}{\numberline {6}Spos\IeC {\'o}b u\IeC {\.z}ycia}{25}
+\contentsline {section}{\numberline {6.1}Zachowanie podczas normalnego dzia\IeC {\l }ania}{27}
+\contentsline {chapter}{\numberline {7}Testy}{29}
+\contentsline {chapter}{Bibliografia}{29}
