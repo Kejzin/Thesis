@@ -63,7 +63,7 @@
 
 \chapter{Wstęp}
 \section{Cel i zakres pracy}
-Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i dziesięć setnych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
+Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych~w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i dziesięć setnych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
 \begin{enumerate}
 \item Moduł odczytywania pliku,
 \item Moduł przetwarzania sygnału,
@@ -82,7 +82,7 @@ Praca powstała w połowie z~chęci stworzenia użytecznego narzędzia a~w~poło
 
 Powyższe przesłanki zadecydowały o~stworzeniu narzędzia. 
 
-\chapter{Wprowadzenie}
+\chapter{Wprowadzenie} \label{wprowadzenie}
 W tym rozdziale zostaną wprowadzone podstawowe pojęcia, którymi autor posługiwał się podczas tworzenia pracy. Omówione zostaną teoretyczne podstawy problemu oraz ogólna struktura logiczna programu.
 \section{Zdarzenie akustyczne}
 Jak wspomniano w powyższym rozdziale, nie ma jednej ogólnej definicji zdarzenia akustycznego, które odnosi się do wszystkich dziedzin akustyki. Jedna z~możliwych definicji podana jest w~normie \cite{PN-ISO-1996-1:2006} dotyczącej akustyki środowiskowej. Zapis normatywny mówi:
@@ -147,7 +147,7 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 
 \cite{PN-EN_61672-1:2014-03},
 \item przeliczenie otrzymanych próbek na wartości dB FS,
-\item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich z wartością referencyjną,
+\item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich~z wartością referencyjną,
 \item wyszukanie przekroczeń ustalonego poziomu~i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
 \item repetycja punktów 4--8 aż do końca pliku,
 \item segregacja odnalezionych zdarzeń,
@@ -157,7 +157,7 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 \item wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
 \end{enumerate}
 \section{Istniejące rozwiązania do wykrywania zdarzeń akustycznych}
-\chapter{Metodologia}
+\chapter{Metodologia} \label{metodologia}
 W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawione zostaną narzędzia użyte to stworzenia programu, oprogramowanie, środowisko programistyczne oraz język programowania.
 \section{System kontroli wersji - Git, GitHub, GitKraken}
 \subsection{System kontroli wersji}
@@ -165,7 +165,7 @@ We współczesnym świecie istnieje bardzo wiele języków programowania. Każdy
 
 Jednym z~najpopularniejszych współcześnie systemów kontroli wersji jest Git. System kontroli wersji oferuje możliwość ciągłego śledzenia zmian w kodzie programu bez potrzeby ręcznego zapisywania wielu wersji pliku \cite{Git}. Problem wersjonowania oprogramowania jest znany od dawna i~jest jednym z~kluczowych zagadnień pracy nad programem, szczególnie kiedy pracuje się w~zespole. Gdy kilka osób pracuje nad jednym fragmentem kodu, wydaje się niemożliwe aby współpracować bez systemu kontroli wersji.
 
-Pomimo iż praca dyplomowa inżynierska jest projektem jednoosobowym, system kontroli wersji spełnia swoją rolę i~w takim przypadku. Praca z~kodem jest nierozłącznie związana z~wielokrotnymi zmianami wcześniej wprowadzonych rozwiązań. Czasami wynika to z~faktu odkrycia nowych, lepszych rozwiązań. Bywają też przypadki, kiedy w zaawansowanym stadium pracy okaże się, że już na samym początku został popełniony błąd w~logice działania i~trzeba coś zmienić w~jedne funkcji. Często te zmiany wymagają powrotu do momentu pracy sprzed paru dni a nawet tygodni, ponieważ kolejne fragmenty kodu opierały swoje funkcjonowanie na działaniu tych wadliwych elementów. Nie jest możliwym pamiętanie wszystkich tych zmian i~płynny powrót do nich poprzez przepisanie kodu. W takiej sytuacji, system kontroli wersji jest niezawodnym narzędziem, które pomaga zorganizować rozwój oprogramowania. 
+Pomimo iż praca dyplomowa inżynierska jest projektem jednoosobowym, system kontroli wersji spełnia swoją rolę i w~takim przypadku. Praca z~kodem jest nierozłącznie związana z~wielokrotnymi zmianami wcześniej wprowadzonych rozwiązań. Czasami wynika to z~faktu odkrycia nowych, lepszych rozwiązań. Bywają też przypadki, kiedy w zaawansowanym stadium pracy okaże się, że już na samym początku został popełniony błąd w~logice działania i~trzeba coś zmienić w~jedne funkcji. Często te zmiany wymagają powrotu do momentu pracy sprzed paru dni a nawet tygodni, ponieważ kolejne fragmenty kodu opierały swoje funkcjonowanie na działaniu tych wadliwych elementów. Nie jest możliwym pamiętanie wszystkich tych zmian i~płynny powrót do nich poprzez przepisanie kodu. W takiej sytuacji, system kontroli wersji jest niezawodnym narzędziem, które pomaga zorganizować rozwój oprogramowania. 
 
 Dodatkowo nie można nie docenić możliwości porównywania wersji roboczej pliku z~dowolną wersją tego pliku przechowywaną na serwerze. Daje to możliwość ocenienia wprowadzonych zmian, zastanowienia się czy wszystkie były konieczne oraz odpowiedniego przypomnienia sobie od czego zaczynaliśmy. Wszystkie te elementy pozwalają pracować w sposób efektywny i uporządkowany.
 
@@ -308,7 +308,7 @@ Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewła
 Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\newline\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
 
 
-\section{Odczytywanie pliku Wave}
+\section{Odczytywanie pliku wave}
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveFileReader.py},captionpos=b,label={WaveFileReader}]
 def read_audio_data_chunk(self, seconds_to_read=30):
@@ -349,7 +349,7 @@ while True:
 \end{minipage}
 Na listingu \ref{WaveFileReader} widzimy moduł odpowiedzialny za odczytywanie danych z pliku wave. Jak zostało wspomniane wcześniej, funkcja jest przystosowana to działania wielokrotnie i odczytywania pliku w kawałkach. Aby to umożliwić, funkcja została zaprojektowana aby była używana jako generator \cite{Generator}. Pozwala to na cykliczne zwracanie próbek, co dzieje się w linii 33. bez utraty informacji z poprzedniego wywołania. Istotnym elementem tej funkcji jest moment końca iteracji. Kiedy plik zostanie przeczytany do końca, zostaje wywołane słowo kluczowe "return"(linia 30) zamiast "yield"(linia 33). Jest to zgodne z rekomendacją do Pythona wersji trzeciej, \cite{return} która zmieniła działanie generatorów. W poprzednich wersjach przerwanie iteracji wykonywało się zazwyczaj poprzez instrukcję "raise(StopIteration)". 
 
-Ilość czytanych danych jest z góry zdefiniowana w linii 1. Jest ona przeliczana w linii 11 na rozmiar czytanego fragmentu w bitach. 
+Ilość czytanych danych jest z góry zdefiniowana w linii 1. Jest ona przeliczana w linii 11. na rozmiar czytanego fragmentu w bitach. 
 
 \section{Konwersja pliku}
 Konwersja pliku odbywa się wewnątrz piku SampledBConverter. 
@@ -373,7 +373,7 @@ class SamplesDbFsConverter:
 \end{minipage}
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter},captionpos=b,label={SamplesDbSPLConverter}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbSPLConverter},captionpos=b,label={SamplesDbSPLConverter}]
 
 class SamplesDbSPLConverter(SamplesDbFsConverter):
     """Subclasses of SamplesDbFsConverter which add conversion to dB SPL"""
@@ -384,7 +384,7 @@ class SamplesDbSPLConverter(SamplesDbFsConverter):
 \end{lstlisting}
 \end{minipage}
 
-Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbFsConverter}) oraz  SamplesDbSPLConverter (\ref{SamplesDbSPLConverter}). Jak widać, klasa SamplesDbSPLConverter dziedziczy po klasie SamplesDbFsConverter. Pokazuje to linia 2 listingu \ref{SamplesDbSPLConverter} gdzie w linii 2. widzimy odziedziczenie wszystkich metod i w linii 5. wywołanie konstruktora klasy nadrzędnej. Rozwiązanie to zastosowano, ponieważ klasa SamplesDbFsConverter zostaje użyta to konwersji pliku referencyjnego. Gdyby od razu zaimplementować pełną funkcjonalności klasy SamplesDbSPLConverter, z oczywistej przyczyzny referencyjna wartość "reference\_db\_fs\_value" nie mogłaby być jeszcze znana. 
+Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbFsConverter}) oraz  SamplesDbSPLConverter (\ref{SamplesDbSPLConverter}). Jak widać, klasa SamplesDbSPLConverter dziedziczy po klasie SamplesDbFsConverter. Pokazuje to linia 2. listingu \ref{SamplesDbSPLConverter} gdzie widzimy odziedziczenie wszystkich metod i w linii 5. wywołanie konstruktora klasy nadrzędnej. Rozwiązanie to zastosowano, ponieważ klasa SamplesDbFsConverter zostaje użyta to konwersji pliku referencyjnego. Gdyby od razu zaimplementować pełną funkcjonalności klasy SamplesDbSPLConverter, z oczywistej przyczyzny referencyjna wartość\newline "reference\_db\_fs\_value" nie mogłaby być jeszcze znana. 
 
 
 Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
@@ -416,10 +416,10 @@ Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
 \end{lstlisting}
 \end{minipage}
 
-Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14.na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave \cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES \cite{AES17}. Ciekawym momentem jest linia 15, która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki \cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym \cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
+Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14. na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave \cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES \cite{AES17}. Ciekawym momentem jest linia 15., która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki \cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym \cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_filte\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
     def _filter_db_samples_with_time_constant(self, samples):
         """Take dynamic pressure samples and integrate it with time
         constant defined in IEC-61672-2013.
@@ -439,19 +439,20 @@ Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odp
         """
         if self.time_weighting == 'slow':
             time_weighted_samples = standards.iec_61672_1_2013.slow(np.array(samples),
-                                                                    self.wave_reader_object.frame_rate)
+                                                            self.wave_reader_object.frame_rate)
             print("Slow constant is applied")
         elif self.time_weighting == 'fast':
             time_weighted_samples = standards.iec_61672_1_2013.fast(np.array(samples),
-                                                                    self.wave_reader_object.frame_rate)
+                                                            self.wave_reader_object.frame_rate)
             print("Fast constant is applied")
         else:
             raise ValueError('time weighting must be "slow" or "fast"
             , not {}'.format(self.time_weighting))
 
-        print('{} samples has been converted to {} samples with {} time constant'.format(len(samples),
-                                                                            len(time_weighted_samples),
-                                                                            self.time_weighting))
+        print('{} samples has been converted to {} samples with {} time constant'.format(
+        															len(samples),
+                                                                    len(time_weighted_samples),
+                                                                    self.time_weighting))
         print('')
         time_weighted_samples = list(time_weighted_samples)
         return time_weighted_samples
@@ -461,7 +462,7 @@ Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odp
 Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w czasie zgodnie z normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z atrybutów klasy. W tej funkcji zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
    def _filter_samples_with_weighting_filter(self, samples):
 """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672.
  Weighting is defined in class variable.
@@ -514,7 +515,7 @@ Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtr
 Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonalnością klasy. Wykorzystuje ona poprzednio omówione metody aby wykonać pełną konwersję pakietu danych. Widzimy więc w liniach 11--14 obsługę generatora próbek. Linie 15--17 wywołują metody opisane poprzednio, aby w linii 18. zwrócić pakiet próbek po korekcji czasowej i częstotliwościowej. Wszystko opisane jest również jako generator, którego działanie kończy się gdy skończą się próbki, w liniach 13--14. Nie jest tutaj wykonywana konwersja próbek na wartości dB SPL. Ta funkcjonalność zostaje rozszerzona w klasie SamplesDbSPLConverter.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
     def convert_samples(self,):
         """
         Make full conversion to dB SPL from dynamic representation to
@@ -541,12 +542,10 @@ Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonal
 \end{minipage}
 
 
-% Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z listingu \ref{convertsamples} rozszerzając ją o linię 18, odpowiedzialną za konwersję na dB SPL. Aby zobaczyć co się tam dzieję należy popatrzeć na listing % \ref{samplesToDbSPL}
-
-Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z~listingu \ref{convertsamples} rozszerzając ją o~linię 18, odpowiedzialną za konwersję na dB SPL. Aby prześledzić jej działanie należy spojrzeć na listing \ref{samplesToDbSPL}.
+Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z~listingu \ref{convertsamples} rozszerzając ją o~linię 18., odpowiedzialną za konwersję na dB SPL. Aby prześledzić jej działanie należy spojrzeć na listing \ref{samplesToDbSPL}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples\_to\_db\_spl},captionpos=b,label={samplesToDbSPL}]     
+\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples\_to\_db\_spl},captionpos=b,label={samplesToDbSPL}]     
       
 def convert_samples_to_db_spl(self, db_fs_samples):
 """Convert samples in dB FS to dB SPL using reference value given in command line
@@ -632,14 +631,15 @@ Parameters
     time_constant: str
         Time constant applied to a signal. Can be slow or fast.
     events: [(float, float)]
-        List of two element touples. Must contain list of all events
-        to organise where first value of every
-        touple is value of sample, second is number of it position in file. Must contain every starts
-        and endings of events(except first and last).
+        List of two element touples.
+        Must contain list of all events to organise where first value of every
+        touple is value of sample, second is number of it position in file.
+        Must contain every starts and endings of events(except first and last).
 Returns
 -------
     events_starts_ends_lengths: [(float, float, float)]
-        List of three element touple which contains starts, endings and lengths of all founded events.
+        List of three element touple which contains starts,
+        endings and lengths of all founded events.
 """
 time_constant_ms = {'slow': 1,
                     'fast': 0.125}
@@ -710,7 +710,7 @@ Klasa przedstawiona na listingu \ref{jsonevents} posiada dwie metody, create\_ev
  "Event_2": {"start": 30, "end": 43, "length": 13}}
 \end{lstlisting}
 
-\subsection{Ekstrakcja z plików wav}
+\subsection{Ekstrakcja z plików wave}
 Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z analizowanych plików. Zajmuje się tym klasa WaveWriter umieszczona w pliku WaveReader.py. Posiada ona dwie metody. Pierwszą z nich widzimy na listingu \ref{readdefinedframes}.
 
 
@@ -750,7 +750,7 @@ Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z ana
         return frames_and_params
 \end{lstlisting}
 \end{minipage}
-Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie akustyczne. Linie 15--21 odpowiadają za przygotowanie wskaźników na obsługiwanym pliku aby odczytać odpowiednią ilość bitów z odpowiedniego miejsca. Linia 25 odczytuje zadane wcześniej bity. Zwracana jest krotka zawierająca bity oraz parametry które powinny zostać nagrane do pliku wave. Metoda ta jest wywoływana przez drugą metodę, widoczną na listingu \ref{writedefinedframes}.
+Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie akustyczne. Linie 15--21 odpowiadają za przygotowanie wskaźników na obsługiwanym pliku aby odczytać odpowiednią ilość bitów z odpowiedniego miejsca. Linia 25. odczytuje zadane wcześniej bity. Zwracana jest krotka zawierająca bity oraz parametry które powinny zostać nagrane do pliku wave. Metoda ta jest wywoływana przez drugą metodę, widoczną na listingu \ref{writedefinedframes}.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter. metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
@@ -794,9 +794,9 @@ Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza
 \begin{enumerate}
 \item To ścieżka prowadząca to pliku main.py, który uruchamia cały program,
 \item To ścieżka do folderu, w którym znajdują się pliki wave oraz plik referencyjny,
-\item Tefiniuje krzywą korekcji częstotliwościowej, która zostanie użyta do filtracji sygnału. Możliwe opcje to "A", "B" lub "C".
+\item Definiuje krzywą korekcji częstotliwościowej, która zostanie użyta do filtracji sygnału. Możliwe opcje to "A", "B" lub "C".
 \item Definiuje stałą czasową, według której zostaną uśrednione próbki. Dopuszczalne wartości to "slow" oraz "fast".
-\item To poziom w dB SPL pliku referencyjnego. Jeżeli sygnał referencyjny był o częstotliwości innej niż 1kHz, lub użyty został mikrofon do którego wymagane jest wprowadzenie poprawki do odczytu z pistofonu poprawka ta musi zostać wprowadzona w tym miejscu. Dozwolona jest dowolna liczba zmiennoprzecinkowa mieszcząca się w zakresie typy float.
+\item To poziom w dB SPL pliku referencyjnego. Jeżeli sygnał referencyjny był o częstotliwości innej niż 1 kHz, lub użyty został mikrofon do którego wymagane jest wprowadzenie poprawki do odczytu z pistofonu poprawka ta musi zostać wprowadzona w tym miejscu. Dozwolona jest dowolna liczba zmiennoprzecinkowa mieszcząca się w zakresie typy float.
 \item To próg wykrycia zdarzenia. Program odnajdzie wszystkie fragmenty pliku, który poziom mierzony w dB SPL przekroczy zadaną wartość. Dozwolona jest dowolna liczba zmiennoprzecinkowa mieszcząca się w zakresie typy float.
 \end{enumerate}
 \end{minipage}   
@@ -886,6 +886,9 @@ W celu weryfikacji czy program odnalazł tylko fragmenty zawierające zdarzenia 
 
 Testy zostały przeprowadzone dla tych samych plików używają referencji z pliku 94 dB SPL oraz 114 dB SPL. W obu przypadkach program wyszukiwał tyle samo zdarzeń akustycznych we wszystkich plikach przy tym samym progu zadziałania. Testowano również stałe czasowe i różne krzywe ważenia. Dla wszystkich kombinacji program działał zgodnie z oczekiwaniami. 
 
+\chapter{Podsumowanie}
+Celem pracy było stworzenie oprogramowania, które umożliwia detekcję i~ekstrakcję zdarzeń akustycznych z~materiału audio. Na początku zadecydowano o zawężeniu definicji zdarzenia akustycznego na potrzeby pracy. Zagadnienie to zostało szerzej omówione w rozdziale \ref{wprowadzenie}. 
+Następnym krokiem było dobranie metodologii pracy. W rozdziale 
 \appendix
 \addcontentsline{toc}{chapter}{Bibliografia} %utworzenie w spisie treści pozycji Bibliografia
 \bibliography{bibliografia} % wstawia bibliografię korzystając z pliku bibliografia.bib - dotyczy BibTeXa, jeżeli nie korzystamy z BibTeXa należy użyć otoczenia thebibliography
