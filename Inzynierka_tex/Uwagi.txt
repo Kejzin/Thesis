@@ -68,3 +68,17 @@ Inne uwagi:
 Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
 Na niektórych stronach w pdf pojawiają się metadane - np.: 6.
 definedframes}
+
+Strona 20:
+Jest "zawiera dwie klasy", powinno być: "zawiera dwie metody"
+Strona 22:
+"Lista inicjalizacyjna została użyta aby: -> dodać przecinek,
+Pojedyncza litera w 6 lub 7 linijce
+Strona 23 - przecinek przed "w którym"
+Strona 25 - troszkę przykrótki wstęp - jeśli się uda, proszę dopisać jedną lub dwie linijki więcej.
+  Ta sama strona: "pierwsze co widzimy to" -> brakuje przecinka
+  Ta sama strona: pojedyncza litera na końcu linijki (końcówka strony)
+Strona 26: dziwne łamanie linijki "Przykła-
+dowa"
+Podsumowanie (i ogólna uwaga): Wydaje mi się, że w większości prac, które widziałem zamiast nazw rysunku 1, rozdziale 3, nazwy te były pisane wielką literą.
+Strona 33 - pojedyncza litera
