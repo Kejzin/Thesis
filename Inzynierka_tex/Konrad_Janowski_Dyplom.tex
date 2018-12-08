@@ -37,7 +37,7 @@
 %definicje własnych poleceń
 \newcommand{\R}{I\!\!R} %symbol liczb rzeczywistych, działa tylko w trybie matematycznym
 \newtheorem{theorem}{Twierdzenie}[section] %nowe otoczenie do składania twierdzeń
-
+\renewcommand*{\lstlistlistingname}{Listingi}
 %dane do złożenia strony tytułowej
 \title{Narzędzie do detekcji i ekstrakcji zdarzeń akustycznych w materiale audio}
 \engtitle{A tool for detecting and extracting acoustic events in an audio material}
@@ -117,7 +117,7 @@ Po dokonaniu takich obliczeń, można zauważyć, że przetwarzania takiego plik
 \item może nastąpić potrzeba współdzielenia pamięci~z innymi programami bez możliwości ich wyłączenia.
 \end{itemize}
 
-Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój program oprzeć o~przetwarzanie sygnału fragmentarycznie. Dokładny sposób działania programu zostanie omówiony w dalszej części pracy. Co istotne w tym punkcie, wracając do definicji przytoczonej w normie \cite{PN-ISO-1996-1:2006}, zadaniem nietrywialnym jest osiągnąć jednocześnie obie te funkcjonalności:
+Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój program oprzeć o~przetwarzanie sygnału fragmentarycznie. Dokładny sposób działania programu zostanie omówiony w~dalszej części pracy. Co istotne w tym punkcie, wracając do definicji przytoczonej w normie \cite{PN-ISO-1996-1:2006}, zadaniem nietrywialnym jest osiągnąć jednocześnie obie te funkcjonalności:
 \begin{enumerate}
 \item Odczytywanie programu fragmentarycznie.
 \item Zapamiętanie wszystkich poprzednich wartości próbek aby w razie potrzeby cofnąć się do poprzedniego fragmentu celem odnalezienia spadku poziomu~o 10 dB.
@@ -126,14 +126,14 @@ Powyższe czynniki w głównej mierze skłoniły autora do tego aby swój progra
 Mając na uwadze powyższe przesłanki oraz możliwość późniejszego rozszerzania funkcjonalności programu, autor zadecydował się aby ograniczyć definicję zdarzenia akustycznego do definicji:
 
 \begin{quote}
-\textit{Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu \newline \cite{PN-ISO-1996-1:2006}.}
+\textit{Należy podawać czas trwania zdarzenia~w odniesieniu do pewnej cechy dźwięku, jak np, liczba przekroczeń pewnego ustalonego poziomu. \newline \cite{PN-ISO-1996-1:2006}.}
 \end{quote}
 
 Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga ona wiedzy o~pewnych danych środowiska i~zdarzenia, jak np. poziom tła akustycznego oraz przewidywany poziom ciśnienia akustycznego generowany podczas zdarzenia. Pomimo świadomości tych ograniczeń autor postanowił zastosować tę uproszczoną definicję, aby program realizował fragmentaryczne przetwarzanie danych i~tym samym spełniał w~całości założenia pracy jednocześnie dając lepsze możliwości na jego rozwój w przyszłości. Autor ma nadzieję, że dodanie innego algorytmu do detekcji bazującego na przetwarzaniu sygnału partiami będzie prostsze niż przyszła zmiana samego centrum oprogramowania, czyli odczytywania i~zapisywania wyników. 
 
 \section{Metoda wykrywania zakłóceń}
 
-Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące operacje:
+Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \newline\cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące operacje:
 \begin{enumerate}
 \item Odnalezienie wszystkich plików wave i pliku referncyjnego w zadanym folderze,
 \item odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z,
@@ -155,7 +155,8 @@ Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wy
 \item repetycja kroków 4--12 dla wszystkich znalezionych plików wave,
 \item wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
 \end{enumerate}
-\section{Istniejące rozwiązania do wykrywania zdarzeń akustycznych}
+\section{Istniejące rozwiązania}
+Autor nie spotkał się z rozwiązaniami programowymi, realizującymi podobną funkcjonalność. Niektóre mierniki poziomu dźwięku w podstawowym stopniu oferują tego typu rozwiązania, jednak autor nie znalazł informacji o żadnym, który umożliwia takie przetwarzanie na zapisanych uprzednio plikach.
 \chapter{Metodologia} \label{metodologia}
 W tej części zostanie omówiona metodologa przeprowadzonej pracy. Przedstawione zostaną narzędzia użyte to stworzenia programu, oprogramowanie, środowisko programistyczne oraz język programowania.
 \section{System kontroli wersji - Git, GitHub, GitKraken}
@@ -221,8 +222,8 @@ Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnow
 Pycharm jest środowiskiem dedykowanym do obsługi Pythona. Mając niewielkie doświadczenie z~tym środowiskiem autor wybrał je aby je poznać i~sprawdzić jego działanie. Każde środowisko oferuje odmienny zestaw funkcjonalności i~ułatwień użytkowania.
 
 \section{Plik z informacjami o zdarzeniach: JSON}
-Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\newline\cite{JSON}. JSON jest popularnym sposobem wyświetlania i~przekazywania danych. Po raz kolejny o~jego wyborze przesądziło jego rosnąca popularność i~prostota użycia \cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i~przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i~ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
-\chapter{Struktura oraz działanie programu} \label{struktura_dzialanie}
+Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecma\newline\cite{JSON}. JSON, choć jego pełna nazwa brzmi "JavaScrip Object Notation" jest uniwersalnym, popularnym sposobem wyświetlania i~przekazywania danych. O~jego wyborze przesądziła jego rosnąca popularność i~prostota użycia \cite{JSON_popular}. Dodatkowo, jest on łatwo odczytywany zarówno przez oprogramowanie jak i~przez człowieka co dodatkowo poprawia prostotę użytkowania. Do przekazania wyników i~ich obejrzenia nie potrzebujemy żadnego specjalnego oprogramowania, wystarczą standardowe aplikacje do odczytu plików tekstowych dostępne na większości systemów operacyjnych.
+\chapter{Sposób działania oraz struktura programu} \label{struktura_dzialanie}
 \section{Sposób działania programu - aplikacja konsolowa}\label{sposób}
 Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
 
@@ -259,10 +260,11 @@ W tym rozdziale na przykładzie kodu szczegółowo zostaną omówione główne f
 Warto w tym miejscu nadmienić, że istotnym elementem programu poza jego modularnością jako całości jest też zachowanie czystości kodu wewnątrz klas. Zasada pojedynczej odpowiedzialności, znaczących nazw jak i~inne dobre zasady pisania estetycznego kodu zostały zaczerpnięte z~literatury \cite{Czysty_kod}. Autor wierzy, że każdy kod powinien być możliwie łatwy do przeczytania przez człowieka, ponieważ to on jest głównym podmiotem pracującym nad nim. Być może zastosowanie tych zasad ułatwi a~może nawet i~uprzyjemni czytanie i~zrozumienie stworzonego kodu. 
 
 Należy mieć na uwadze, że w~umieszczonych fragmentach kodu może się zdarzyć ominięcie niektórych wcięć. Spowodowane jest to szerokością kodu, który do odczytu w~środowiskach powinien mieć 150 \cite{PEP8}. Taka szerokość jednak nie pozwala na komfortowe umieszczenie listingu na stronie formatu A4. Dołożono wszelkich starań, aby wszystkie wcięcia istotne dla zrozumienia logiki kodu zostały zachowane
-\newpage
 \section{Odnajdywanie plików wave}
+Listing \ref{WaveFileSearcher} przedstawia metodę odnajdującą pliki wave w~zadanym folderze.
+
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveFileSearcher.py},captionpos=b,label={WaveFileSearcher}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku WaveFileSearcher.py},captionpos=b,label={WaveFileSearcher}]
 class WaveFileSearcher:
 def find_wave_files_paths(self, ):
 """
@@ -302,14 +304,15 @@ return wave_files_and_reference_paths
 
 \end{lstlisting}
 \end{minipage}
-Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w lini 33. zostaje zwrócony obiekt zawierający obie te  wartości.
+Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w~lini 33. zostaje zwrócony obiekt zawierający obie te  wartości.
 
 Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\newline\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
 
 
 \section{Odczytywanie pliku wave}
+Na listingu \ref{WaveFileReader} został przedstawiony fragment kodu realizujący funkcję odczytywania odnalezionego pliku wave. 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveFileReader.py},captionpos=b,label={WaveFileReader}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku WaveFileReader.py},captionpos=b,label={WaveFileReader}]
 def read_audio_data_chunk(self, seconds_to_read=30):
 """ Read audio data in chunks.
 Parameters
@@ -353,10 +356,10 @@ Ilość czytanych danych jest z góry zdefiniowana w linii 1. Jest ona przelicza
 \section{Konwersja pliku}
 Konwersja pliku odbywa się wewnątrz piku SampledBConverter. 
 
-wewnątrz znajdują się dwie klasy:
+Znajdują się tam dwie klasy:
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter},captionpos=b,label={SamplesDbFsConverter}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter},captionpos=b,label={SamplesDbFsConverter}]
 
 class SamplesDbFsConverter:
 """Convert samples from given wave file to frequency and time weighted signal
@@ -372,7 +375,7 @@ class SamplesDbFsConverter:
 \end{minipage}
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbSPLConverter},captionpos=b,label={SamplesDbSPLConverter}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbSPLConverter},captionpos=b,label={SamplesDbSPLConverter}]
 
 class SamplesDbSPLConverter(SamplesDbFsConverter):
     """Subclasses of SamplesDbFsConverter which add conversion to dB SPL"""
@@ -389,7 +392,7 @@ Zaprezentowano listing konstruktorów klas SamplesDbFsConverter (\ref{SamplesDbF
 Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_convert\_samples\_to\_db\_fs},captionpos=b,label={converttofs}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter, metoda \_convert\_samples\_to\_db\_fs},captionpos=b,label={converttofs}]
 
     def _convert_samples_to_db_fs(self, energy_samples):
         """Convert samples in energy unit(preferably p^2) to dB FS according do AES17-2015.
@@ -415,10 +418,10 @@ Przyjrzyjmy się zatem bliżej metodom klasy SamplesDbFsConverter.
 \end{lstlisting}
 \end{minipage}
 
-Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14. na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave \cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES \cite{AES17}. Ciekawym momentem jest linia 15., która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki \cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym \cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
+Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odpowiada za konwersję sampli do wartosci dB FS. W linii 14. na podstawie rozdzielczości bitowej zostaje obliczona maksymalna wartość cyfrowa, która mogła znaleźć się w odczytywanym pliku wave \cite{Cyfrowe_przetwarzanie_sygnalow}. Obliczenie wartości dB FS zostaje wykonane zgodnie z normą AES\linebreak \cite{AES17}. Ciekawym momentem jest linia 15., która wykorzystuje listę składaną do konstrukcji listy zawierającej przekonwertowane próbki. Listy składane pojawiały się już wcześnie w~programie. Do tej pory jednak działanie ich wynikało głównie z dbania o~czytelność kodu, listy składane bowiem często są bardziej zwięzłe i~czytelne niż ich klasyczne odpowiedniki \cite{Python_data_structures}. Tutaj jednak szczególnie istotne jest to, o~czym wspomniano w rozdziale \ref{wybrany_jezyk}. Język Python jest językiem interpretowanym, jednak część jego funkcji zostaje na poziomie interpretacji sprowadzona do kodu w języku C i~skompilowane, przez co działają z szybkością równą językom kompilowanym \cite{Wprowadzenie_python}. Jedną z~takich struktur jest lista składana. W widocznym przykładzie jest to o~tyle istotne, że wykonywanych jest wiele obliczeń i~czas ich wykonania jest istotnym elementem całego czasu działania programu.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_db\_samples\_with\_time\_constant},captionpos=b,label={filtertimeconstant}]
     def _filter_db_samples_with_time_constant(self, samples):
         """Take dynamic pressure samples and integrate it with time
         constant defined in IEC-61672-2013.
@@ -458,10 +461,10 @@ Metoda \_convert\_samples\_to\_db\_fs pokazana na listingu \ref{converttofs} odp
 \end{lstlisting}
 \end{minipage}
 
-Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w czasie zgodnie z normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z atrybutów klasy. W tej funkcji zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
+Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśrednienie sygnału w~czasie zgodnie z~normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z~atrybutów klasy. W~tej metodzie zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
    def _filter_samples_with_weighting_filter(self, samples):
 """Filter samples with weighting filter. Use one of the weighting defined in IEC-61672.
  Weighting is defined in class variable.
@@ -487,7 +490,7 @@ Na listingu \ref{filtertimeconstant} widzimy funkcję odpowiedzialną za uśredn
 Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtrowanie próbek zgodnie z krzywą częstotliwościową A, B lub C zdefiniowane w normie \cite{IEC-61672-2013}. Wykorzystano tutaj funkcję weight\_signal() z biblioteki splweighting \cite{splweighting}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamples}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py, klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamples}]
     def convert_samples(self,):
         """
         Make full conversion from dynamic representation to frequency and time
@@ -511,10 +514,10 @@ Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtr
 \end{minipage}
 
 
-Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonalnością klasy. Wykorzystuje ona poprzednio omówione metody aby wykonać pełną konwersję pakietu danych. Widzimy więc w liniach 11--14 obsługę generatora próbek. Linie 15--17 wywołują metody opisane poprzednio, aby w linii 18. zwrócić pakiet próbek po korekcji czasowej i częstotliwościowej. Wszystko opisane jest również jako generator, którego działanie kończy się gdy skończą się próbki, w liniach 13--14. Nie jest tutaj wykonywana konwersja próbek na wartości dB SPL. Ta funkcjonalność zostaje rozszerzona w klasie SamplesDbSPLConverter.
+Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonalnością klasy. Wykorzystuje ona poprzednio omówione metody aby wykonać pełną konwersję pakietu danych. Widzimy więc w~liniach 11--14 obsługę generatora próbek. Linie 15--17 wywołują metody opisane poprzednio, aby w~linii 18. zwrócić pakiet próbek po korekcji czasowej i~częstotliwościowej. Wszystko opisane jest również jako generator, którego działanie kończy się gdy skończą się próbki, w~liniach 13--14. Nie jest tutaj wykonywana konwersja próbek na wartości dB SPL. Ta funkcjonalność zostaje rozszerzona w klasie SamplesDbSPLConverter.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
     def convert_samples(self,):
         """
         Make full conversion to dB SPL from dynamic representation to
@@ -544,7 +547,7 @@ Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonal
 Na listingu \ref{convertsamplesSPL} widzimy nadpisanie funkcji z~listingu \ref{convertsamples} rozszerzając ją o~linię 18., odpowiedzialną za konwersję na dB SPL. Aby prześledzić jej działanie należy spojrzeć na listing \ref{samplesToDbSPL}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples\_to\_db\_spl},captionpos=b,label={samplesToDbSPL}]     
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples\_to\_db\_spl},captionpos=b,label={samplesToDbSPL}]     
       
 def convert_samples_to_db_spl(self, db_fs_samples):
 """Convert samples in dB FS to dB SPL using reference value given in command line
@@ -584,7 +587,7 @@ W ten sposób program konwertuje próbki z~reprezentacji dynamicznego ciśnienia
 Za detekcję i organizowanie zdarzeń odpowiedzialny jest plik "Detectors.py". Zawiera on dwie klasy, "count\_occurrence" oraz "organise\_events". Razem pozwalają na zdetekowanie i~przygotowanie w formie możliwej do dalszej analizy zdarzeń akustycznych. Moduł ten na razie zawiera tylko jedna klasę detekującą. W dalszym rozwoju możliwe jest dodanie kolejnych. Wystarczy aby każda z klas zwracała wyniki w~odpowiedniej formie a~wtedy dodając tylko jej wywołanie do struktury programu "main.py" będzie można dodać dodatkową detekcję zdarzeń. 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py,\newline klasa ThresholdCrossDetector, metoda count\_occurrence},captionpos=b,label={countoccurence}]     
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku Detectors.py,\newline klasa ThresholdCrossDetector, metoda count\_occurrence},captionpos=b,label={countoccurence}]     
     def count_occurrence(threshold, _last_previous_index=0, _found=0):
 """Detect starts and ends acoustic events. Events are all samples above threshold.
 Parameters
@@ -618,11 +621,11 @@ while True:
 \end{lstlisting}
 \end{minipage}
 
-Listing \ref{countoccurence} przedstawia funkcję znajdującą zdarzenia. Ponieważ cały program przetwarza plik we fragmentach, funkcja musi posiadać pamięć poprzednich zdarzeń i zachować ciągłość zliczania odebranych próbek. Zapewniają to inicjalizacja wartości na liście inicjalizacyjnej w~linii  1. oraz następna ich aktualizacja z każdym przebiegiem funkcji. Lista inicjalizacyjna została użyta aby z każdym wywołaniem generatora nie inicjalizować na nowo wartości, które są jedynie aktualizowane w liniach 19--20. Funkcja ta działa jako generator, pobierając dane w linii 18. oraz zwracając je w linii 29. przy pomocy słowa kluczowego yield. Zliczanie zdarzeń odbywa się w pętli w liniach 22--28.
+Listing \ref{countoccurence} przedstawia funkcję znajdującą zdarzenia. Ponieważ cały program przetwarza plik we fragmentach, funkcja musi posiadać pamięć poprzednich zdarzeń i~zachować ciągłość zliczania odebranych próbek. Zapewniają to inicjalizacja wartości na liście inicjalizacyjnej w~linii  1. oraz następna ich aktualizacja z każdym przebiegiem funkcji. Lista inicjalizacyjna została użyta, aby z każdym wywołaniem generatora nie inicjalizować na nowo wartości, które są jedynie aktualizowane w liniach 19--20. Funkcja ta działa jako generator, pobierając dane w linii 18. oraz zwracając je w~linii 29. przy pomocy słowa kluczowego yield. Zliczanie zdarzeń odbywa się w~pętli w liniach 22--28.
 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku Detectors.py, klasa EventsOrganiser,\newline metoda organise\_events},captionpos=b,label={organiseevents}]  
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku Detectors.py, klasa EventsOrganiser,\newline metoda organise\_events},captionpos=b,label={organiseevents}]  
     def organise_events(events, time_constant):
 """Search in events list and prepare easy to use list of touples.
 Parameters
@@ -670,7 +673,7 @@ Po przejściu poprzednich etapów, otrzymujemy gotowe dane ze zdarzeniami akusty
 \subsection{JsonEventsWriter}
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku JsonEventWriter.py,\newline klasa JsonEventsWriter},captionpos=b,label={jsonevents}] 
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku JsonEventWriter.py,\newline klasa JsonEventsWriter},captionpos=b,label={jsonevents}] 
 class JsonEventsWriter:
     def __init__(self, organised_events, file_name, destination_directory):
         self.organised_events = organised_events
@@ -714,7 +717,7 @@ Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z ana
 
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter, metoda read\_defined\_frames},captionpos=b,label={readdefinedframes}] 
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter, metoda read\_defined\_frames},captionpos=b,label={readdefinedframes}] 
 
    def read_defined_frames(self, file_path, event):
         """Read events from audio file
@@ -752,7 +755,7 @@ Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z ana
 Odczytuje ona tylko te bity plik wave, które zawierają znalezione zdarzenie akustyczne. Linie 15--21 odpowiadają za przygotowanie wskaźników na obsługiwanym pliku aby odczytać odpowiednią ilość bitów z odpowiedniego miejsca. Linia 25. odczytuje zadane wcześniej bity. Zwracana jest krotka zawierająca bity oraz parametry które powinny zostać nagrane do pliku wave. Metoda ta jest wywoływana przez drugą metodę, widoczną na listingu \ref{writedefinedframes}.
 
 \begin{minipage}{\linewidth}
-\begin{lstlisting}[caption={fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter. metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
+\begin{lstlisting}[caption={Fragment kodu źródłowego pliku WaveReader.py,\newline klasa WaveWriter, metoda write\_defined\_frames },captionpos=b,label={writedefinedframes}] 
     def write_defined_frames(self, file_dir_path, frames_and_params, count):
         """Write frames to file under defined path.
         Params
@@ -777,18 +780,18 @@ W ten sposób zamyka ona proces detekcji i ekstrakcji zdarzenia z zadanego pliku
 
 
 \chapter{Użytkowanie programu} \label{uzytkowanie}
-Ta część dotyczyć będzie sposobu użycia programu z punktu widzenia użytkownika
+Ta część dotyczy sposobu użycia programu z punktu widzenia użytkownika.
 \section{Sposób użycia}
 Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolowa. Oznacza to, że wywołanie następuje poprzez wiersz poleceń systemu operacyjnego. Rozpatrzmy dokładniej wywołanie programu pokazane na rysunku \ref{cmd}.
 
 \begin{figure}[hbtp]
-\caption{przykładowe wywołanie z wiersza poleceń}
+\caption{Przykładowe wywołanie z~wiersza poleceń}
 \centering
 \includegraphics[width=0.8\textwidth]{cmd_wywolanie_2.PNG}
 \label{cmd}
 \end{figure}
 
-Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \\ \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z nich to:
+Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \\ \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z~nich to:
 
 \begin{minipage}{\linewidth}
 \begin{enumerate}
@@ -898,7 +901,7 @@ Rozdział \ref{szczegolowe_omowienie} w~sposób szczegółowy omawia funkcjonaln
 
 Następnie rozdział \ref{uzytkowanie}. opisuje sposób użytkowania programu z punktu widzenia użytkownika. Zostają objaśnione parametry wejściowe oraz przygotowanie katalogów niezbędne do prawidłowego funkcjonowania. Zaprezentowany został również przykład zachowania programu podczas normalnego działania, zarówno poprawnego jak i~podczas wykrycia błędów użytkownika. 
 
-Pracę zakończyły testy oprogramowania omówione w rozdziale \ref{testy}. Program został użyty do detekcji zdarzeń w plikach o~różnym czasie trwania, różnej zawartości oraz przy użyciu różnych plików referencyjnych. Oprogramowanie podczas przeprowadzonych testów zachowywało się w sposób stabilny i~działało zgodnie z oczekiwaniami. 
+Pracę zakończyły testy oprogramowania omówione w~rozdziale \ref{testy}. Program został użyty do detekcji zdarzeń w~plikach o~różnym czasie trwania, różnej zawartości oraz przy użyciu różnych plików referencyjnych. Oprogramowanie podczas przeprowadzonych testów zachowywało się w~sposób stabilny i~działało zgodnie z~oczekiwaniami. 
 
 Efektem pracy jest oprogramowanie, działające jako aplikacja konsolowa. Może być użytkowane jako samodzielne narzędzie lub użyte jako element większego systemu. Oprogramowanie potrafi rozpoznać w~podanym pliku wave zdarzenia akustyczne, przekraczające zadany poziom dźwięku. Po detekcji następuje zapisanie wyników z ilością zdarzeń, oraz informacji gdzie się zaczynają, kończą oraz jaki jest ich czas trwania. Dodatkowo zdetekowane zdarzenia zostają zapisane jako pliki wave. Oprogramowanie przeszło podstawowe testy i działa zgodnie z~oczekiwaniami. Założenia pracy wspomniane na początku rozdziału zostały wobec tego spełnione.
 

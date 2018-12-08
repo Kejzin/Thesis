@@ -1,0 +1,87 @@
+Uwagi:
+Strona 1 (tytułowa) - przenieść literę i do nowego wiersza (dr Maciej Walczyński, Katedra Akutyki i Multimediów (W4/K5)
+Strona 3 Rodziców wielką literą
+Strona (3) 7 Proszę zastanowić się nad zdaniem "Oprogramowanie zostaao stworzone do obsaugi plików w formacie wa-
+ve o rozdzielczo±ci bitowej szesna±cie(16) i dwadzie±cia cztery(24) bity oraz cz¦stotliwo±ci
+próbkowania czterdzie±ci cztery i sto dziesi¡tych (44,1) kilo Herca i czterdzie±ci osiem (48)
+kilo Herca." - proszę sprawdzić, czy nie używa się pojęcia rozdzielczość bitowa dźwięku (vide: https://pl.wikipedia.org/wiki/Rozdzielczo%C5%9B%C4%87_bitowa_d%C5%BAwi%C4%99ku). 2 - czterdzie±ci cztery i sto dziesi¡tych -> raczej dziesięć setnych.
+Strona (4) 8 W zdaniu "Gdyby kto± chciaa policzy¢ ile razy zostaaa odbita
+piaka do koszykówki podczas badania jej wytrzymaao±ci, jednym z mo»liwych sposobów na
+zliczenie ilo±ci odbi¢" powinno być liczby odbić (zamiast ilości) - są one policzalne
+Strona (4) 8 "Jak wida¢, wyszukiwanie zdarze« akustycznych wraz
+z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu z pozoru nie zwi¡zanych
+z tym dziedzinach." Tu brakuje przecinków lub -. Np: Jak wida¢, wyszukiwanie zdarze« akustycznych wraz
+z czasem ich trwania mo»e by¢ niezwykle u»yteczne w wielu - z pozoru nie zwi¡zanych
+z tym - dziedzinach.
+Strona (4) 8 Nie za bardzo rozumiem to zdanie: "Roz-
+wini¦cie wiedzy w zakresie tworzenia oprogramowania w j¦zyki Python, pracy z systemem
+kontroli wersji oraz implementacja algorytmów znanych z ksi¡»ek do realnie dziaaaj¡cego
+programu jest procesem, który autor chciaa zga¦bi¢." Inny przypadek? ... języku Python, ... oraz implementacji - może tak byłoby lepiej? BTW Rz pisze Pan Autor, innym rzem autor - proszę ujednolicić.
+Stona (5) 9: Treść normy proponowałbym napisać kursywą.
+Strona 5 (9) Czy przecinek jest tu przez przypadek, czy będzie jeszcze jakieś odnieienie? "[PN-ISO-9612:2014, ]"
+Strona 5 (9) "a ka»da se-
+kunda zawiera czterdzie±ci osiem tysi¦cy próbek.[Pohlmann, 2000]" Kropka po cytowaniu
+Strona 6 (10) Uwaga ogólna - po wzorach, obliczeniach proszę wstawiać przecinki i kropki, tak jak w zwykłym zdaniu.
+Strona 7 (11) "program wykonuje następujące obliczenia można zamienić na ... operacje (zamiast obliczenia).
+Strona 7 (11) Na liście numerowanej:
+  - pierwszy item małą literą,
+  - 3 i 6 rozbić na dwie linijki,
+  - 5, 10 i 13 - dodać przecinki na końcu linijek
+Strona 8 (12) - rozumiem, że tutaj pojawi się tekst
+Strona 9 - apisywania wielu wersji pliku.[Software Freedom Conservancy, 2018]. - o jedną kropkę za dużo
+Strona 9 - "Ostatnim ale na pewno nie najmniej wa»nym elementem jest mo»liwo±¢ przechowywa-
+nia caaego programu na zdalnym serwerze" -> "Ostatnim - ale na pewno nie najmniej wa»nym - elementem  jest mo»liwo±¢ przechowywa-
+nia caaego programu na zdalnym serwerze"
+Strona 11:
+  - metadane w pdf,
+  - "Maj¡c pomysa na dziaaanie programu oraz niezb¦dne narz¦dzie do kontrolowania post¦pów
+prac nale»y wybrac j¦zyk programowania w którym zostanie napisany program." - dodać przecinek
+  - programowania[Rassmussen College, 2017]. - brak spacji przed [
+  - Kropka w innym miejscu: "Ponadto Python ma rozbudowan¡ baz¦ bibliotek i moduaów, które mo»na u»ywa¢
+ponownie do swoich zastosowa«.[Python Software Foundation, 2018e]"
+Strona 12:
+  - "opracowan¡ dokumentacje." -> dokumentację
+  - kropki i wcięcia: a nie kompilowanym.[Reitz and schulsser, 2018].
+  - "wybraa je aby je pozna¢ i" -> dodać przecinek i usunąć drugie je
+  - "orze przes¡dziao jego rosn¡ca popularno±" -> przesądziłą zamiast przesądziło
+Strona 15:
+  - "W tym rozdziale szczegóaowo zostan¡ omówione" -> szyk zdania
+Strona 16:
+  - rozjechała się,
+  - rozdział, podrozdział i inne nie powinny zaczynać się od obrazka (tu listingu) -> powinien być tekst
+  - "rogram dziaaa jedynie gdy zostanie podana" -> "Program działa jedynie wtedy, gdy ..."
+Strona 18:
+  - "ak wida¢, klasa SamplesDbSPLConverter to dziedziczy po
+klasie SamplesDbFsConverter." -> Czy chodziło o : Jak wida¢, to klasa SamplesDbSPLConverter dziedziczy po
+klasie SamplesDbFsConverter."?
+Strona 20
+  - zamiast o funkcji lepiej pisać o metodzie lub funkcji składowej (jeśli mówimy o funkcji zdefiniowanej wewnątrz klasy)
+  - "Aby zobaczy¢ co si¦ tam dzieje nale»y spojrze¢
+na listing" brzmi trochę za kolokwialnie - > "Aby prześledzić działanie ... "
+Strona 21:
+  "Tam nastepuje" -> ę, w tym samym zdaniu proszę dodać porównnie czego z wartością referncyjną
+  
+Strona 19 (23):
+  - W tej funkcji wykorzystana zostaay wykorzystane -> zostały wykorzystane
+TUTAJ SKOŃCZYŁEM CZYTANIE! - reszta wieczorem lub jutro
+Inne uwagi:
+Listing kodu można spróbować pokolorować - proszę sprawdzić, czy nie ma takich modułow (ja też poszukam)
+Na niektórych stronach w pdf pojawiają się metadane - np.: 6.
+definedframes}
+
+Strona 20:
+Jest "zawiera dwie klasy", powinno być: "zawiera dwie metody"
+Strona 22:
+"Lista inicjalizacyjna została użyta aby: -> dodać przecinek,
+Pojedyncza litera w 6 lub 7 linijce
+Strona 23 - przecinek przed "w którym"
+Strona 25 - troszkę przykrótki wstęp - jeśli się uda, proszę dopisać jedną lub dwie linijki więcej.
+  Ta sama strona: "pierwsze co widzimy to" -> brakuje przecinka
+  Ta sama strona: pojedyncza litera na końcu linijki (końcówka strony)
+Strona 26: dziwne łamanie linijki "Przykła-
+dowa"
+Podsumowanie (i ogólna uwaga): Wydaje mi się, że w większości prac, które widziałem zamiast nazw rysunku 1, rozdziale 3, nazwy te były pisane wielką literą.
+Strona 33 - pojedyncza litera
+W podsumowaniu warto napisać wprost, że cel został zrealizowany.
+
+Najpewniej nie wszystko wychwyciłem, ale myślę, że można po poprawkach wrzucać na ASAP.
