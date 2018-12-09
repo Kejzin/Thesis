@@ -55,24 +55,23 @@
 %tutaj zaczyna się właściwa treść dokumentu
 \begin{document}
  
-\bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii
-\maketitle %polecenie generujące stronę tytułową
+\bibliographystyle{apalike} %tylko gdy używamy BibTeXa, ustawia polski styl bibliografii\maketitle %polecenie generujące stronę tytułową
 \dedication{6cm}{Dla Rodziców, którzy zawsze mnie wspierali i~pozwolili mi rozwinąć się~w kierunku, w który pragnąłem.}
 
 \small{\tableofcontents} %spis treści
 
 \chapter{Wstęp}
 \section{Cel i zakres pracy}
-Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych~w materiale audio. Oprogramowanie zostało stworzone do obsługi plików w formacie wave o rozdzielczości bitowej szesnaście(16) i dwadzieścia cztery(24) bity oraz częstotliwości próbkowania czterdzieści cztery i dziesięć setnych (44,1) kilo Herca i~czterdzieści osiem (48) kilo Herca. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
+Przedmiotem pracy jest oprogramowanie do detekcji i~ekstrakcji zdarzeń akustycznych~w materiale audio. Oprogramowanie zostało stworzone do obsługi plików~w formacie wave o rozdzielczości bitowej szesnaście (16) i~dwadzieścia cztery (24) bity oraz częstotliwości próbkowania czterdzieści cztery i dziesięć setnych (44,1) kilo Herców i~czterdzieści osiem (48) kilo Herców. Oprogramowanie zostało przetestowane używając plików o~tych parametrach. Oprogramowanie zostało stworzone modularnie aby możliwy był jego dalszy rozwój. Z~powodu tego założenia, program ma możliwość obsługi dowolnej częstotliwości próbkowania oraz dowolnej rozdzielczości bitowej choć nie jest to zalecane. Praca w swojej logicznej strukturze zawiera cztery moduły:
 \begin{enumerate}
-\item Moduł odczytywania pliku,
-\item Moduł przetwarzania sygnału,
-\item Moduł detekcji zdarzeń,
+\item Moduł odczytywania pliku.
+\item Moduł przetwarzania sygnału.
+\item Moduł detekcji zdarzeń.
 \item Moduł zapisu wyników do pliku.
 \end{enumerate}
 Autor ma nadzieję, że zaprojektowany w~ten sposób system pozwoli na późniejszy rozwój i~ułatwi powtórne wykorzystywanie tego narzędzia.
 \section{Motywacja}
-Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w pozostałym czasie. 
+Analiza nagrań odgrywa bardzo ważną rolę we współczesnych zastosowaniach akustyki. Jednym z~przykładów może być ochrona ludzi przed hałasem. Aby zbadać hałas na stanowisku pracy lub ocenić narażenie na hałas przestrzeni publicznej niejednokrotnie wykonuje się bardzo długie nagrania, trwające nawet kilkanaście godzin. Ze względu na metody analizy nieraz niezbędne jest wyselekcjonowanie z~nagrania konkretnych zdarzeń akustycznych i~analiza ich w izolacji, nie biorąc pod uwagę poziomu tła w~pozostałym czasie. 
 
 Z~drugiej strony, możemy wyobrazić sobie potrzebę wyizolowania z~nagrania bardzo wielu zdarzeń akustycznych, które wydarzają się w krótkim odstępie czasu. Jako przykład może tutaj posłużyć strzelnica, gdzie chcąc policzyć liczbę strzałów w ciągu dnia możemy zrobić nagranie krótkie i~na podstawie tego krótkiego wycinka czasu oszacować hałas podczas całego dnia. Innym razem możemy mieć potrzebę wykryć te zdarzenia do celów z~pozoru nie związanych z~akustyką. Gdyby ktoś chciał policzyć ile razy została odbita piłka do koszykówki podczas badania jej wytrzymałości, jednym z~możliwych sposobów na zliczenie liczby odbić mogłoby być policzenie zdarzeń akustycznych jakimi są odbicia piłki od ziemi. Być może ktoś ze względów medycznych chciałby sprawdzić, ile czasu w~ciągu jego snu zajmuje chrapanie i~w ten sposób ocenić jak duży problem ma z~tą dolegliwością. Również w~tym przypadku, przy pewnej kontroli hałasu środowiska mógłby zrobić to za pomocą stworzonego narzędzia. Jak widać, wyszukiwanie zdarzeń akustycznych wraz z~czasem ich trwania może być niezwykle użyteczne w wielu z~pozoru nie związanych z~tym dziedzinach. 
 
@@ -95,7 +94,7 @@ Przykład: czas trwania zdarzenia można zdefiniować jako całkowity czas, w~kt
 Biorąc pod uwagę przytoczone wcześniej możliwe zastosowania stworzonego oprogramowania powyższa definicja dobrze opisuje te sytuacje, które mają być detekowane. Ponadto, wykonanie oprogramowania, które rozpoznaje zdarzenia opisane w normie daje perspektywy na możliwości jego praktycznego zastosowania.
 \section{Przyjęta definicja zdarzenia akustycznego}
 W poprzedniej sekcji przytoczony został zapis normatywny, który opisuje zdarzenie akustyczne na potrzeby akustyki środowiskowej. Sugeruje on, żeby czas trwania zdarzenia akustycznego definiować jako całkowity czas, w~którym poziom ciśnienia akustycznego mieści się w~zakresie 10 dB maksymalnego poziomu ciśnienia akustycznego podczas zdarzenia. 
-Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy \cite{PN-ISO-9612:2011}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany~w formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców(48 kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek \cite{Principles_of_digital_audio}. Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w bitach:
+Nie można zapomnieć, że pomiary w~akustyce środowiskowej często wykonywane są przez długi czas. Dla przykładu, pomiar hałasu na stanowisku pracy może być wykonywany przez osiem godzin bez przerwy \cite{PN-ISO-9612:2011}. Plik z ośmiogodzinnych pomiarów może być monofoniczny, zapisany w~ formacie wave~o częstotliwości próbkowania czterdziestu ośmiu kilo Herców (48~kHz) oraz rozdzielczości dwudziestu czterech bitów. Każda próbka takiego pliku zajmuje zatem dwadzieścia cztery bity w~pamięci a~każda sekunda zawiera czterdzieści osiem tysięcy próbek \cite{Principles_of_digital_audio}. Przy pomocy prostego wzoru możemy obliczyć jego rozmiar w pamięci komputera liczonej w~bitach:
 \begin{equation}
 \text{rozdzielczość bitowa} * \text{częstotliwość próbkowania} * \text{długość pliku} = \text{rozmiar pliku}.
 \end{equation}
@@ -133,27 +132,23 @@ Powyższa definicja jest mniej praktyczna niż jej rozszerzona wersja. Wymaga on
 
 \section{Metoda wykrywania zakłóceń}
 
-Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \newline\cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące operacje:
+Na podstawie informacji,~o których mowa powyżej autor podjął decyzję aby wykrywać przekroczenia pewnego ustalonego poziomu ciśnienia akustycznego. Ciśnienie akustyczne to jednak określenie zbyt ubogie aby w pełni precyzyjnie opisać funkcjonalność narzędzia. Autor zdecydował się na zaczerpnięcie dodatkowych informacji z rozporządzeń normatywnych \linebreak\cite{PN-EN_61672-1:2014-03}. W związku z tym, program wykonuje następujące operacje:
 \begin{enumerate}
-\item Odnalezienie wszystkich plików wave i pliku referencyjnego w zadanym folderze,
-\item odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z,
-\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy
-  
-\cite{PN-EN_61672-1:2014-03},
-\item przeliczenie otrzymanych próbek na wartość dB FS,
-\item odczytanie fragmentu pliku wave zawierające badany sygnał
-\item korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy 
-
-\cite{PN-EN_61672-1:2014-03},
-\item przeliczenie otrzymanych próbek na wartości dB FS,
-\item przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich~z wartością referencyjną,
-\item wyszukanie przekroczeń ustalonego poziomu~i zapisanie do pamięci stanu programu(ilości znalezionych zdarzeń, zdarzeniu które miało początek na końcu przetwarzanego bloku),
-\item repetycja punktów 4--8 aż do końca pliku,
-\item segregacja odnalezionych zdarzeń,
-\item ekstrakcja zdarzeń do osobnych plików wave w podfolderze folderu, w którym znajdowały się nagrania,
-\item zapisanie wyniku do pliku w formacie .json,
-\item repetycja kroków 4--12 dla wszystkich znalezionych plików wave,
-\item wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
+\item Odnalezienie wszystkich plików wave i pliku referencyjnego w zadanym folderze.
+\item Odczytanie referencyjnego pliku wave o znanym poziomie dB SPL Z.
+\item Korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy \linebreak\cite{PN-EN_61672-1:2014-03}.
+\item Przeliczenie otrzymanych próbek na wartość dB FS.
+\item Odczytanie fragmentu pliku wave zawierające badany sygnał.
+\item Korekcja częstotliwościowa i~uśrednianie w~czasie zgodnie z~zaleceniami normy \linebreak\cite{PN-EN_61672-1:2014-03}.
+\item Przeliczenie otrzymanych próbek na wartości dB FS.
+\item Przeliczenie otrzymanych wartości na wartości dB SPL poprzez porównanie ich~z wartością referencyjną.
+\item Wyszukanie przekroczeń ustalonego poziomu~i zapisanie do pamięci stanu programu (ilości znalezionych zdarzeń, zdarzenia które miało początek na końcu przetwarzanego bloku).
+\item Repetycja punktów 4--8 aż do końca pliku.
+\item Segregacja odnalezionych zdarzeń.
+\item Ekstrakcja zdarzeń do osobnych plików wave w podfolderze folderu, w którym znajdowały się nagrania.
+\item Zapisanie wyniku do pliku w formacie .json.
+\item Repetycja kroków 4--12 dla wszystkich znalezionych plików wave.
+\item Wyświetlenie komunikatu o poprawnym zakończeniu działania programu.
 \end{enumerate}
 \section{Istniejące rozwiązania}
 Autor nie spotkał się z rozwiązaniami programowymi, realizującymi podobną funkcjonalność. Niektóre mierniki poziomu dźwięku w podstawowym stopniu oferują tego typu rozwiązania, jednak autor nie znalazł informacji o żadnym, który umożliwia takie przetwarzanie na zapisanych uprzednio plikach.
@@ -179,7 +174,7 @@ Jak zostało powiedziane, autor zdecydował się na skorzystanie z~Git'a jako sy
 \subsection{GitKraken}
 Pomimo iż autor zadecydował się tworzyć oprogramowanie w ramach pracy dyplomowej inżynierskiej warto pamiętać o tym, że praca w przeznaczeniu jest skierowana do akustyków. W związku z tym poza efektywnością działania programu ważne jest też jego prostota i przejrzystość aby podczas pracy nad nim oraz przyszłej możliwej rozbudowy można skupiać się na istocie działania a nie odkrywaniu zawiłych sposobów obsługi oprogramowania towarzyszącego.
 
-Git w wersji podstawowej jest dostarczany z~bardzo ubogim graficznym interfejsem użytkownika. Przykładowe okno zostało zaprezentowane na obrazie (\ref{git_gui})
+Git w wersji podstawowej jest dostarczany z~bardzo ubogim graficznym interfejsem użytkownika. Przykładowe okno zostało zaprezentowane na Rysunku \ref{git_gui}.
 
 \begin{figure}[hbtp]  
 	\caption{Graficzny interfejs użytkownika GIT}
@@ -188,7 +183,7 @@ Git w wersji podstawowej jest dostarczany z~bardzo ubogim graficznym interfejsem
 	\includegraphics[width=0.8\textwidth]{git_gui.PNG}
 \end{figure} 
  
-Aby lepiej móc skupić się na logicznej strukturze programu autor zadecydował skorzystać z~programu GitKraken, który umożliwia pracę w~oparciu o system kontroli wersji Git w~bardziej przejrzystej i~czytelnej formie. Przykładowe drzewo kolejnych zmian zaprezentowano na obrazie (\ref{GitKraken})
+Aby lepiej móc skupić się na logicznej strukturze programu autor zadecydował skorzystać z~programu GitKraken, który umożliwia pracę w~oparciu o system kontroli wersji Git w~bardziej przejrzystej i~czytelnej formie. Przykładowe drzewo kolejnych zmian zaprezentowano na Rysunku \ref{GitKraken}.
 
 \begin{figure}[hbtp]
 \label{GitKraken}
@@ -210,9 +205,7 @@ Ponadto Python ma rozbudowaną bazę bibliotek i~modułów, które można używa
 
 Do tego Python ma doskonale opracowaną dokumentację. Większość modułów jest opisana czytelnie i~zrozumiale. Zdecydowanie ułatwia to pracę z~tym językiem. 
 
-Co ważne, Python jest językiem interpretowanym a nie kompilowanym  \linebreak\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem z~kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka.
-
-Z podanych powodów, Python został wybrany do napisania pracy.
+Co ważne, Python jest językiem interpretowanym a nie kompilowanym  \linebreak\cite{Przewodnik_po_pythonie}. Oznacza to, że do działania potrzebuje interpretatora, który działa niezależnie od systemu operacyjnego i jego bibliotek. Co prawda spowalnia to nieco jego działanie w porównaniu to języków kompilowanych takich jak C++ ale daje lepszą możliwość dzielenia się oprogramowaniem. Można skonstruować interpreter tak, by mógł być wysłany razem z~kodem programu i osoba odbierająca bez problemu będzie mogła ten kod interpretować. W przypadku języków kompilowanych występują często problemu  z udostępnianiem kodu źródłowego właśnie ze względu na ich silna interakcję z systemem operacyjnym. W kontekście przyszłego rozwoju programu dla akustyków jest to ważny aspekt wyboru języka. Z podanych powodów, Python został wybrany do napisania pracy.
 
 Z wyborem Pythona wiąże się jeszcze jeden wybór, jego wersji. Obecnie najnowszą wersją jest Python 3.7.1 ale równocześnie wspierany jest Python w wersji 2.7.x \linebreak\cite{Python_latest_release}. Niestety, zmiana z~Pythona wersji drugiej na wersję trzecią wiąże się ze znaczącymi zmianami w~funkcjonalności języka i~wersje te nie są ze sobą kompatybilne. Wiele modułów aktualnie dostępnych do użytku dalej funkcjonuje w~wersji drugiej języka. Można by więc pokusić się o napisanie programu w starszej wersji. Python wersji drugiej przestaje jednak być wspierany wraz z końcem 2020 roku \cite{Python_end_of_life}. Oznacza to, że najprawdopodobniej ze względów bezpieczeństwa i~braku wsparcia większość nowych modułów będzie pisana w~Pythonie w~wersji trzeciej a~dodatkowo w~razie nieprawidłowości w działaniu wersji drugiej, nie będzie można liczyć na żadną pomoc.
 
@@ -226,7 +219,7 @@ Do reprezentacji wyników został wybrany format JSON opisany przez standard Ecm
 \section{Sposób działania programu - aplikacja konsolowa}\label{sposób}
 Decydując się na program, należy wybrać w~jaki sposób będzie on uruchamiany. Może być jedynie biblioteką, czyli zestawem funkcjonalności, które mogą być wykorzystywane przez inny program. Jest również możliwość skonstruowania rozbudowanego graficznego interfejsu użytkownika. Na ten moment, autor zadecydował aby oprogramowanie działało jako program konsolowy. 
 
-Oznacza to, że wywołuje się go z~konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na obrazie(\ref{wywolanie}). Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
+Oznacza to, że wywołuje się go z~konsoli systemu z odpowiednimi parametrami. Przykładowe wywołanie widzimy na Rysunku \ref{wywolanie}. Parametry wywołania i~struktura działania programu zostaną omówione w~dalszej części pracy.
 \begin{figure}[hbtp]
 \label{wywolanie}
 \caption{Przykładowe wywołanie programu w konsoli systemu Windows}
@@ -237,7 +230,7 @@ Oznacza to, że wywołuje się go z~konsoli systemu z odpowiednimi parametrami. 
 Tego typu konstrukcja daje możliwość używania programu jako samodzielnego narzędzia. Jednocześnie, ze względu na ograniczony czas pracy nad programem stworzenie graficznego interfejsu mogłoby negatywnie wpłynąć na zadbanie o~poprawną funkcjonalność. W~ramach rozwoju programu autor nie wyklucza dodania graficznego interfejsu użytkownika do programu.
 
 \section{Struktura programu}
-Struktura plików w programie przedstawiona została na Rysunku (\ref{struktura}).
+Struktura plików w programie przedstawiona została na Rysunku \ref{struktura}.
 
 \begin{figure}[hbtp]
 \label{struktura}
@@ -254,11 +247,12 @@ Plik "CmdInterface.py" odpowiada za komunikację z wierszem poleceń i odczytywa
 Uważny czytelnik zauważy, że wszystkie nazwy modułów zachowane są w jednej konwencji, nazwanej "CamelCase", co w~tłumaczeniu na polski można określić jako "StylWielbłąda". Autor zdecydował się na ten sposób notacji uwzględniając rekomendacje twórców języka \cite{PEP8}Używanie spójnego nazewnictwa jest o~tyle istotne, że pozwala się w~prosty sposób zorientować w strukturze programu. Jeżeli twórcy oprogramowania przestrzegają ustalonych, umownych zasad kod staje się z czasem coraz bardziej przejrzysty i~wymiana informacji jest dużo prostsza. 
 
 \chapter{Szczegółowe omówienie funkcji w programie} \label{szczegolowe_omowienie}
-W tym rozdziale na przykładzie kodu szczegółowo zostaną omówione główne funkcję programu. Dołożono wszelkich starań, żeby funkcje były omówione w kolejności jak najbardziej zbliżonej do logiki programu. Należy mieć jednak na uwadze, że niektóre funkcje wykorzystywane są kilkukrotnie co wyklucza zupełnie liniowe rozumienie kodu.
+W tym rozdziale na przykładzie kodu szczegółowo zostaną omówione główne funkcje programu. Dołożono wszelkich starań, żeby funkcje były omówione w kolejności jak najbardziej zbliżonej do logiki programu. Należy mieć jednak na uwadze, że niektóre funkcje wykorzystywane są kilkukrotnie co wyklucza zupełnie liniowe rozumienie kodu.
 
 Warto w tym miejscu nadmienić, że istotnym elementem programu poza jego modularnością jako całości jest też zachowanie czystości kodu wewnątrz klas. Zasada pojedynczej odpowiedzialności, znaczących nazw jak i~inne dobre zasady pisania estetycznego kodu zostały zaczerpnięte z~literatury \cite{Czysty_kod}. Autor wierzy, że każdy kod powinien być możliwie łatwy do przeczytania przez człowieka, ponieważ to on jest głównym podmiotem pracującym nad nim. Być może zastosowanie tych zasad ułatwi a~może nawet i~uprzyjemni czytanie i~zrozumienie stworzonego kodu. 
 
 Należy mieć na uwadze, że w~umieszczonych fragmentach kodu może się zdarzyć ominięcie niektórych wcięć. Spowodowane jest to szerokością kodu, który do odczytu w~środowiskach powinien mieć 150 \cite{PEP8}. Taka szerokość jednak nie pozwala na komfortowe umieszczenie listingu na stronie formatu A4. Dołożono wszelkich starań, aby wszystkie wcięcia istotne dla zrozumienia logiki kodu zostały zachowane
+\newpage
 \section{Odnajdywanie plików wave}
 Listing \ref{WaveFileSearcher} przedstawia metodę odnajdującą pliki wave w~zadanym folderze.
 
@@ -303,11 +297,11 @@ return wave_files_and_reference_paths
 
 \end{lstlisting}
 \end{minipage}
-Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik REFERENCE.wav. Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w~linii 33. zostaje zwrócony obiekt zawierający obie te  wartości.
+Pierwsze co zostało zapewnione w~tej metodzie to odporność na podanie niewłaściwej ścieżki do folderu. Program działa jedynie gdy zostanie podana ścieżka do folderu, który musi zawierać pliki wave oraz plik "REFERENCE.wav". Jeżeli któregoś z tych elementów zabraknie, dostaniemy odpowiednie informacje o~błędach odpowiednio w liniach 13, 24 i~25. Dodatkowo widać w liniach 28--30 dodatkowe instrukcje print. Zostały wprowadzone w tym jak i~w innych modułach w celu informowania użytkownika o~tym, w~którym miejscu programu aktualnie się znajduje podczas pracy. Są to informacje pomocnicze, nie ostrzegające o błędach a~jedynie informujące o przebiegu. Pomagają jednak zorientować się, gdy przypadkiem ustawimy nie takie opcje jak byśmy chcieli. Główną funkcjonalność programu widzimy w liniach 14-19 w którym to tworzone są dwa obiekty, "wave\_files\_paths" oraz "reference\_file\_path". Są to listy, które zawierają odpowiednio ścieżki to plików wave, które zostaną poddane analizie oraz ścieżkę do pliku referencyjnego. Na koniec, w~linii 33. zostaje zwrócony obiekt zawierający obie te  wartości.
 
 Dodatkowo można zauważyć tutaj kolejną konwencję nazewnictwa, klas, funkcji oraz zmiennych. Autor podczas całego programu stosował nazewnictwo zgodne ze standardem\linebreak\cite{PEP8}. Co ułatwia odnalezienie się w~programie.
 
-
+\newpage
 \section{Odczytywanie pliku wave}
 Na Listingu \ref{WaveFileReader}. został przedstawiony fragment kodu realizujący funkcję odczytywania odnalezionego pliku wave. 
 
@@ -461,7 +455,7 @@ Metoda \_convert\_samples\_to\_db\_fs pokazana na Listingu \ref{converttofs}. od
 \end{lstlisting}
 \end{minipage}
 
-Na Listingu \ref{filtertimeconstant}. widzimy funkcję odpowiedzialną za uśrednienie sygnału w~czasie zgodnie z~normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z~atrybutów klasy. W~tej metodzie zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
+Na Listingu \ref{filtertimeconstant}. widzimy metodę odpowiedzialną za uśrednienie sygnału w~czasie zgodnie z~normą  \cite{IEC-61672-2013}. Wartość stałej czasowej jest pobierana z~atrybutów klasy. W~tej metodzie zostały wykorzystane metody z biblioteki acoustics.standards \cite{acoustics}.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampledBConverter.py,\newline klasa SamplesDbFSConverter,\newline metoda \_filter\_samples\_with\_weighting\_filter},captionpos=b,label={filterweightingfilter}]
@@ -514,7 +508,7 @@ Listing \ref{filterweightingfilter} przedstawia metodę odpowiedzialną za filtr
 \end{minipage}
 
 
-Listing \ref{convertsamples} pokazuje funkcję, która jest główną funkcjonalnością klasy. Wykorzystuje ona poprzednio omówione metody aby wykonać pełną konwersję pakietu danych. Widzimy więc w~liniach 11--14 obsługę generatora próbek. Linie 15--17 wywołują metody opisane poprzednio, aby w~linii 18. zwrócić pakiet próbek po korekcji czasowej i~częstotliwościowej. Wszystko opisane jest również jako generator, którego działanie kończy się gdy skończą się próbki, w~liniach 13--14. Nie jest tutaj wykonywana konwersja próbek na wartości dB SPL. Ta funkcjonalność zostaje rozszerzona w klasie SamplesDbSPLConverter.
+Listing \ref{convertsamples} pokazuje metodę, która jest główną funkcjonalnością klasy. Wykorzystuje ona poprzednio omówione metody aby wykonać pełną konwersję pakietu danych. Widzimy więc w~liniach 11--14 obsługę generatora próbek. Linie 15--17 wywołują metody opisane poprzednio, aby w~linii 18. zwrócić pakiet próbek po korekcji czasowej i~częstotliwościowej. Wszystko opisane jest również jako generator, którego działanie kończy się gdy skończą się próbki, w~liniach 13--14. Nie jest tutaj wykonywana konwersja próbek na wartości dB SPL. Ta funkcjonalność zostaje rozszerzona w klasie SamplesDbSPLConverter.
 
 \begin{minipage}{\linewidth}
 \begin{lstlisting}[caption={Fragment kodu źródłowego pliku SampleSPLConverter.py,\newline klasa SamplesDbSPLConverter, metoda convert\_samples},captionpos=b,label={convertsamplesSPL}]
@@ -620,8 +614,8 @@ while True:
     yield events
 \end{lstlisting}
 \end{minipage}
-
-Listing \ref{countoccurence} przedstawia funkcję znajdującą zdarzenia. Ponieważ cały program przetwarza plik we fragmentach, funkcja musi posiadać pamięć poprzednich zdarzeń i~zachować ciągłość zliczania odebranych próbek. Zapewniają to inicjalizacja wartości na liście inicjalizacyjnej w~linii  1. oraz następna ich aktualizacja z każdym przebiegiem funkcji. Lista inicjalizacyjna została użyta, aby z każdym wywołaniem generatora nie inicjalizować na nowo wartości, które są jedynie aktualizowane w liniach 19--20. Funkcja ta działa jako generator, pobierając dane w linii 18. oraz zwracając je w~linii 29. przy pomocy słowa kluczowego yield. Zliczanie zdarzeń odbywa się w~pętli w liniach 22--28.
+\newline
+Listing \ref{countoccurence} przedstawia metodę znajdującą zdarzenia. Ponieważ cały program przetwarza plik we fragmentach, funkcja musi posiadać pamięć poprzednich zdarzeń i~zachować ciągłość zliczania odebranych próbek. Zapewniają to inicjalizacja wartości na liście inicjalizacyjnej w~linii  1. oraz następna ich aktualizacja z każdym przebiegiem funkcji. Lista inicjalizacyjna została użyta, aby z~każdym wywołaniem generatora nie inicjalizować na nowo wartości, które są jedynie aktualizowane w liniach 19--20. Funkcja ta działa jako generator, pobierając dane w linii 18. oraz zwracając je w~linii 29. przy pomocy słowa kluczowego yield. Zliczanie zdarzeń odbywa się w~pętli w liniach 22--28.
 
 
 \begin{minipage}{\linewidth}
@@ -669,7 +663,7 @@ return events_starts_ends_lengths
 Kod pokazany na Listingu \ref{organiseevents}. odpowiada za zestawienie zdarzeń w formie umożliwiającą ich dalszą obróbkę. W liniach 18--20 zapisuje istotne cechy zdarzenia, biorąc pod uwagę stałą czasową  z~którą zostało dokonane przetwarzanie próbek. Linie 25--27 zabezpieczają działanie programu w przypadku gdy na nagraniu pojawi się zdarzenie, które nie kończy się w czasie nagrania. Ponieważ funkcja przyjmuje jako parametr wejściowy listę znalezionych zdarzeń nie musi być przygotowana do operowania na dużych ilościach danych. Przetwarzanie odbywa się więc jednorazowo dla wszystkich próbek. 
 \section{Zapis pliku .json oraz plików wave}
 Po przejściu poprzednich etapów, otrzymujemy gotowe dane ze zdarzeniami akustycznymi. Jedyne co pozostaje do zrobienia to zapisać je do pliku .json oraz wyekstrahować je z~pliku w~którym zostały znalezione. 
-
+\newpage
 \subsection{JsonEventsWriter}
 Przeanalizujmy działanie klasy JsonEventsWriter.
 
@@ -712,7 +706,7 @@ Klasa przedstawiona na Listingu \ref{jsonevents} posiada dwie metody, create\_ev
 {"All_Events": 2, "Event_1": {"start": 11, "end": 20, "length": 9},
  "Event_2": {"start": 30, "end": 43, "length": 13}}
 \end{lstlisting}
-
+\newpage
 \subsection{Ekstrakcja z plików wave}
 Ostatnią czynnością jest ekstrakcja plików ze zdarzeniami akustycznymi z analizowanych plików. Zajmuje się tym klasa WaveWriter umieszczona w pliku WaveReader.py. Posiada ona dwie metody. Pierwszą z nich widzimy na listingu \ref{readdefinedframes}.
 
@@ -792,7 +786,7 @@ Jak wspomniano w rozdziale \ref{sposób} program działa jako aplikacja konsolow
 \label{cmd}
 \end{figure}
 
-Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \\ \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z~nich to:
+Pierwsze co widzimy, to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza to, że wiersz poleceń działa w wirtualnym środowisku Python \\ \cite{venv}. Nie jest to konieczne ale niezbędny jest interpreter Pythona w wersji 3.7.1. Następne jest 6 argumentów podanych do linii komend. Znaczenie każdego z~nich to:
 
 \begin{minipage}{\linewidth}
 \begin{enumerate}
@@ -805,7 +799,7 @@ Pierwsze co widzimy to napis (My\_thesis\_venv) przed samym wywołaniem. Oznacza
 \end{enumerate}
 \end{minipage}   
 
-Należy zwrócić uwagę na strukturę folderu w którym trzymane są pliki do analizy. Przykładowa zawartość katalogu przedstawiona została na Rysunku \ref{katalog}
+Należy zwrócić uwagę na strukturę folderu w którym trzymane są pliki do analizy.\linebreak Przykładowa zawartość katalogu przedstawiona została na Rysunku \ref{katalog}.
 
 \begin{figure}[hbtp]
 \caption{Przykładowa struktura katalogu z plikami wave}
@@ -906,7 +900,7 @@ Następnie rozdział \ref{uzytkowanie}. opisuje sposób użytkowania programu z 
 
 Pracę zakończyły testy oprogramowania omówione w~rozdziale \ref{testy}. Program został użyty do detekcji zdarzeń w~plikach o~różnym czasie trwania, różnej zawartości oraz przy użyciu różnych plików referencyjnych. Oprogramowanie podczas przeprowadzonych testów zachowywało się w~sposób stabilny i~działało zgodnie z~oczekiwaniami. 
 
-Efektem pracy jest oprogramowanie, działające jako aplikacja konsolowa. Może być użytkowane jako samodzielne narzędzie lub użyte jako element większego systemu. Oprogramowanie potrafi rozpoznać w~podanym pliku wave zdarzenia akustyczne, przekraczające zadany poziom dźwięku. Po detekcji następuje zapisanie wyników z ilością zdarzeń, oraz informacji gdzie się zaczynają, kończą oraz jaki jest ich czas trwania. Dodatkowo zdetekowane zdarzenia zostają zapisane jako pliki wave. Oprogramowanie przeszło podstawowe testy i działa zgodnie z~oczekiwaniami. Założenia pracy wspomniane na początku rozdziału zostały wobec tego spełnione.
+Efektem pracy jest oprogramowanie, działające jako aplikacja konsolowa. Może być użytkowane jako samodzielne narzędzie lub użyte jako element większego systemu. Oprogramowanie potrafi rozpoznać w~podanym pliku wave zdarzenia akustyczne, przekraczające zadany poziom dźwięku. Po detekcji następuje zapisanie wyników z ilością zdarzeń, oraz informacji gdzie się zaczynają, kończą oraz jaki jest ich czas trwania. Dodatkowo zdetekowane zdarzenia zostają zapisane jako pliki wave. Oprogramowanie przeszło podstawowe testy i działa zgodnie z~oczekiwaniami. Cel pracy został zatem zrealizowany.
 
 Oprogramowanie poprzez swoją modularną budowę oraz dbałość autora o~czytelność kodu daje możliwości dalszego rozwoju. W przyszłości można rozbudować funkcjonalności programu o dodatkowe moduły, biorące pod uwagę bardziej szczegółowe cechu zdarzeń dźwiękowych. Najprostszym i~najbardziej pożądanym, zdaniem autora, usprawnieniem byłoby dodanie odnajdywania zdarzeń akustycznych na podstawie ich relatywnego poziomu względem tła, nie zaś bezwzględnego odgórnie ustalanego jak to ma miejsce w stworzonym oprogramowaniu. Dodatkowo można rozbudowywać je o moduły odnajdywania hałasów tonalnych, o~maksimach w wybranych pasmach częstotliwościowych, jedynie o~zadanym czasie trwania itd. Dodatkowym usprawnieniem mogłaby być również funkcjonalność odnajdywania wydarzeń nagrywanych w czasie rzeczywistym. Przetwarzanie zdarzeń małymi fragmentami daje dobre fundamenty do implementacji dodatkowych modułów działających w czasie rzeczywistym . Te i~inne usprawnienia z~pewnością mogą sprawić, że oprogramowanie ma szanse stać się narzędziem użytecznym w~praktyce inżynierskiej.
 \appendix

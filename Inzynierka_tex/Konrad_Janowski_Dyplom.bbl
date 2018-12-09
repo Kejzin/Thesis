@@ -1,9 +1,9 @@
 \begin{thebibliography}{}
 
-\bibitem[{Audio Engineering Society, Inc}, 2018]{AES17}
-{Audio Engineering Society, Inc} (2018).
-\newblock {\em AES17-2015, AES standard method for digital audio engineering
-  — Measurement of digital audio equipment}.
+\bibitem[{AES17-2015}, 2018]{AES17}
+{AES17-2015} (2018).
+\newblock {\em AES standard method for digital audio engineering —
+  Measurement of digital audio equipment}.
 
 \bibitem[Drakos and Moore, 2003]{init}
 Drakos, N. and Moore, R. (2003).
